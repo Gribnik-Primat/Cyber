@@ -14,7 +14,7 @@ public class EnemyRobotAI : MonoBehaviour {
 
     Animator anim;
 
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     Transform target;
     bool lookLeft;//change orientation to left
@@ -22,7 +22,7 @@ public class EnemyRobotAI : MonoBehaviour {
 	void Start ()
     {
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         agent.stoppingDistance = attackRange;//stop ai if we in radius of attack
         agent.updateRotation = false;
@@ -37,9 +37,9 @@ public class EnemyRobotAI : MonoBehaviour {
 
         float distance = Vector3.Distance(transform.position, target.position);//calculate distance to player
 
-        if (GetComponent<CharacterStats>().health == 100)//this shit for our robot
+        if (GetComponent<CharacterStats>().health == 100)
         {
-            GetComponent<StelsAI>().visible = 0f;//if health == 100 does nothing at all
+            ;//if health == 100 does nothing at all
         }
         else
         {

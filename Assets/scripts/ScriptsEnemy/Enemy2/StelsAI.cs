@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StelsAI : MonoBehaviour {
 
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
     
     Animator anim;
     public float visible = 10f; // дальность на сколько видим 
@@ -29,16 +29,16 @@ public class StelsAI : MonoBehaviour {
     Transform target2;
     void Start ()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
        
        
 
-        sourse = GetComponent<AudioSource>();
+        /*sourse = GetComponent<AudioSource>();
         sourse.playOnAwake = false;
-        sourse.loop = false;
+        sourse.loop = false;*/
        
         agent.stoppingDistance = attackRange;
         agent.updateRotation = false;

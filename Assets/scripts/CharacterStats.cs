@@ -65,7 +65,7 @@ public class CharacterStats : MonoBehaviour {
                 if (GetComponent<StelsAI>())
                 {
                     GetComponent<StelsAI>().enabled = false;
-                    GetComponent<NavMeshAgent>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                     anim.SetBool("Dead", true);
                     anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
@@ -73,7 +73,7 @@ public class CharacterStats : MonoBehaviour {
                 if (GetComponent<EnemyRobotAI>())
                 {
                     GetComponent<EnemyRobotAI>().enabled = false;
-                    GetComponent<NavMeshAgent>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                     anim.SetBool("Dead", true);
                     anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
@@ -81,7 +81,7 @@ public class CharacterStats : MonoBehaviour {
                 if (GetComponent<EnemyAI>())
                 {
                     GetComponent<EnemyAI>().enabled = false;
-                    GetComponent<NavMeshAgent>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                    anim.SetBool("Dead", true);
                    anim.CrossFade("Death", .5f);
                    Destroy(gameObject, 5f);

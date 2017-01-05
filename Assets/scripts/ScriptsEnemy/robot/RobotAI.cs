@@ -14,7 +14,7 @@ public class RobotAI : MonoBehaviour {
 
     Animator anim;
 
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     Transform target2;
     bool lookLeft;//change orientation to left
@@ -22,7 +22,7 @@ public class RobotAI : MonoBehaviour {
     void Start()
     {
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         agent.stoppingDistance = attackRange;//stop ai if we in radius of attack
         agent.updateRotation = false;

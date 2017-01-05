@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour {
 
     Animator anim;
 
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     Transform target;
     bool lookLeft;
@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour {
 	void Start ()
     {
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         agent.stoppingDistance = attackRange;
         agent.updateRotation = false;
