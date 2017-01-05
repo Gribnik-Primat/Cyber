@@ -50,7 +50,7 @@ public class CharacterStats : MonoBehaviour {
             }
             StartCoroutine("CloseDamage");
         }
-        if(health < 0)
+        if(health <= 0)
         {
             if (!dead)
             {
@@ -106,6 +106,12 @@ public class CharacterStats : MonoBehaviour {
             dealDamage = true;
         }
     }
+
+    public void damage(float value)
+    {
+        health -= value;
+    }
+
     IEnumerator CloseDamage()
     {
         yield return damageT;

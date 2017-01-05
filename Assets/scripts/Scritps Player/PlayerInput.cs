@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour {
     public bool fire1;
    // public bool fire2;
     public bool uses;
+    public bool trapping;
+
 	void Start ()
     {
 	
@@ -23,6 +25,7 @@ public class PlayerInput : MonoBehaviour {
         this.fire1 = Input.GetButton("Fire1");
         this.uses = Input.GetButton("Uses");
         this.jump = Input.GetButton("Jump");
+        this.trapping = Input.GetKeyDown(KeyCode.T);
         // this.fire2 = Input.GetButton("Fire2");
     }
 }
