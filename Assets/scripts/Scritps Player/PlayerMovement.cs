@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     CharacterController chart;
 
     public float speed = 15;
+    public float jumpSpeedMultiplier = 3.0f;
     public float rotSpeed = 30;
     public bool canMove = true;
     Vector3 jump;
@@ -19,7 +20,9 @@ public class PlayerMovement : MonoBehaviour {
 
     //Quaternion originalRot;
     Quaternion targetRot;
-
+    Vector3 velocity = new Vector3();
+    bool wasSecondJump = false;
+   
     void Start ()
     {
         source = GetComponent<AudioSource>();
@@ -31,41 +34,41 @@ public class PlayerMovement : MonoBehaviour {
         anim = GetComponent<Animator>();
         plInput = GetComponent<PlayerInput>();
     }
-
-
+    
     void FixedUpdate()
     {
         if (chart.isGrounded)
-        {   
-           // anim.enabled = true;
+        {
+            // anim.enabled = true;
             if (canMove)
             {
+                velocity.z = plInput.hotizontal;
+                velocity.x = -plInput.vertical;
+                velocity.y = 0;
 
-                Vector3 horizontalForse = Vector3.forward* plInput.hotizontal;
-                Vector3 verticalForce = -Vector3.right * plInput.vertical;
-                // rigid.AddForce((horizontalForse + verticalForce).normalized * speed)
-                chart.Move(horizontalForse * speed * Time.deltaTime);
-                chart.Move(verticalForce * speed * Time.deltaTime);
-              /*  if (!source.isPlaying)
+                if (plInput.jump)
                 {
-                    RaycastHit hit;
-                    if(Physics.Raycast(transform.position + Vector3.up,-Vector3.up,out hit, 2f))
-                    {
-                        if(hit.collider.material.name == "Metall(Instance)")
-                        {
-                            source.clip = clips[1];
-                        }
-                        else
-                            source.clip = clips[0];
-                    }
-                    
-                }*/
-                
+                    wasSecondJump = false;
+                    velocity.y = 1.0f;
+                    velocity *= jumpSpeedMultiplier;
+                }
+                /*  if (!source.isPlaying)
+                  {
+                      RaycastHit hit;
+                      if(Physics.Raycast(transform.position + Vector3.up,-Vector3.up,out hit, 2f))
+                      {
+                          if(hit.collider.material.name == "Metall(Instance)")
+                          {
+                              source.clip = clips[1];
+                          }
+                          else
+                              source.clip = clips[0];
+                      }
+
+                  }*/
+
                 source.Play();
-
-                if(plInput.jump)
-                chart.Move(Vector3.up);
-
+                
                 UpdateAnimator();
 
                 if (plInput.hotizontal != 0)
@@ -83,12 +86,24 @@ public class PlayerMovement : MonoBehaviour {
                 }
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed);
             }
+            else
+            {
+                velocity.z = 0;
+                velocity.x = 0;
+            }
         }
-         else
+        else
         {
-           // anim.enabled = false;
-                } 
-        chart.Move(Physics.gravity * Time.deltaTime);
+            // anim.enabled = false;
+            if (plInput.jump && !wasSecondJump)
+            {
+                velocity.y = jumpSpeedMultiplier;
+                wasSecondJump = true;
+            }
+        }
+
+        velocity += Physics.gravity * Time.deltaTime;
+        chart.Move(velocity * speed * Time.deltaTime);
     }
 
     void UpdateAnimator()
