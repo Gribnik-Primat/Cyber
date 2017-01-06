@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour {
         this.vertical = Input.GetAxis("Vertical");
         this.fire1 = Input.GetButton("Fire1");
         this.uses = Input.GetButton("Uses");
-        this.jump = Input.GetButton("Jump");
+        this.jump = Input.GetButtonDown("Jump");
         this.trapping = Input.GetKeyDown(KeyCode.T);
         // this.fire2 = Input.GetButton("Fire2");
     }
