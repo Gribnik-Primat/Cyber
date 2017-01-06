@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerTrap : MonoBehaviour
 {
     public GameObject TrapPrefab;
+    public float timeInSignalState = 0.5f;
 
     PlayerInput plInput;
     PlayerMovement plMovement;
@@ -33,7 +34,12 @@ public class PlayerTrap : MonoBehaviour
 
         Vector3 pos = plMovement.transform.position;
         pos += plMovement.transform.TransformDirection(new Vector3(0, 0, 0.5f));
-        Instantiate(TrapPrefab, pos, Quaternion.identity);
+        GameObject trapObj = Instantiate(TrapPrefab, pos, Quaternion.identity);
+        Trap trap = trapObj.GetComponent<Trap>();
+        trap.triggeredByEnemy = true;
+        trap.damageEnemy = true;
+        trap.damage = 100.0f;
+        trap.timeInSignalState = timeInSignalState;
     }
 }
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class DoExplodeDamage : MonoBehaviour
 {
-    public bool onlyEnemy = false;
+    public bool damageEnemy = false;
+    public bool damagePlayer = false;
     public float damage = 50.0f;
 
     List<CharacterStats> targets = new List<CharacterStats>();
@@ -15,7 +16,8 @@ public class DoExplodeDamage : MonoBehaviour
         if (!stats)
             return;
 
-        bool relationOk = !onlyEnemy || other.GetComponent<EnemyAI>();
+        bool relationOk = damageEnemy && other.GetComponent<EnemyAI>();
+        relationOk = relationOk || (damagePlayer && other.GetComponent<PlayerTrap>());
 
         if (relationOk)
         {
