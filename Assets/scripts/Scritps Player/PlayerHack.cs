@@ -10,7 +10,7 @@ public class PlayerHack : MonoBehaviour
     Animator anim;
     public float see;
     Transform target;
-
+    OpenClose open;
 
     void Start()
     {
@@ -32,6 +32,13 @@ public class PlayerHack : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, see))
         {
+            if(hit.collider.CompareTag("Top"))
+            {
+                if (plInput.uses)
+                {
+                    hit.transform.SendMessage("Open");
+                }
+            }
             if (hit.collider.CompareTag("Robot"))
             {
                 if (plInput.uses)

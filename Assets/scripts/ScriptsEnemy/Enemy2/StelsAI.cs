@@ -92,9 +92,11 @@ public class StelsAI : MonoBehaviour {
 
                 float hor = relativePosition.z;
                 float ver = relativePosition.x;
-
-                anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
-                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
+                        
+                        
+                            anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
+                            anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
+                        
 
                 lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
@@ -119,8 +121,9 @@ public class StelsAI : MonoBehaviour {
 
                 float hor = relativePosition.z;
                 float ver = relativePosition.x;
+              
 
-                anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
+                 anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
                 anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
 
                 attackR += Time.deltaTime;
