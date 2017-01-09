@@ -24,7 +24,8 @@ public class StelsAI : MonoBehaviour {
     public GameObject damageCollider; // колайдер дамага
     bool lookLeft;
 
-   
+    
+
     Transform target;
     Transform target2;
     void Start ()
@@ -33,13 +34,13 @@ public class StelsAI : MonoBehaviour {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-       
-       
+
+        Invoke("move", 10f);
 
         /*sourse = GetComponent<AudioSource>();
         sourse.playOnAwake = false;
         sourse.loop = false;*/
-       
+
         agent.stoppingDistance = attackRange;
         agent.updateRotation = false;
     }
@@ -88,7 +89,7 @@ public class StelsAI : MonoBehaviour {
                 agent.Resume();
                 agent.SetDestination(target.position);
 
-                Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
+              /*  Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
 
                 float hor = relativePosition.z;
                 float ver = relativePosition.x;
@@ -96,7 +97,7 @@ public class StelsAI : MonoBehaviour {
                         
                             anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
                             anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
-                        
+                        */
 
                 lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
@@ -117,14 +118,14 @@ public class StelsAI : MonoBehaviour {
             else
             {
                 agent.Stop();
-                Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);      
+               /* Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);      
 
                 float hor = relativePosition.z;
                 float ver = relativePosition.x;
               
 
                  anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
-                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
+                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);*/
 
                 attackR += Time.deltaTime;
 
@@ -144,8 +145,13 @@ public class StelsAI : MonoBehaviour {
                         }
                     }
               }
-       // move();
-           }
+        if (agent.velocity.magnitude > 0.5)   // запуск анимации
+        {
+            anim.SetBool("Walk", true);
+        }
+        else anim.SetBool("Walk", false);
+        // move();
+    }
     
     IEnumerator CloseAttack()
     {
