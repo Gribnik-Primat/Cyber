@@ -144,7 +144,7 @@ public class StelsAI : MonoBehaviour {
                         }
                     }
               }
-        move();
+       // move();
            }
     
     IEnumerator CloseAttack()
