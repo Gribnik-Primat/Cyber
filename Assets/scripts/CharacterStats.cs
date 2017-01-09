@@ -9,6 +9,7 @@ public class CharacterStats : MonoBehaviour {
     bool dealDamage;
     bool substractOnce;
     bool dead;
+    public Transform[] items;
 
     public float damageTimer = .4f;
     WaitForSeconds damageT;
@@ -61,29 +62,34 @@ public class CharacterStats : MonoBehaviour {
                 GetComponent<CapsuleCollider>().enabled = false;
                 // GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
+                for(int i = 0; i<items.Length; i++)
+                {
+                    items[i].parent = null;
+                    items[i].GetComponent<Rigidbody>().isKinematic = false;
+                }
 
                 if (GetComponent<StelsAI>())
                 {
                     GetComponent<StelsAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
-                    anim.CrossFade("Death", .5f);
+                   // anim.SetBool("Dead", true);
+               //     anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
                     GetComponent<EnemyRobotAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
-                    anim.CrossFade("Death", .5f);
+                 //   anim.SetBool("Dead", true);
+                  //  anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyAI>())
                 {
                     GetComponent<EnemyAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                   anim.SetBool("Dead", true);
-                   anim.CrossFade("Death", .5f);
+                 //  anim.SetBool("Dead", true);
+                 //  anim.CrossFade("Death", .5f);
                    Destroy(gameObject, 5f);
 
                 }
