@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
 
                   }*/
 
-                source.Play();
+ //               source.Play();
                 
                 UpdateAnimator();
 

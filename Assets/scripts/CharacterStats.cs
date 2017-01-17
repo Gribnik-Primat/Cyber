@@ -14,6 +14,8 @@ public class CharacterStats : MonoBehaviour {
     public float damageTimer = .4f;
     WaitForSeconds damageT;
 
+    SpawnPlayer Death;
+
     Animator anim;
 
     public GameObject sliderPrefab;
@@ -62,6 +64,9 @@ public class CharacterStats : MonoBehaviour {
                 GetComponent<CapsuleCollider>().enabled = false;
                 // GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
+
+                
+
                 for(int i = 0; i<items.Length; i++)
                 {
                     items[i].parent = null;
@@ -98,6 +103,7 @@ public class CharacterStats : MonoBehaviour {
                     GetComponent<PlayerInput>().enabled = false;
                     GetComponent<PlayerMovement>().enabled = false;
                     GetComponent<PlayerAttack>().enabled = false;
+                    Death.Death();
                 }
                 dead = true;
             }

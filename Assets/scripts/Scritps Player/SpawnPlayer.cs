@@ -5,22 +5,30 @@ public class SpawnPlayer : MonoBehaviour {
 
     
     public GameObject player;
+    public GameObject spawn;
+    public bool death = false;
    
-
-	void Start ()
+    void Start ()
     {
 	
 	}
-	
-	
-	void Update ()
+
+    public void Death()
+    {
+        death = true;
+    }
+
+    void Update ()
     {
 
-        Vector3 spawn = transform.position + Vector3.up; 
+       
     
-	if(player == null)
+	if(death)
         {
-           GameObject go = Instantiate(player,spawn,Quaternion.identity) as GameObject; 
+           GameObject go = Instantiate(player, spawn.transform.position, Quaternion.identity) as GameObject;
+            death = false;
+           
         }
 	}
+    
 }
