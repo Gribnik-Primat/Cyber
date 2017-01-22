@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour {
 
  //               source.Play();
                 
-                UpdateAnimator();
+               UpdateAnimator();
 
                 if (plInput.hotizontal != 0)
                 {
