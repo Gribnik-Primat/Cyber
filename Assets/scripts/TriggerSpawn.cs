@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TriggerSpawn : MonoBehaviour {
+public class TriggerSpawn : MonoBehaviour
+{
 
     GameManager gm;
 
-	
-	void Start ()
+
+    void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-	}
-	
-	void OnTriggerEnter(Collider other)
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerInput>())
         {
@@ -20,8 +21,4 @@ public class TriggerSpawn : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-	void Update ()
-    {
-	
-	}
 }
