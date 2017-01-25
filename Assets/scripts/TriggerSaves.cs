@@ -3,20 +3,22 @@ using System.Collections;
 
 public class TriggerSaves : MonoBehaviour {
 
-    Saves save;
-   
-	
-	void Start ()
+    Saves save; 
+
+
+    void Start ()
     {
-       save = GameObject.FindGameObjectWithTag("GameController").GetComponent<Saves>();
+       
 
     }
 	
 	void OnTriggerEnter(Collider other)
     {
+        save = GameObject.FindGameObjectWithTag("TriggerSave").GetComponent<Saves>();//тэг относится к объекту-невидимке saves
         if (other.GetComponent<PlayerMovement>())
         {
             save.s = true;
+            save.Save();
             Destroy(gameObject);
         }
     }
