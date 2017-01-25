@@ -11,15 +11,18 @@ public class TriggerSaves : MonoBehaviour {
        
 
     }
-	
-	void OnTriggerEnter(Collider other)
+
+    void OnTriggerEnter(Collider other)
     {
         save = GameObject.FindGameObjectWithTag("TriggerSave").GetComponent<Saves>();//тэг относится к объекту-невидимке saves
-        if (other.GetComponent<PlayerMovement>())
-        {
-            save.s = true;
-            save.Save();
-            Destroy(gameObject);
+        if (save.s != true)
+        { 
+            if (other.GetComponent<PlayerMovement>())
+            {
+                save.s = true;
+                save.Save(save.transform.position);
+                Destroy(gameObject);
+            }
         }
     }
 	void Update ()

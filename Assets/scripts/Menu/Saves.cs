@@ -19,7 +19,7 @@ public class Saves : MonoBehaviour
         public float z;
     }
 
-    public void Save()
+    public void Save()//TODO: понять откуда берутся первые значения позиции при запуске
     {
         if (s)
         {
@@ -29,7 +29,23 @@ public class Saves : MonoBehaviour
             positionP.z = Player.transform.position.z;
             if (!Directory.Exists(Application.dataPath + "/saves"))
                 Directory.CreateDirectory(Application.dataPath + "/saves");
-            FileStream fs = new FileStream(Application.dataPath + "/saves/save.tr", FileMode.Create);
+            FileStream fs = new FileStream(Application.dataPath + "/saves/save.sv", FileMode.Create);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(fs, positionP);
+            fs.Close();
+        }
+    }
+    public void Save(Vector3 pos)
+    {
+        if (s)
+        {
+            Position positionP = new Position();
+            positionP.x = pos.x;
+            positionP.y = pos.y;
+            positionP.z = pos.z;
+            if (!Directory.Exists(Application.dataPath + "/saves"))
+                Directory.CreateDirectory(Application.dataPath + "/saves");
+            FileStream fs = new FileStream(Application.dataPath + "/saves/save.sv", FileMode.Create);
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fs, positionP);
             fs.Close();
@@ -38,22 +54,26 @@ public class Saves : MonoBehaviour
 
     public void Load()
     {
-        if (File.Exists(Application.dataPath + "/saves/save.tr"))
+        if (s == true)
         {
-            FileStream fs = new FileStream(Application.dataPath + "/saves/save.tr", FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
-            try
+            if (File.Exists(Application.dataPath + "/saves/save.sv"))
             {
-                Position pos = (Position)formatter.Deserialize(fs);
-                Player.transform.position = new Vector3(pos.x, pos.y, pos.z);
-            }
-            catch (System.Exception e)
-            {
-                Debug.Log(e.Message);
-            }
-            finally
-            {
-                fs.Close();
+                FileStream fs = new FileStream(Application.dataPath + "/saves/save.sv", FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                try
+                {
+                    Position pos = (Position)formatter.Deserialize(fs);
+                    Player.transform.Translate((GameObject.FindGameObjectWithTag("TriggerSave").transform.position));//нужно помедитировать и понять почему игрок не хочет телепортироваться(необходимость в какой-нибудь функции update???)
+                }
+                catch (System.Exception e)
+                {
+                    Debug.Log(e.Message);
+                }
+                finally
+                {
+                    s = false;
+                    fs.Close();
+                }
             }
         }
     }
