@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour {
     public float vertical;
     public bool jump;
     public bool fire1;
-   // public bool fire2;
+    public bool fire2;
     public bool uses;
     public bool trapping;
 
@@ -26,6 +26,6 @@ public class PlayerInput : MonoBehaviour {
         this.uses = Input.GetButton("Uses");
         this.jump = Input.GetButtonDown("Jump");
         this.trapping = Input.GetKeyDown(KeyCode.T);
-        // this.fire2 = Input.GetButton("Fire2");
+        this.fire2 = Input.GetButton("Fire2");
     }
 }
