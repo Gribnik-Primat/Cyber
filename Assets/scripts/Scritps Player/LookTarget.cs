@@ -5,24 +5,25 @@ using UnityEngine;
 public class LookTarget : MonoBehaviour
 {
 
-    public GameObject target;
-    public float visible = 2f;
-   
-    bool spawntarget;
-   
+    private GameObject target;
+    public float visible = 10f;
+
     void Update()
     {
-       
-                RaycastHit hit;
-                Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
-                if (Physics.Raycast(ray, out hit, visible))
-                {
+
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+        if (Physics.Raycast(ray, out hit, visible))
+        {
 
             if (hit.transform.CompareTag("Enemy"))
             {
-               // transform.LookAt; Todo
+                GameObject.FindGameObjectWithTag("Player").transform.LookAt(hit.transform);
+                /*target = GameObject.FindGameObjectWithTag(hit.transform.tag);
+                GameObject Player = GameObject.FindGameObjectWithTag("Player");
+                Player.transform.LookAt(target.transform);*/
             }
 
-                }
-            }
-       }
+        }
+    }
+}
