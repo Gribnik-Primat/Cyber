@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
     Rigidbody rigid;
     Animator anim;
     PlayerInput plInput;
-    CharacterController chart;
+    //CharacterController chart;
 
     public float speed = 15;
     public float jumpSpeedMultiplier = 3.0f;
     public float rotSpeed = 30;
     public bool canMove = true;
-    Vector3 jump;
+    public float distToGround = 0;
     bool lookLeft;
 
     AudioSource source;
@@ -22,22 +23,26 @@ public class PlayerMovement : MonoBehaviour {
     Quaternion targetRot;
     Vector3 velocity = new Vector3();
     bool wasSecondJump = false;
-   
-    void Start ()
+
+    void Start()
     {
         source = GetComponent<AudioSource>();
         source.playOnAwake = false;
-        source.loop = false; 
+        source.loop = false;
 
-        chart = GetComponent<CharacterController>();
+        //chart = GetComponent<CharacterController>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         plInput = GetComponent<PlayerInput>();
     }
-    
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+    }
     void FixedUpdate()
     {
-        if (chart.isGrounded)
+        //if (chart.isGrounded)
+        if(IsGrounded())
         {
             // anim.enabled = true;
             if (canMove)
@@ -67,9 +72,9 @@ public class PlayerMovement : MonoBehaviour {
 
                   }*/
 
- //               source.Play();
-                
-               UpdateAnimator();
+                //               source.Play();
+
+                UpdateAnimator();
 
                 if (plInput.hotizontal != 0)
                 {
@@ -101,9 +106,11 @@ public class PlayerMovement : MonoBehaviour {
                 wasSecondJump = true;
             }
         }
+        rigid.velocity = velocity * speed;
 
+        rigid.position = new Vector3(rigid.position.x,0.0f,rigid.position.z);
         velocity += Physics.gravity * Time.deltaTime;
-        chart.Move(velocity * speed * Time.deltaTime);
+        //rigid.MovePosition(velocity * speed * Time.deltaTime);
     }
 
     void UpdateAnimator()
