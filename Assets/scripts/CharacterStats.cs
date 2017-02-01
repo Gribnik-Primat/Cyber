@@ -6,6 +6,7 @@ using System;
 public class CharacterStats : MonoBehaviour {
 
     public float health = 100f;
+    public float biostim = 100f;
     bool dealDamage;
     bool substractOnce;
     bool dead;

@@ -47,7 +47,7 @@ public class PlayerAttack : MonoBehaviour {
     {
         yield return comboR;
         anim.SetBool("Attack", false);
-      //  anim.SetBool("Attack2", false);
+      
     }
     public void OpenDamageCollider()
     {
