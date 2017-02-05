@@ -34,9 +34,17 @@ public class EnemyAI : MonoBehaviour {
 	void Update ()
     {
         float distance = Vector3.Distance(transform.position, target.position);
-        if(distance<attackRange + .5f)
+        if (distance < attackRange + .5f)
         {
-            attacking = true;
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+            if (Physics.Raycast(ray, out hit, 2f))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    attacking = true;
+                }
+            }
         }
         else
         {

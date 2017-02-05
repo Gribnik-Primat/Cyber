@@ -15,7 +15,7 @@ public class CharacterStats : MonoBehaviour {
     public float damageTimer = .4f;
     WaitForSeconds damageT;
 
-    SpawnPlayer Death;
+    
 
     Animator anim;
 
@@ -48,7 +48,7 @@ public class CharacterStats : MonoBehaviour {
         {
             if (!substractOnce)
             {
-                health -= 0;
+                health -= 30;
                 anim.SetTrigger("Hit");
                 substractOnce = true;
             }
@@ -63,7 +63,7 @@ public class CharacterStats : MonoBehaviour {
                 dealDamage = true;
 
                 GetComponent<CapsuleCollider>().enabled = false;
-                // GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
 
                 
@@ -78,7 +78,7 @@ public class CharacterStats : MonoBehaviour {
                 {
                     GetComponent<StelsAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                   // anim.SetBool("Dead", true);
+                    anim.SetBool("Dead", true);
                //     anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
@@ -86,7 +86,7 @@ public class CharacterStats : MonoBehaviour {
                 {
                     GetComponent<EnemyRobotAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                 //   anim.SetBool("Dead", true);
+                    anim.SetBool("Dead", true);
                   //  anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
@@ -94,7 +94,7 @@ public class CharacterStats : MonoBehaviour {
                 {
                     GetComponent<EnemyAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                 //  anim.SetBool("Dead", true);
+                    anim.SetBool("Dead", true);
                  //  anim.CrossFade("Death", .5f);
                    Destroy(gameObject, 5f);
 
@@ -104,7 +104,7 @@ public class CharacterStats : MonoBehaviour {
                     GetComponent<PlayerInput>().enabled = false;
                     GetComponent<PlayerMovement>().enabled = false;
                     GetComponent<PlayerAttack>().enabled = false;
-                    Death.Death();
+                    
                 }
                 dead = true;
             }

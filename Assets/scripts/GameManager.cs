@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour {
         if (holdPlayer)
         {
             cameraMover.enabled = false;
-            while (enemiesSpawend.Remove(null));    //  останавливает камеру пока не убиваем врагов, но в чем то есть баг. Необходимо до пилить
+            while (enemiesSpawend.Remove(null));    //  останавливает камеру и чистит лист
+        
         }
         else
         {

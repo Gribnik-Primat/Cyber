@@ -10,7 +10,7 @@ public class StelsAI : MonoBehaviour {
     GameObject Player;
     public float speed = 2f; // speed
     AudioSource sourse;
-    public float angleV = 90f; // угол обозора
+    public float angleV = 70f; // угол обозора
 
     public float attackRate = 3; // скорость атаки
     float attackR;
@@ -35,17 +35,14 @@ public class StelsAI : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
 
-//<<<<<<< HEAD
+
         Invoke("move", 10f);
 
         /*sourse = GetComponent<AudioSource>();
         sourse.playOnAwake = false;
         sourse.loop = false;*/
 
-//=======
-       
-       
-//>>>>>>> origin/master
+
         agent.stoppingDistance = attackRange;
         agent.updateRotation = false;
     }
@@ -55,7 +52,7 @@ public class StelsAI : MonoBehaviour {
         CheckPoint point = checkpoint.GetComponent<CheckPoint>();
         checkpoint = point.getNext();
         agent.destination = checkpoint.position;
-        Invoke("move", 10f);
+        Invoke("move", 20f);
     }
         void Update()
     {
@@ -70,14 +67,16 @@ public class StelsAI : MonoBehaviour {
                 { 
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, Player.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-                    Debug.DrawRay(transform.position + Vector3.up , Player.transform.position - transform.position*100f);
+                    
 
                     if (Physics.Raycast(ray, out hit, visible))
                     {
 
                         if (hit.transform.gameObject == Player)
                         {
-                            if (distance < attackRange + .5f)           // расстоние меньше то бьем 
+                           
+
+                            if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
                             }
@@ -92,35 +91,35 @@ public class StelsAI : MonoBehaviour {
                {
                         
                 agent.Resume();
-                agent.SetDestination(target.position);
+               agent.SetDestination(target.position);
 
-              /*  Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
+                        /*  Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
 
-                float hor = relativePosition.z;
-                float ver = relativePosition.x;
-                        
-                        
-                            anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
-                            anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
-                        */
+                          float hor = relativePosition.z;
+                          float ver = relativePosition.x;
 
-                lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
-                Quaternion targetRot = transform.rotation;
+                                      anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
+                                      anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
+                                  */
 
-                if (lookLeft)
-                {
-                    targetRot = Quaternion.Euler(0, 180, 0);
+                        lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
-                }
-                else
-                {
-                    targetRot = Quaternion.Euler(0, 0, 0);
-                }
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+                        Quaternion targetRot = transform.rotation;
 
-            }
-            else
+                        if (lookLeft)
+                        {
+                            targetRot = Quaternion.Euler(0, 180, 0);
+
+                        }
+                        else
+                        {
+                            targetRot = Quaternion.Euler(0, 0, 0);
+                        }
+                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+
+                    }
+                    else
             {
                 agent.Stop();
                /* Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);      
@@ -150,7 +149,7 @@ public class StelsAI : MonoBehaviour {
                         }
                     }
               }
-        if (agent.velocity.magnitude > 0.5)   // запуск анимации
+        if (agent.velocity.magnitude > 0.1)   // запуск анимации
         {
             anim.SetBool("Walk", true);
         }
