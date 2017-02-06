@@ -102,7 +102,12 @@ public class PlayerMovement : MonoBehaviour {
                 velocity.z = 0;
                 velocity.x = 0;
             }
-        }
+        rigid.velocity = velocity * speed;
+
+        rigid.position = new Vector3(rigid.position.x, 0.0f, rigid.position.z);
+        velocity += Physics.gravity * Time.deltaTime;
+    }
+
         //else
         //{
             
