@@ -38,13 +38,8 @@ public class StelsAI : MonoBehaviour {
 
         Invoke("move", 10f);
 
-        /*sourse = GetComponent<AudioSource>();
-        sourse.playOnAwake = false;
-        sourse.loop = false;*/
-
-
         agent.stoppingDistance = attackRange;
-        agent.updateRotation = false;
+       // agent.updateRotation = false;
     }
 
     void move()
@@ -64,106 +59,71 @@ public class StelsAI : MonoBehaviour {
                 Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
-                { 
+                {
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, Player.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-                    
+
 
                     if (Physics.Raycast(ray, out hit, visible))
                     {
 
-                        if (hit.transform.gameObject == Player)
+                        if (hit.transform.CompareTag("Player"))
                         {
-
-
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
-                                RaycastHit hit1;
-                                Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward);
-                                if (Physics.Raycast(ray, out hit1, 2f))
-                                {
-                                    if (hit1.collider.CompareTag("Player"))
-                                    {
-                                        attacking = true;
-                                    }
 
-                                }
+                                attacking = true;
                             }
                             else
                             {
                                 attacking = false;
                             }
                         }
-                    }
-
-            if (!attacking)                     // если не бьем то идем
-               {
-                        
-                agent.Resume();
-               agent.SetDestination(target.position);
-
-                        /*  Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
-
-                          float hor = relativePosition.z;
-                          float ver = relativePosition.x;
-
-
-                                      anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);  // анимамции в дереве смешиваний
-                                      anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
-                                  */
-
-                        lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
-
-                        Quaternion targetRot = transform.rotation;
-
-                        if (lookLeft)
+                        if (!attacking)                     // если не бьем то идем
                         {
-                            targetRot = Quaternion.Euler(0, 180, 0);
+                            agent.Resume();
+                            agent.destination = Player.transform.position;
+
+                            //lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
+
+                            //Quaternion targetRot = transform.rotation;
+
+                            //if (lookLeft)
+                            //{
+                            //    targetRot = Quaternion.Euler(0, 180, 0);
+
+                            //}
+                            //else
+                            //{
+                            //    targetRot = Quaternion.Euler(0, 0, 0);
+                            //}
+                            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
 
                         }
                         else
                         {
-                            targetRot = Quaternion.Euler(0, 0, 0);
-                        }
-                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+                            agent.Stop();
+                            attackR += Time.deltaTime;
 
-                    }
-                    else
-            {
-                agent.Stop();
-               /* Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);      
+                            if (attackR > attackRate)                       // атакуем 
+                            {
+                                anim.SetBool("Attack", true);
+                                StartCoroutine("CloseAttack");
 
-                float hor = relativePosition.z;
-                float ver = relativePosition.x;
-              
-
-                 anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
-                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);*/
-
-                attackR += Time.deltaTime;
-
-                if (attackR > attackRate)                       // атакуем 
-                {
-                    anim.SetBool("Attack", true);
-                    StartCoroutine("CloseAttack");          
-
-                    attackR = 0;
-                }
-
-              //  if (!sourse.isPlaying)
-                             //   {
-                             //       sourse.Play();
-                            //   }
+                                attackR = 0;
                             }
+          
                         }
                     }
-              }
+                }
+            }
+      }
         if (agent.velocity.magnitude > 0.1)   // запуск анимации
         {
             anim.SetBool("Walk", true);
         }
         else anim.SetBool("Walk", false);
-        // move();
+        
     }
     
     IEnumerator CloseAttack()
