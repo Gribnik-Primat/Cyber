@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         source.playOnAwake = false;
         source.loop = false;
 
-        // chart = GetComponent<CharacterController>();
+        //chart = GetComponent<CharacterController>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         plInput = GetComponent<PlayerInput>();
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 horizontalForse = Vector3.forward * plInput.hotizontal;
             Vector3 verticalForce = -Vector3.right * plInput.vertical;
-          //  rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
+            //rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
             //chart.Move(horizontalForse * speed * Time.deltaTime);
             //chart.Move(verticalForce * speed * Time.deltaTime);
             /*  if (!source.isPlaying)
@@ -98,22 +98,13 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed);
         }
-        else
-        {
-            velocity.z = 0;
-            velocity.x = 0;
-        }
         if (plInput.hotizontal != 0 && plInput.vertical != 0)
         {
-            float speed1 = speed / 1.3f;// уникальный модификатор - please dont touch
+            float speed1 = speed / 1.414f;// уникальный модификатор - магия квадратных корней
             rigid.velocity = velocity * speed1;
         }
         else
-            rigid.velocity = velocity * speed;
-
-
-        rigid.position = new Vector3(rigid.position.x, 0.0f, rigid.position.z);
-        velocity += Physics.gravity * Time.deltaTime;
+           rigid.velocity = velocity * speed;
     }
 
     //else
