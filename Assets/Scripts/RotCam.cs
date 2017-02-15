@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotCam : MonoBehaviour {
-    public float x;
-    public float y;
-    public float z;
-    public float w;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+public class RotCam : MonoBehaviour
+{
+    public float right;
+    public float left;
+   
+    private int sign;
+    // Use this for initialization 
+    void Start()
     {
-        transform.Rotate(Vector3.up, 1f, Space.World);
+        sign = -1;
+       
+        
+    }
+
+    // Update is called once per frame 
+    void Update()
+    {
+        if (transform.rotation.eulerAngles.x > left)
+            sign = -1;
+        if (transform.rotation.eulerAngles.x < right)
+            sign = 1;
+        transform.Rotate(sign * Vector3.up * Time.deltaTime * 100, Space.World);
+       
+        
     }
 }
