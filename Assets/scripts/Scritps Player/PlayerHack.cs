@@ -36,7 +36,7 @@ public class PlayerHack : MonoBehaviour
             {
                 if (plInput.uses)
                 {
-                    hit.transform.SendMessage("Open");
+                //    hit.transform.SendMessage("Open");
                 }
             }
             if (hit.collider.CompareTag("Robot"))

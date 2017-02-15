@@ -17,10 +17,20 @@ public class OpenClose : MonoBehaviour {
     {
 
     }
-    public void Open()
+    void OnTriggerStay(Collider other)
     {
-        open = true;
+        if (other.GetComponent<PlayerInput>())
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                open = true;
+            }
+        }
     }
+    //public void Open()
+    //{
+    //    open = true;
+    //}
 	void Update ()
     {
         if (open)

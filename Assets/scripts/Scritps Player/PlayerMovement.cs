@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 horizontalForse = Vector3.forward * plInput.hotizontal;
             Vector3 verticalForce = -Vector3.right * plInput.vertical;
-            rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
+          //  rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
             //chart.Move(horizontalForse * speed * Time.deltaTime);
             //chart.Move(verticalForce * speed * Time.deltaTime);
             /*  if (!source.isPlaying)

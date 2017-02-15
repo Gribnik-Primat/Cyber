@@ -74,11 +74,20 @@ public class StelsAI : MonoBehaviour {
 
                         if (hit.transform.gameObject == Player)
                         {
-                           
+
 
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
-                                attacking = true;
+                                RaycastHit hit1;
+                                Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward);
+                                if (Physics.Raycast(ray, out hit1, 2f))
+                                {
+                                    if (hit1.collider.CompareTag("Player"))
+                                    {
+                                        attacking = true;
+                                    }
+
+                                }
                             }
                             else
                             {
