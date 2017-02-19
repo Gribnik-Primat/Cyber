@@ -74,9 +74,9 @@ public class CharacterStats : MonoBehaviour {
                     items[i].GetComponent<Rigidbody>().isKinematic = false;
                 }
 
-                if (GetComponent<StelsAI>())
+                if (GetComponent<EnemyMili>())
                 {
-                    GetComponent<StelsAI>().enabled = false;
+                    GetComponent<EnemyMili>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                     anim.SetBool("Dead", true);
                //     anim.CrossFade("Death", .5f);
@@ -97,6 +97,15 @@ public class CharacterStats : MonoBehaviour {
                     anim.SetBool("Dead", true);
                  //  anim.CrossFade("Death", .5f);
                    Destroy(gameObject, 5f);
+
+                }
+                if (GetComponent<EnemyShootAi>())
+                {
+                    GetComponent<EnemyShootAi>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                    anim.SetBool("Dead", true);
+                    //  anim.CrossFade("Death", .5f);
+                    Destroy(gameObject, 5f);
 
                 }
                 else
