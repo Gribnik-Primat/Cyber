@@ -6,12 +6,17 @@ public class LookTarget : MonoBehaviour
 {
 
     public float visible = 10f;
+    Transform target;
 
+	void Start()
+	{
+		target = GameObject.FindGameObjectWithTag("Enemy").transform;
+	}
     void Update()
     {
 
         RaycastHit hit;
-        Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+		Ray ray = new Ray(transform.position + Vector3.up, transform.position - target.transform.position);
         if (Physics.Raycast(ray, out hit, visible))
         {
 
