@@ -25,6 +25,8 @@ public class CharacterStats : MonoBehaviour {
 
     RectTransform healthTrans;
 
+
+
 	void Start ()
     {
         damageT = new WaitForSeconds(damageTimer);
@@ -34,6 +36,8 @@ public class CharacterStats : MonoBehaviour {
         slid.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         healthSlider = slid.GetComponentInChildren<Slider>();
         healthTrans = slid.GetComponent<RectTransform>();
+
+
 	}
 
     
