@@ -66,11 +66,12 @@ public class CharacterStats : MonoBehaviour {
                 healthTrans.gameObject.SetActive(false);
                 dealDamage = true;
 
+
                 GetComponent<CapsuleCollider>().enabled = false;
-                GetComponent<Rigidbody>().isKinematic = true;
+//                GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
 
-                
+			
 
                 for(int i = 0; i<items.Length; i++)
                 {

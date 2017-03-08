@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
-    Rigidbody rigid;
+    // Rigidbody rigid;
     Animator anim;
     PlayerInput plInput;
     // CharacterController chart;
