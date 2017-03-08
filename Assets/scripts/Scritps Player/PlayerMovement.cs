@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeedMultiplier = 3.0f;
     public float rotSpeed = 30;
     public bool canMove = true;
+
+	public float mouseSensitivityX = 100f;
+
     Vector3 jump;
     bool lookLeft;
 
@@ -31,29 +34,29 @@ public class PlayerMovement : MonoBehaviour
         source.loop = false;
 
         //chart = GetComponent<CharacterController>();
-        rigid = GetComponent<Rigidbody>();
+       // rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         plInput = GetComponent<PlayerInput>();
     }
 
     void FixedUpdate()
-    {
-        // if (chart.isGrounded)
-        // {
-        // anim.enabled = true;
-        if (canMove)
-        {
-            velocity.z = plInput.hotizontal;
-            velocity.x = -plInput.vertical;
-            velocity.y = 0;
+	{
+		// if (chart.isGrounded)
+		// {
+		// anim.enabled = true;
+		if (canMove) {
+			velocity.z = plInput.hotizontal;
+			velocity.x = -plInput.vertical;
+			velocity.y = 0;
 
 
-            Vector3 horizontalForse = Vector3.forward * plInput.hotizontal;
-            Vector3 verticalForce = -Vector3.right * plInput.vertical;
-            //rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
-            //chart.Move(horizontalForse * speed * Time.deltaTime);
-            //chart.Move(verticalForce * speed * Time.deltaTime);
-            /*  if (!source.isPlaying)
+
+			Vector3 horizontalForse = Vector3.forward * plInput.hotizontal;
+			Vector3 verticalForce = -Vector3.right * plInput.vertical;
+			//rigid.AddForce((horizontalForse + verticalForce).normalized * speed);
+			//chart.Move(horizontalForse * speed * Time.deltaTime);
+			//chart.Move(verticalForce * speed * Time.deltaTime);
+			/*  if (!source.isPlaying)
 
 
 
@@ -79,34 +82,32 @@ public class PlayerMovement : MonoBehaviour
 
                 }*/
 
-            //          source.Play();
+			//          source.Play();
 
-            UpdateAnimator();
+			UpdateAnimator ();
 
-            if (plInput.hotizontal != 0)
-            {
-                lookLeft = (plInput.hotizontal < -.01f) ? true : false;
+			if (plInput.hotizontal != 0) {
+				lookLeft = (plInput.hotizontal < -.01f) ? true : false;
 
-            }
-            if (lookLeft)
-            {
-                targetRot = Quaternion.Euler(0, 180, 0);
-            }
-            else
-            {
-                targetRot = Quaternion.Euler(0, 0, 0);
-            }
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed);
-        }
-        if (plInput.hotizontal != 0 && plInput.vertical != 0)
+			}
+			if (lookLeft) {
+				targetRot = Quaternion.Euler (0, 180, 0);
+			} else {
+				targetRot = Quaternion.Euler (0, 0, 0);
+			}
+			transform.rotation = Quaternion.Slerp (transform.rotation, targetRot, Time.deltaTime * rotSpeed);
+		}
+	
+			/*   if (plInput.hotizontal != 0 && plInput.vertical != 0)
         {
             float speed1 = speed / 1.414f;// уникальный модификатор - магия квадратных корней
             rigid.velocity = velocity * speed1;
         }
         else
-           rigid.velocity = velocity * speed;
-    }
-
+           rigid.velocity = velocity * speed; 
+		} */
+	
+	}
     //else
     //{
 

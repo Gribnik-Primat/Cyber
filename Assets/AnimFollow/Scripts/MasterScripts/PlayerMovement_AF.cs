@@ -21,7 +21,14 @@ namespace AnimFollow
 		Vector3 glideFree2 = Vector3.zero;
 		[HideInInspector] public bool inhibitRun = false; // Set from RagdollControl
 
+
+
+
+
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 		void Awake ()
 		{
@@ -54,12 +61,12 @@ namespace AnimFollow
 		
 		void FixedUpdate ()
 		{
-			if (inhibitMove)
+			 if (inhibitMove)
 				return;
 
 			transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensitivityX * Time.fixedDeltaTime, 0f);
+			MovementManagement(Input.GetAxis("Vertical"), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl)); 
 
-			MovementManagement(Input.GetAxis("Vertical"), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +95,8 @@ namespace AnimFollow
 			}
 			else
 				// Otherwise set the speed parameter to 0.
-				anim.SetFloat(hash.speedFloat, 0, speedDampTime, Time.fixedDeltaTime);
+				anim.SetFloat(hash.speedFloat, 0, speedDampTime, Time.fixedDeltaTime); 
+
 		}
 	}
 }
