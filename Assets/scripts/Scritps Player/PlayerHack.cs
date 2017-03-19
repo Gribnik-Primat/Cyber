@@ -32,16 +32,10 @@ public class PlayerHack : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, see))
         {
-            if(hit.collider.CompareTag("Top"))
-            {
-                if (plInput.uses)
-                {
-                //    hit.transform.SendMessage("Open");
-                }
-            }
+            
             if (hit.collider.CompareTag("Robot"))
             {
-                if (plInput.uses)
+			if (Input.GetKeyDown(KeyCode.E))
                 {
                     anim.SetBool("Uses", true);
                     plMovement.canMove = false;
@@ -52,9 +46,9 @@ public class PlayerHack : MonoBehaviour
             }
         }
 
-    }
+    
 
-
+	}
     public void hacks()
     {
         RaycastHit hit;

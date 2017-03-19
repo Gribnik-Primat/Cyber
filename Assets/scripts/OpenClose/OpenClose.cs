@@ -6,6 +6,11 @@ public class OpenClose : MonoBehaviour {
 
     public GameObject door;
     public bool open = false;
+	public bool close = false;
+
+	AudioSource audio;
+
+	private float time = 0;
 
     public float OpenX;
     public float OpenY;
@@ -15,16 +20,16 @@ public class OpenClose : MonoBehaviour {
     public float CloseZ;
     void Start()
     {
-
+		audio = GetComponent<AudioSource>();
+		audio.playOnAwake = false;
+		audio.loop = false;
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<PlayerInput>())
-        {
-            if (Input.GetKey(KeyCode.E))
-            {
-                open = true;
-            }
+		if (other.GetComponent<PlayerHack>())
+        {       
+            open = true;
+
         }
     }
     //public void Open()
@@ -38,8 +43,19 @@ public class OpenClose : MonoBehaviour {
             Vector3 toPosition = new Vector3(OpenX, OpenY, OpenZ);
 
             door.transform.position = Vector3.Lerp(transform.position, toPosition, 4f * Time.deltaTime);
-        }
-        else
+
+			if (!audio.isPlaying) 
+			{
+				audio.Play();
+			}
+			time = time += Time.deltaTime;
+			if (time >= 1.5f)
+			{
+				open = false;
+				time = 0;
+			}
+		}
+		if (close)
         {
             Vector3 toPosition1 = new Vector3(CloseX,CloseY,CloseZ);
 

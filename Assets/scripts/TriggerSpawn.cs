@@ -16,7 +16,7 @@ public class TriggerSpawn : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         
-        if (other.GetComponent<PlayerInput>())
+		if (other.GetComponent<PlayerHack>())
         {
             
             gm.spawnEnemiesNow = true;    

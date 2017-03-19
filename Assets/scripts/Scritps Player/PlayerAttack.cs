@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerAttack : MonoBehaviour {
 
-    PlayerInput plInput;
-    PlayerMovement plMovement;
+   // PlayerInput plInput;
+   // PlayerMovement plMovement;
     Animator anim;
 
     public float comboRate = .5f;
@@ -17,9 +17,9 @@ public class PlayerAttack : MonoBehaviour {
 
     void Start ()
     {
-        plInput = GetComponent<PlayerInput>();
+       // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
-        plMovement = GetComponent<PlayerMovement>();
+     //   plMovement = GetComponent<PlayerMovement>();
 
         comboR = new WaitForSeconds(comboRate);
 
@@ -30,16 +30,16 @@ public class PlayerAttack : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-        if (plInput.fire1)
+		if (Input.GetMouseButton(0))
         {   
             anim.SetBool("Attack", true);
-            plMovement.canMove = false;
+           // plMovement.canMove = false;
             StartCoroutine("CloseAttack");
         }
-        if (plInput.fire2)
+		if (Input.GetMouseButton(1))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
-            plMovement.canMove = false;
+           // plMovement.canMove = false;
             StartCoroutine("CloseAttack1");
         }
     }
