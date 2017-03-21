@@ -25,7 +25,6 @@ public class EnemyAI : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         agent.stoppingDistance = attackRange;
-        agent.updateRotation = false;
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
 	}
@@ -62,21 +61,7 @@ public class EnemyAI : MonoBehaviour {
 
             anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
             anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
-
-            lookLeft = (target.position.z < transform.position.z) ? true : false;
-
-            Quaternion targetRot = transform.rotation;
-
-            if (lookLeft)
-            {
-                targetRot = Quaternion.Euler(0, 180, 0);
-
-            }
-            else
-            {
-                targetRot = Quaternion.Euler(0, 0, 0);
-            }
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed);
+        
 
         }
         else
