@@ -26,7 +26,7 @@ public class OpenClose : MonoBehaviour {
     }
     void OnTriggerStay(Collider other)
     {
-		if (other.GetComponent<CharacterStats>())
+		if (other.GetComponent<PlayerHack>())
         {       
             open = true;
 

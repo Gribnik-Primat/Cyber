@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using RootMotion.Demos;
 
 public class PlayerAttack : MonoBehaviour {
 
@@ -13,14 +12,14 @@ public class PlayerAttack : MonoBehaviour {
     WaitForSeconds comboR;
     public GameObject  damageCollider;
     public GameObject damageCollider1;
-    private float turnspeed;
+
+
 
     void Start ()
     {
        // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
-        //   plMovement = GetComponent<PlayerMovement>();
-        turnspeed = GetComponent<CharacterThirdPerson>().turnSpeed;
+     //   plMovement = GetComponent<PlayerMovement>();
 
         comboR = new WaitForSeconds(comboRate);
 
@@ -34,14 +33,12 @@ public class PlayerAttack : MonoBehaviour {
 		if (Input.GetMouseButton(0))
         {   
             anim.SetBool("Attack", true);
-            turnspeed = 0;
            // plMovement.canMove = false;
             StartCoroutine("CloseAttack");
         }
 		if (Input.GetMouseButton(1))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
-            turnspeed = 0;
            // plMovement.canMove = false;
             StartCoroutine("CloseAttack1");
         }
