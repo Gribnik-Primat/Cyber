@@ -7,6 +7,8 @@ public class EnemyAI : MonoBehaviour {
     float attackR;
     bool attacking;
 
+	public float angleV = 180f;
+
     public float attackRange = 3;
     public float rotSpeed = 5;
 
@@ -17,7 +19,6 @@ public class EnemyAI : MonoBehaviour {
     UnityEngine.AI.NavMeshAgent agent;
 
     Transform target;
-    bool lookLeft;
 
 	void Start ()
     {
@@ -31,20 +32,25 @@ public class EnemyAI : MonoBehaviour {
 	
 	
 	void Update ()
-    {
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance < attackRange + .5f)
-        {
-            RaycastHit hit;
-            Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
-            if (Physics.Raycast(ray, out hit, 2f))
-            {
-                if (hit.collider.CompareTag("Player"))
-                {
-                    attacking = true;
-                }
-            }
-        }
+	{
+		float distance = Vector3.Distance (transform.position, target.position);
+		if (distance < attackRange + .5f) { 
+			Quaternion look = Quaternion.LookRotation (target.transform.position - transform.position);  // угол видимости
+			float angle = Quaternion.Angle (transform.rotation, look);
+		
+			if (angle < angleV) {
+				RaycastHit hit;
+				Ray ray = new Ray (transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
+
+
+				if (Physics.Raycast (ray, out hit, attackRange + .5f)) {
+
+					if (hit.transform.CompareTag ("Player")) {
+						attacking = true;
+					}
+				}
+			}
+		}
         else
         {
             attacking = false;

@@ -31,14 +31,14 @@ public class PlayerAttack : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-		if (Input.GetMouseButton(0))
+		if (Input.GetButton("Fire1"))
         {   
             anim.SetBool("Attack", true);
             turnspeed = 0;
            // plMovement.canMove = false;
             StartCoroutine("CloseAttack");
         }
-		if (Input.GetMouseButton(1))
+		if (Input.GetButton("Fire2"))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
             turnspeed = 0;
