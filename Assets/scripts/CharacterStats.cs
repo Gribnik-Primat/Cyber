@@ -44,7 +44,7 @@ public class CharacterStats : MonoBehaviour {
 
     void Update ()
     {
-        healthSlider.value = health / 100;
+        healthSlider.value = health / 30;
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
 
@@ -68,7 +68,7 @@ public class CharacterStats : MonoBehaviour {
 
 
                 GetComponent<CapsuleCollider>().enabled = false;
-//                GetComponent<Rigidbody>().isKinematic = true;
+                 GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
 
 			

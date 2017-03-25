@@ -34,23 +34,38 @@ public class EnemyAI : MonoBehaviour {
 	void Update ()
 	{
 		float distance = Vector3.Distance (transform.position, target.position);
-		if (distance < attackRange + .5f) { 
-			Quaternion look = Quaternion.LookRotation (target.transform.position - transform.position);  // угол видимости
-			float angle = Quaternion.Angle (transform.rotation, look);
+		if (distance < attackRange + .5f) {
+
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
+
+
+            if (Physics.Raycast(ray, out hit, attackRange + .5f))
+            {
+
+                if (hit.transform.CompareTag("Player"))
+                {
+                    RaycastHit hit1;
+                    Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up); //  райкаст чтоб не палил нас сковзь стены
+
+
+                    if (Physics.Raycast(ray1, out hit1, attackRange + .5f))
+                    {
+
+                        if (hit.transform.CompareTag("Player"))
+                        {
+                            attacking = true;
+                        }
+                        else
+                        {
+                            agent.Stop();
+                            transform.Rotate(Vector3.up * Time.deltaTime);
+                        }
+                    }
+                 }
+            }
+         }
 		
-			if (angle < angleV) {
-				RaycastHit hit;
-				Ray ray = new Ray (transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-
-
-				if (Physics.Raycast (ray, out hit, attackRange + .5f)) {
-
-					if (hit.transform.CompareTag ("Player")) {
-						attacking = true;
-					}
-				}
-			}
-		}
         else
         {
             attacking = false;

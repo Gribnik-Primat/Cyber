@@ -96,20 +96,20 @@ public class EnemyMili : MonoBehaviour
 
 
 
-                            lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
+                            //lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
-                            Quaternion targetRot = transform.rotation;
+                            //Quaternion targetRot = transform.rotation;
 
-                            if (lookLeft)
-                            {
-                                targetRot = Quaternion.Euler(0, 180, 0);
+                            //if (lookLeft)
+                            //{
+                            //    targetRot = Quaternion.Euler(0, 180, 0);
 
-                            }
-                            else
-                            {
-                                targetRot = Quaternion.Euler(0, 0, 0);
-                            }
-                            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+                            //}
+                            //else
+                            //{
+                            //    targetRot = Quaternion.Euler(0, 0, 0);
+                            //}
+                            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
 
                         }
                         else
