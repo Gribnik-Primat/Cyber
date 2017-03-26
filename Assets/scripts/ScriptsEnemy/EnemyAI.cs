@@ -56,11 +56,7 @@ public class EnemyAI : MonoBehaviour {
                         {
                             attacking = true;
                         }
-                        else
-                        {
-                            agent.Stop();
-                            transform.Rotate(Vector3.up * Time.deltaTime);
-                        }
+                       
                     }
                  }
             }

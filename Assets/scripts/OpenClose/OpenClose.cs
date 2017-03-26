@@ -5,12 +5,16 @@ using UnityEngine;
 public class OpenClose : MonoBehaviour {
 
     public GameObject door;
-    public bool open = false;
-	public bool close = false;
+    private bool open = false;
+    private bool close = false;
+    private bool opening = false;
+
 
 	AudioSource audio;
 
-	private float time = 0;
+    private float timeO = 0;
+    private float timeC = 0;
+    private float time = 0;
 
     public float OpenX;
     public float OpenY;
@@ -38,6 +42,7 @@ public class OpenClose : MonoBehaviour {
     //}
 	void Update ()
     {
+       
         if (open)
         {
             Vector3 toPosition = new Vector3(OpenX, OpenY, OpenZ);
@@ -48,18 +53,41 @@ public class OpenClose : MonoBehaviour {
 			{
 				audio.Play();
 			}
-			time = time += Time.deltaTime;
-			if (time >= 1.5f)
+            timeO = timeO += Time.deltaTime;
+            if (timeO >= 1.5f)
 			{
 				open = false;
-				time = 0;
-			}
-		}
+                timeO = 0;
+
+            }
+            opening = true;
+        }
+       
 		if (close)
         {
             Vector3 toPosition1 = new Vector3(CloseX,CloseY,CloseZ);
 
             door.transform.position = Vector3.Lerp(transform.position, toPosition1, 4f * Time.deltaTime);
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
+            timeC = timeC += Time.deltaTime;
+            if (timeC >= 1.5f)
+            {
+                close = false;
+                timeC = 0;
+            }
+            opening = false;
+        }
+        if(opening)
+        {
+            time = time +=Time.deltaTime;   
+        }
+        if (time >= 3f)
+        {
+            close = true;
+            time = 0;
         }
 	}
 }

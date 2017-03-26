@@ -15,9 +15,13 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject damageCollider1;
     private float turnspeed;
 
+    private float time = 0;
+
     void Start ()
     {
-       // plInput = GetComponent<PlayerInput>();
+        
+
+        // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
         //   plMovement = GetComponent<PlayerMovement>();
         turnspeed = GetComponent<CharacterThirdPerson>().turnSpeed;
@@ -27,11 +31,33 @@ public class PlayerAttack : MonoBehaviour {
         damageCollider.SetActive(false);
         damageCollider1.SetActive(false);
     }
-	
-	
-	void FixedUpdate ()
+
+
+    void FixedUpdate()
     {
-		if (Input.GetButton("Fire1"))
+
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up);     // об думать как сделать переход между слоями анимациив
+        if (Physics.Raycast(ray, out hit, 3f))
+        {
+
+            if (hit.transform.CompareTag("Enemy"))
+            {
+
+                anim.SetLayerWeight(1, 1f);
+            }
+        }
+        else
+        {
+            time = time += Time.deltaTime;
+            if (time >= 1.5f)
+            {
+                anim.SetLayerWeight(1, 0f);
+                time = 0;
+            }
+        }
+
+        if (Input.GetButton("Fire1"))
         {   
             anim.SetBool("Attack", true);
             turnspeed = 0;

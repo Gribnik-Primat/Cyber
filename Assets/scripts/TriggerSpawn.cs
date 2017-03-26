@@ -5,7 +5,7 @@ public class TriggerSpawn : MonoBehaviour
 {
 
     GameManager gm;
-    
+    RotCam rc;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class TriggerSpawn : MonoBehaviour
 		if (other.GetComponent<PlayerHack>())
         {
             
-            gm.spawnEnemiesNow = true;    
+            gm.spawnEnemiesNow = true;
             Destroy(gameObject);
 
         }

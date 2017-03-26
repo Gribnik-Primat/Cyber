@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class RotCam : MonoBehaviour
 {
-  
-  
-    public bool offOn;
-    
+
+    Animator anim;
+    public bool activeCam = false;
+  //  public Light light;
+
     void Start()
     {
-        offOn = false;
-        
+        anim = GetComponent<Animator>();
+       // light = GetComponent<Light>();
     }
 
     
     void Update()
     {
-        //if (offOn)
-        //{
-        //   GetComponent<Animator>().enabled = false;
-           
-        //}
-       
+
+        if (activeCam)
+        {
+           // изменить цвет
+            anim.Stop();
+        }
         
     }
 }

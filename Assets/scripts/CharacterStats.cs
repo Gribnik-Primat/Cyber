@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using RootMotion.Demos;
 using System;
 
 public class CharacterStats : MonoBehaviour {

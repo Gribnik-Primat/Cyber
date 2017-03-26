@@ -24,7 +24,7 @@ public class EnemyMili : MonoBehaviour
     public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
-    bool lookLeft;
+    
 
 
 
