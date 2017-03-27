@@ -38,7 +38,7 @@ public class PlayerHack : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.E))
                 {
                     anim.SetBool("Uses", true);
-                    plMovement.canMove = false;
+                  //  plMovement.canMove = false;
 
                 }
                 else
