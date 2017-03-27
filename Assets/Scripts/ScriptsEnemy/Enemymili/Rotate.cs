@@ -4,31 +4,38 @@ using UnityEngine;
 using RootMotion.Demos;
 
 public class Rotate : MonoBehaviour {
-    public Transform enemy;
-    public float time = 0;
+    
+  public float time = 0;
+  private bool act = false;
+ 
+    	
+	void Update ()
+    {
+        if (act)
+        {
+            time += Time.deltaTime;
+        }
+        if (time>= 4f)
+            transform.Rotate(Vector3.up, 180f);
+
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<CharacterThirdPerson>())
-        {
-            time += time + Time.deltaTime;
-            //if (time >= 2f)
-            //{
-                transform.Rotate(Vector3.up, 180f);
-            //}
-        }
-        else
-        {
-            time = 0;
+        {   
+            act = true;
         }
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<CharacterThirdPerson>())
+        {
+            act = false;
 
-	void Start () {
-		
-	}
-	
-	
-	void Update () {
-		
-	}
+            time = 0;
+        }
+    }
 }
