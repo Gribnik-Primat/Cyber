@@ -19,12 +19,14 @@ public class EnemyAI : MonoBehaviour {
     UnityEngine.AI.NavMeshAgent agent;
 
     Transform target;
+    CharacterStats CharStats;
 
 	void Start ()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
+        CharStats = GetComponent<CharacterStats>();
         agent.stoppingDistance = attackRange;
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -37,7 +39,7 @@ public class EnemyAI : MonoBehaviour {
 		if (distance < attackRange + .5f) {
 
             RaycastHit hit;
-            Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
+            Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); 
 
 
             if (Physics.Raycast(ray, out hit, attackRange + .5f))
@@ -46,7 +48,7 @@ public class EnemyAI : MonoBehaviour {
                 if (hit.transform.CompareTag("Player"))
                 {
                     RaycastHit hit1;
-                    Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up); //  райкаст чтоб не палил нас сковзь стены
+                    Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up); 
 
 
                     if (Physics.Raycast(ray1, out hit1, attackRange + .5f))
@@ -55,6 +57,7 @@ public class EnemyAI : MonoBehaviour {
                         if (hit.transform.CompareTag("Player"))
                         {
                             attacking = true;
+                            
                         }
                        
                     }

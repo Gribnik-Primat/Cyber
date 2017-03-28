@@ -16,14 +16,16 @@ public class CharacterStats : MonoBehaviour {
     public float damageTimer = .4f;
     WaitForSeconds damageT;
 
-    
+    public bool energi;
 
     Animator anim;
 
-    public GameObject sliderPrefab;
-
+    public GameObject sliderPrefabH;
+   
     Slider healthSlider;
+    
 
+    
     RectTransform healthTrans;
 
 
@@ -33,10 +35,12 @@ public class CharacterStats : MonoBehaviour {
         damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>();
 
-        GameObject slid = Instantiate(sliderPrefab, transform.position, Quaternion.identity) as GameObject;
-        slid.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
-        healthSlider = slid.GetComponentInChildren<Slider>();
-        healthTrans = slid.GetComponent<RectTransform>();
+        GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
+        slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
+        healthSlider = slidH.GetComponentInChildren<Slider>();
+        healthTrans = slidH.GetComponent<RectTransform>();
+
+        
 
 
     }
@@ -45,9 +49,13 @@ public class CharacterStats : MonoBehaviour {
 
     void Update ()
     {
-        healthSlider.value = health / 100;
+       
+        healthSlider.value = health;
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
+     
+
+      
 
         if (dealDamage)
         {
@@ -63,13 +71,15 @@ public class CharacterStats : MonoBehaviour {
         {
             if (!dead)
             {
+                anim.SetBool("Dead", true);
                 anim.enabled = false;
                 healthTrans.gameObject.SetActive(false);
+                
                 dealDamage = true;
 
 
                 GetComponent<CapsuleCollider>().enabled = false;
-                GetComponent<Rigidbody>().isKinematic = true;
+              //  GetComponent<Rigidbody>().isKinematic = true;
                 Destroy(gameObject, 3f);
 
 			
@@ -116,8 +126,8 @@ public class CharacterStats : MonoBehaviour {
                 }
                 else
                 {
-                    GetComponent<PlayerInput>().enabled = false;
-                    GetComponent<PlayerMovement>().enabled = false;
+                    //GetComponent<PlayerInput>().enabled = false;
+                    //GetComponent<PlayerMovement>().enabled = false;
                     GetComponent<PlayerAttack>().enabled = false;
                     
                 }

@@ -4,22 +4,23 @@ using RootMotion.Demos;
 
 public class PlayerAttack : MonoBehaviour {
 
-   // PlayerInput plInput;
-   // PlayerMovement plMovement;
+    // PlayerInput plInput;
+    // PlayerMovement plMovement;
     Animator anim;
 
     public float comboRate = .5f;
-
+    HitReactionTrigger hitt;
     WaitForSeconds comboR;
     public GameObject  damageCollider;
     public GameObject damageCollider1;
     private float turnspeed;
-
+    public bool attack= false;
     public float time = 0;
+    CharacterStats CharStats;
 
     void Start ()
     {
-        
+        CharStats = GetComponent<CharacterStats>();
 
         // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
@@ -27,6 +28,7 @@ public class PlayerAttack : MonoBehaviour {
         turnspeed = GetComponent<CharacterThirdPerson>().turnSpeed;
 
         comboR = new WaitForSeconds(comboRate);
+        hitt = GetComponent<HitReactionTrigger>();
 
         damageCollider.SetActive(false);
         damageCollider1.SetActive(false);
@@ -37,15 +39,21 @@ public class PlayerAttack : MonoBehaviour {
     {
 
         //RaycastHit hit;
-        //Ray ray = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up);     // об думать как сделать переход между слоями анимациив
-        //if (Physics.Raycast(ray, out hit, 3f))
+        //Ray ray = new Ray(transform.position + Vector3.up, transform.forward);     // об думать как сделать переход между слоями анимациив
+        //if (Physics.Raycast(ray, out hit, 4f))
         //{
 
         //    if (hit.transform.CompareTag("Enemy"))
         //    {
-
-        //        anim.SetLayerWeight(1, 1f);
+        //        attack = true;
         //    }
+        //}
+
+
+        //if(CharStats.substractOnce ==false)
+        //{
+        //    
+        //}
         //}
         //else
         //{
@@ -64,18 +72,18 @@ public class PlayerAttack : MonoBehaviour {
 
         
         if (Input.GetButton("Fire1"))
-        {   
+        {
             anim.SetBool("Attack", true);
             turnspeed = 0;
-           // plMovement.canMove = false;
             StartCoroutine("CloseAttack");
+           
         }
-		if (Input.GetButton("Fire2"))
+        if (Input.GetButton("Fire2"))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
             turnspeed = 0;
-           // plMovement.canMove = false;
             StartCoroutine("CloseAttack1");
+            
         }
     }
     IEnumerator CloseAttack()

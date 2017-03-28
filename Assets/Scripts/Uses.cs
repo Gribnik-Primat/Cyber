@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Uses : MonoBehaviour {
 
-    //  OpenDoorLock door;
-    bool door;
+    OpenDoorLock door;
+    
 	void Start ()
     {
-		
+        door = GetComponent<OpenDoorLock>();
 	}
 	
 	
 	void Update ()
     {
         RaycastHit hit;
-        Ray ray = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up);
-        if(Physics.Raycast(ray, out hit, 3f))
+        Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
+        Debug.DrawRay(transform.position + Vector3.up, transform.forward);
+        if(Physics.Raycast(ray, out hit, 5f))
         {
             if (hit.transform.CompareTag("Locker"))
             {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    door =GetComponent<OpenDoorLock>().open = true;
-                }
+
+                door.open = true;
+                
             }
         }
 

@@ -24,9 +24,9 @@ public class EnemyMili : MonoBehaviour
     public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
-    
 
 
+    CharacterStats CharStats;
 
     Transform target;
     public bool see;
@@ -39,7 +39,7 @@ public class EnemyMili : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
 
-
+        CharStats = GetComponent<CharacterStats>();
         Invoke("move", 15f);
 
 
@@ -76,9 +76,9 @@ public class EnemyMili : MonoBehaviour
                         see = true;
 
                         if (distance < attackRange)           // расстоние меньше то бьем 
-                        {
-
+                        {               
                             attacking = true;
+                            
                         }
                         else
                         {
