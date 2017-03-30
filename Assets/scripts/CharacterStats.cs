@@ -41,30 +41,37 @@ public class CharacterStats : MonoBehaviour {
         healthTrans = slidH.GetComponent<RectTransform>();
 
         
-
-
+		substractOnce = false;
     }
 
     
 
     void Update ()
     {
-       
+		
         healthSlider.value = health;
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+		if (healthSlider.value >= 100 || healthSlider.value <= 0)
+			healthSlider.gameObject.SetActive (false);
+		else
+			healthSlider.gameObject.SetActive (true);
+		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
-     
+       
 
-      
 
         if (dealDamage)
         {
-            if (!substractOnce)
+            if (substractOnce == false)
             {
+				
                 health -= 30;
-                anim.SetTrigger("Hit");
-                substractOnce = true;
+
+				substractOnce = true;
+
+				anim.SetTrigger("Hit");
+
             }
+
             StartCoroutine("CloseDamage");
         }
         if(health <= 0)
@@ -150,11 +157,11 @@ public class CharacterStats : MonoBehaviour {
         health -= value;
     }
 
-    IEnumerator CloseDamage()
-    {
-        yield return damageT;
-        dealDamage = false;
-        substractOnce = false;
-
-    }
+   // IEnumerator CloseDamage()
+   // {
+   //     yield return damageT;
+   //     dealDamage = false;
+   //     substractOnce = true;
+	//
+    //}
 }

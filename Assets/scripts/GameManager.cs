@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
     public GameObject EnemyPrefab;
-    public FollowCamera cameraMover;
+   
 
    
 
@@ -37,16 +37,7 @@ public class GameManager : MonoBehaviour {
             spawnEnemiesNow = false;
            
         }
-        if (holdPlayer)
-        {
-            cameraMover.enabled = false;
-            while (enemiesSpawend.Remove(null));    //  останавливает камеру и чистит лист
-        
-        }
-        else
-        {
-            cameraMover.enabled = true;
-        }
+       
         if(enemiesSpawend.Count == 0)      // необходимо убрать все Element  в Size 
         {
             holdPlayer = false;

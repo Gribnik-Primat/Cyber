@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class FollowObject : MonoBehaviour {
@@ -18,3 +18,4 @@ public class FollowObject : MonoBehaviour {
         transform.position = new Vector3(originalX , target.position.y, target.position.z);
 	}
 }
+*/

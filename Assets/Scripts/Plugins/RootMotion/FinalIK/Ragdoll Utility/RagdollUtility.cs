@@ -46,6 +46,11 @@ namespace RootMotion.FinalIK {
 		/// Switches to ragdoll.
 		/// </summary>
 		public void EnableRagdoll() {
+			var colliders = GetComponentsInChildren<Collider> ();
+			foreach (var col in colliders) {
+				col.enabled = true;
+			}
+
 			if (isRagdoll) return;
 			
 			StopAllCoroutines();
@@ -84,7 +89,6 @@ namespace RootMotion.FinalIK {
 				t = r.transform;
 				joint = t.GetComponent<Joint>();
 
-				collider = t.GetComponent<Collider>();
 
 				if (joint != null) {
 					c = joint.connectedBody;

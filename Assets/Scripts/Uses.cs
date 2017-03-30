@@ -8,7 +8,7 @@ public class Uses : MonoBehaviour {
     
 	void Start ()
     {
-        door = GetComponent<OpenDoorLock>();
+		door = GameObject.FindGameObjectWithTag("Locker").GetComponent<OpenDoorLock>();
 	}
 	
 	

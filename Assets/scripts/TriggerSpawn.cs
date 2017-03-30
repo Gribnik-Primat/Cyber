@@ -10,7 +10,7 @@ public class TriggerSpawn : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        
+		rc = GetComponentInParent<RotCam> ();
     }
 
     void OnTriggerEnter(Collider other)
@@ -18,7 +18,7 @@ public class TriggerSpawn : MonoBehaviour
         
 		if (other.GetComponent<PlayerHack>())
         {
-            
+			rc.activeCam = true;
             gm.spawnEnemiesNow = true;
             Destroy(gameObject);
 

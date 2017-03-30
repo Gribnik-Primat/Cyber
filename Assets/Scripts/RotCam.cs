@@ -7,12 +7,15 @@ public class RotCam : MonoBehaviour
 
     Animator anim;
     public bool activeCam = false;
+	Light col;
+
   //  public Light light;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-       // light = GetComponent<Light>();
+		col = GetComponentInChildren<Light>();
+		// light = GetComponent<Light>();
     }
 
     
@@ -21,6 +24,7 @@ public class RotCam : MonoBehaviour
 
         if (activeCam)
         {
+			col.color = Color.red;
            // изменить цвет
             anim.Stop();
         }

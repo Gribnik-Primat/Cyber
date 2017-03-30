@@ -7,6 +7,7 @@ public class DoDamage : MonoBehaviour {
     {
         if (other.GetComponent<CharacterStats>())
         {
+			
             other.GetComponent<CharacterStats>().checkToApplyDamage();
         }
     }
