@@ -21,8 +21,13 @@ public class Uses : MonoBehaviour {
         {
             if (hit.transform.CompareTag("Locker"))
             {
+               
 
-                door.open = true;
+                if (Input.GetButton("Uses"))
+                {
+                    door.Change();
+                  //  door.open = true;
+                }
                 
             }
         }

@@ -20,7 +20,10 @@ public class OpenDoorLock : MonoBehaviour {
     {
 		
 	}
-	
+	public void Change()
+    {
+        open = true;
+    }
 	
 	void Update ()
     {

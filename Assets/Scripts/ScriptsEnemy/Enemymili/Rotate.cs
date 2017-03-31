@@ -15,7 +15,7 @@ public class Rotate : MonoBehaviour {
         {
             time += Time.deltaTime;
         }
-        if (time>= 2.5f)
+        if (time>= 2f)
             transform.Rotate(Vector3.up, 180f);
 
 

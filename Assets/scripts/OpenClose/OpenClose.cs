@@ -47,7 +47,7 @@ public class OpenClose : MonoBehaviour {
         {
             Vector3 toPosition = new Vector3(OpenX, OpenY, OpenZ);
 
-            door.transform.position = Vector3.Lerp(transform.position, toPosition, 4f * Time.deltaTime);
+            door.transform.localPosition = Vector3.Lerp(transform.localPosition, toPosition, 4f * Time.deltaTime);
 
 			if (!audio.isPlaying) 
 			{
@@ -67,7 +67,7 @@ public class OpenClose : MonoBehaviour {
         {
             Vector3 toPosition1 = new Vector3(CloseX,CloseY,CloseZ);
 
-            door.transform.position = Vector3.Lerp(transform.position, toPosition1, 4f * Time.deltaTime);
+            door.transform.localPosition = Vector3.Lerp(transform.localPosition, toPosition1, 4f * Time.deltaTime);
             if (!audio.isPlaying)
             {
                 audio.Play();
