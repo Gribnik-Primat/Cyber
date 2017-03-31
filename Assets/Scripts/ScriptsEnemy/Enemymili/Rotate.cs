@@ -5,7 +5,7 @@ using RootMotion.Demos;
 
 public class Rotate : MonoBehaviour {
     
-  public float time = 0;
+    float time = 0;
   private bool act = false;
  
     	
@@ -15,7 +15,7 @@ public class Rotate : MonoBehaviour {
         {
             time += Time.deltaTime;
         }
-        if (time>= 4f)
+        if (time>= 2.5f)
             transform.Rotate(Vector3.up, 180f);
 
 

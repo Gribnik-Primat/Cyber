@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour {
         // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
         //   plMovement = GetComponent<PlayerMovement>();
-        turnspeed = GetComponent<CharacterThirdPerson>().turnSpeed;
+        turnspeed = GetComponentInParent<CharacterThirdPerson>().turnSpeed;
 
         comboR = new WaitForSeconds(comboRate);
         hitt = GetComponent<HitReactionTrigger>();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using RootMotion.FinalIK;
 using RootMotion.Demos;
 using System;
 
@@ -19,13 +20,14 @@ public class CharacterStats : MonoBehaviour {
     public bool energi;
 
     Animator anim;
+    Animator anim1;
 
     public GameObject sliderPrefabH;
    
     Slider healthSlider;
-    
 
-    
+    RagdollUtility ragdollUtility;
+
     RectTransform healthTrans;
 
 
@@ -33,15 +35,16 @@ public class CharacterStats : MonoBehaviour {
 	void Start ()
     {
         damageT = new WaitForSeconds(damageTimer);
-        anim = GetComponent<Animator>();
-
+        anim = GetComponent<Animator>(); 
+        anim1 = GetComponentInParent<Animator>();
+        
         GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
         slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         healthSlider = slidH.GetComponentInChildren<Slider>();
         healthTrans = slidH.GetComponent<RectTransform>();
-
+        ragdollUtility = GetComponentInChildren<RagdollUtility>();
         
-		substractOnce = false;
+		//substractOnce = false;
     }
 
     
@@ -69,6 +72,7 @@ public class CharacterStats : MonoBehaviour {
 				substractOnce = true;
 
 				anim.SetTrigger("Hit");
+                anim1.SetTrigger("Hit");
 
             }
 
@@ -78,65 +82,66 @@ public class CharacterStats : MonoBehaviour {
         {
             if (!dead)
             {
-                anim.SetBool("Dead", true);
-                anim.enabled = false;
-                healthTrans.gameObject.SetActive(false);
-                
-                dealDamage = true;
-
-
-                GetComponent<CapsuleCollider>().enabled = false;
-              //  GetComponent<Rigidbody>().isKinematic = true;
-                Destroy(gameObject, 3f);
-
-			
-
-                for(int i = 0; i<items.Length; i++)
-                {
-                    items[i].parent = null;
-                    items[i].GetComponent<Rigidbody>().isKinematic = false;
-                }
+                //for(int i = 0; i<items.Length; i++)
+                //{
+                //    items[i].parent = null;
+                //    items[i].GetComponent<Rigidbody>().isKinematic = false;
+                //}
 
                 if (GetComponent<EnemyMili>())
                 {
                     GetComponent<EnemyMili>().enabled = false;
+                    anim.enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
+                  //  anim.SetBool("Dead", true);
                //     anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
+                    anim.enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
+                  //  anim.SetBool("Dead", true);
                   //  anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyAI>())
                 {
+                    anim.enabled = false;
                     GetComponent<EnemyAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
+                  //  anim.SetBool("Dead", true);
                  //  anim.CrossFade("Death", .5f);
                    Destroy(gameObject, 5f);
 
                 }
                 if (GetComponent<EnemyShootAi>())
                 {
+                    anim.enabled = false;
                     GetComponent<EnemyShootAi>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    anim.SetBool("Dead", true);
+                   // anim.SetBool("Dead", true);
                     //  anim.CrossFade("Death", .5f);
                     Destroy(gameObject, 5f);
 
-                }
+                } 
                 else
                 {
-                    //GetComponent<PlayerInput>().enabled = false;
-                    //GetComponent<PlayerMovement>().enabled = false;
-                    GetComponent<PlayerAttack>().enabled = false;
+                    GetComponent<CharacterThirdPerson>().enabled = false;
                     
+                    //  GetComponent<PlayerAttack>().enabled = false;
+                    anim.enabled = false;
+                    ragdollUtility.EnableRagdoll();
+                    healthTrans.gameObject.SetActive(false);
+
+                    dealDamage = true;
+
+
+                    GetComponent<CapsuleCollider>().enabled = false;
+                    //  GetComponent<Rigidbody>().isKinematic = true;
+                    Destroy(gameObject, 3f);
+
                 }
                 dead = true;
             }
@@ -157,11 +162,11 @@ public class CharacterStats : MonoBehaviour {
         health -= value;
     }
 
-   // IEnumerator CloseDamage()
-   // {
-   //     yield return damageT;
-   //     dealDamage = false;
-   //     substractOnce = true;
-	//
-    //}
+    IEnumerator CloseDamage()
+    {
+        yield return damageT;
+        dealDamage = false;
+        substractOnce = false;
+
+    }
 }
