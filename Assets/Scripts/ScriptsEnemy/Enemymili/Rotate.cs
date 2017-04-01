@@ -4,18 +4,18 @@ using UnityEngine;
 using RootMotion.Demos;
 
 public class Rotate : MonoBehaviour {
-    
+   
     float time = 0;
   private bool act = false;
  
-    	
+    
 	void Update ()
     {
         if (act)
         {
             time += Time.deltaTime;
         }
-        if (time>= 2f)
+        if (time>= 1.5f)
             transform.Rotate(Vector3.up, 180f);
 
 

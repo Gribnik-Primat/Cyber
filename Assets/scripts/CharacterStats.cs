@@ -8,7 +8,7 @@ using System;
 public class CharacterStats : MonoBehaviour {
 
     public float health = 100f;
-    public float biostim = 100f;
+   
     bool dealDamage;
     bool substractOnce;
     bool dead;
@@ -30,13 +30,13 @@ public class CharacterStats : MonoBehaviour {
 
     RectTransform healthTrans;
 
-
+    
 
 	void Start ()
     {
         damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>(); 
-        anim1 = GetComponentInParent<Animator>();
+        anim1 = GetComponentInChildren<Animator>();
         
         GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
         slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -71,8 +71,8 @@ public class CharacterStats : MonoBehaviour {
 
 				substractOnce = true;
 
-				anim.SetTrigger("Hit");
                 anim1.SetTrigger("Hit");
+                anim.SetTrigger("Hit");
 
             }
 
@@ -128,19 +128,17 @@ public class CharacterStats : MonoBehaviour {
                 } 
                 else
                 {
-                    GetComponent<CharacterThirdPerson>().enabled = false;
                     
-                    //  GetComponent<PlayerAttack>().enabled = false;
-                    anim.enabled = false;
+                    //GetComponent<CharacterThirdPerson>().enabled = false;
+                    GetComponentInChildren<PlayerAttack>().enabled = false;
+                    anim1.enabled = false;
                     ragdollUtility.EnableRagdoll();
                     healthTrans.gameObject.SetActive(false);
-
-                    dealDamage = true;
-
-
+                   // dealDamage = true;
                     GetComponent<CapsuleCollider>().enabled = false;
                     //  GetComponent<Rigidbody>().isKinematic = true;
                     Destroy(gameObject, 3f);
+                    
 
                 }
                 dead = true;
