@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 7fc51245ee7e5f54193a1d3741569470
+timeCreated: 1491135422
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Xephyr Expanded
+  fontNames:
+  - Xephyr Expanded
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

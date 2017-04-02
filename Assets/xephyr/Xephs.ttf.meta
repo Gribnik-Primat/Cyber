@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ef9f0dff3973f334891c142122612a04
+timeCreated: 1491135422
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Xephyr Shadow
+  fontNames:
+  - Xephyr Shadow
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

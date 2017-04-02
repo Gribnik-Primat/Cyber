@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: f4e64d9a49e0a0d429093d0fe503f358
+timeCreated: 1491135422
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Xephyr Expanded Shadow Italic
+  fontNames:
+  - Xephyr Expanded Shadow Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

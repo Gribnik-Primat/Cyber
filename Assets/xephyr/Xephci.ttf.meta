@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8a27162632d762e4b806f887b8e0d40b
+timeCreated: 1491135422
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Xephyr Condensed Italic
+  fontNames:
+  - Xephyr Condensed Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

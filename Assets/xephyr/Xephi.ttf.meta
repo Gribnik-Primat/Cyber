@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0c37814f4fb845b42984b3472bf92649
+timeCreated: 1491135421
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Xephyr Italic
+  fontNames:
+  - Xephyr Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
