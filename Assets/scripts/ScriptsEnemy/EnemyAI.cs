@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour {
 
     public float attackRate = 3;
     float attackR;
-    bool attacking;
+    public bool attacking;
 
 	public float angleV = 180f;
 
@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour {
 
     UnityEngine.AI.NavMeshAgent agent;
 
-    Transform target;
+    public Transform target;
     CharacterStats CharStats;
 
 	void Start ()
@@ -56,7 +56,10 @@ public class EnemyAI : MonoBehaviour {
 
                         if (hit.transform.CompareTag("Player"))
                         {
-                            attacking = true;
+							if (GameObject.FindGameObjectWithTag ("Player").GetComponent<Invisibility> ().state == true)
+								attacking = true;
+							else
+								attacking = false;
                             
                         }
                        

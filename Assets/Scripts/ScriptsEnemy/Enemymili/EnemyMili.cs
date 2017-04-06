@@ -16,7 +16,7 @@ public class EnemyMili : MonoBehaviour
 
     public float attackRate = 3; // скорость атаки
     float attackR;
-    bool attacking;
+    public bool attacking;
 
     public float attackRange = 3;// расстояние до цели
     public float rotSpeed = 5; // скокрость разворота 
@@ -25,6 +25,7 @@ public class EnemyMili : MonoBehaviour
 
     public GameObject damageCollider; // колайдер дамага
 
+	public bool invisibleplayer;
 
     CharacterStats CharStats;
 
@@ -40,9 +41,9 @@ public class EnemyMili : MonoBehaviour
         anim = GetComponent<Animator>();
 
         CharStats = GetComponent<CharacterStats>();
-        Invoke("move", 15f);
+        Invoke("move", 1f);
 
-
+		invisibleplayer = false;
 
         agent.stoppingDistance = attackRange;
       
@@ -57,7 +58,15 @@ public class EnemyMili : MonoBehaviour
     
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, target.position);  // дистанция
+		invisibleplayer = GetComponent<Invisibility>().state;
+		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
+		float distance;   // дистанция
+		if (invisibleplayer == false)
+		// невидимость игрока
+			distance = visible+1;
+		 else 
+			distance = Vector3.Distance(transform.position, target.position);
+
         if (distance < visible)
         {
             Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
@@ -88,38 +97,38 @@ public class EnemyMili : MonoBehaviour
 
 
 
-                        if (!attacking)                     // если не бьем то идем
-                        {
+						if (!attacking) {                     // если не бьем то идем
 
-                            agent.Resume();
-                            agent.destination = Player.transform.position;
-
+							agent.Resume ();
+							agent.destination = Player.transform.position;
 
 
-                            //lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
-                            //Quaternion targetRot = transform.rotation;
+							//lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
 
-                            //if (lookLeft)
-                            //{
-                            //    targetRot = Quaternion.Euler(0, 180, 0);
+							//Quaternion targetRot = transform.rotation;
 
-                            //}
-                            //else
-                            //{
-                            //    targetRot = Quaternion.Euler(0, 0, 0);
-                            //}
-                            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+							//if (lookLeft)
+							//{
+							//    targetRot = Quaternion.Euler(0, 180, 0);
 
-                        }
-                        else
+							//}
+							//else
+							//{
+							//    targetRot = Quaternion.Euler(0, 0, 0);
+							//}
+							//transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+
+						}
+						
+						if(attacking)
                         {
                             agent.Stop();
 
 
                             attackR += Time.deltaTime;
 
-                            if (attackR > attackRate)                       // атакуем 
+							if (attackR > attackRate)                       // атакуем 
                             {
                                 anim.SetBool("Attack", true);
                                 StartCoroutine("CloseAttack");
