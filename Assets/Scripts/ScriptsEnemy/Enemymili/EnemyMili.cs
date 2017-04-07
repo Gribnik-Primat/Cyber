@@ -62,10 +62,10 @@ public class EnemyMili : MonoBehaviour
 		
 		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
 		float distance;   // дистанция
-		if (invisibleplayer)
+		if (invisibleplayer == false)
 		// невидимость игрока
 			distance = visible+1;
-        if (invisibleplayer = false)
+        if (invisibleplayer)
         {
 
             distance = Vector3.Distance(transform.position, target.position);

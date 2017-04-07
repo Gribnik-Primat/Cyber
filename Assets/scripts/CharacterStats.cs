@@ -100,7 +100,9 @@ public class CharacterStats : MonoBehaviour {
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
+
                     anim.enabled = false;
+                    GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   //  anim.SetBool("Dead", true);
@@ -110,6 +112,7 @@ public class CharacterStats : MonoBehaviour {
                 if (GetComponent<EnemyAI>())
                 {
                     anim.enabled = false;
+                    GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   //  anim.SetBool("Dead", true);
@@ -120,6 +123,7 @@ public class CharacterStats : MonoBehaviour {
                 if (GetComponent<EnemyShootAi>())
                 {
                     anim.enabled = false;
+                    GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyShootAi>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                    // anim.SetBool("Dead", true);
@@ -130,7 +134,7 @@ public class CharacterStats : MonoBehaviour {
                 else
                 {
                     
-                    GetComponent<CharacterThirdPerson>().enabled = false;
+                    // GetComponent<CharacterThirdPerson>().enabled = false;
                     GetComponentInChildren<PlayerAttack>().enabled = false;
                     anim1.enabled = false;
                     ragdollUtility.EnableRagdoll();
