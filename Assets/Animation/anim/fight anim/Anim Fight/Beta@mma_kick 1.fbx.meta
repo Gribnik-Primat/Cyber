@@ -203,15 +203,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.44076306
-        functionName: OpenDamageCollider1
+      - time: 0.38985395
+        functionName: OpenDamageCollider_RL
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.47891566
-        functionName: CloseDamageCollider1
+      - time: 0.4970975
+        functionName: CloseDamageCollider_RL
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerHack : MonoBehaviour
 {
 
-    PlayerInput plInput;
-    PlayerMovement plMovement;
+    //PlayerInput plInput;
+    //PlayerMovement plMovement;
     public bool hack;
     Animator anim;
     public float see;
@@ -15,8 +16,8 @@ public class PlayerHack : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        plMovement = GetComponent<PlayerMovement>();
-        plInput = GetComponent<PlayerInput>();
+        //plMovement = GetComponent<PlayerMovement>();
+        //plInput = GetComponent<PlayerInput>();
         //GetComponent<EnemyRobotAI>().enabled = true;
         // GetComponent<RobotAI>().enabled = false;
 
@@ -60,7 +61,7 @@ public class PlayerHack : MonoBehaviour
             hit.transform.SendMessage("Hack");
             }
         }
-    }
+}
 
 
     

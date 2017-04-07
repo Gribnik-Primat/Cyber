@@ -90,12 +90,13 @@ public class CharacterStats : MonoBehaviour {
 
                 if (GetComponent<EnemyMili>())
                 {
+                    GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyMili>().enabled = false;
                     anim.enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   //  anim.SetBool("Dead", true);
                //     anim.CrossFade("Death", .5f);
-                    Destroy(gameObject, 5f);
+                  //  Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
@@ -104,7 +105,7 @@ public class CharacterStats : MonoBehaviour {
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   //  anim.SetBool("Dead", true);
                   //  anim.CrossFade("Death", .5f);
-                    Destroy(gameObject, 5f);
+                   // Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyAI>())
                 {
@@ -113,7 +114,7 @@ public class CharacterStats : MonoBehaviour {
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   //  anim.SetBool("Dead", true);
                  //  anim.CrossFade("Death", .5f);
-                   Destroy(gameObject, 5f);
+                  // Destroy(gameObject, 5f);
 
                 }
                 if (GetComponent<EnemyShootAi>())
@@ -123,13 +124,13 @@ public class CharacterStats : MonoBehaviour {
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                    // anim.SetBool("Dead", true);
                     //  anim.CrossFade("Death", .5f);
-                    Destroy(gameObject, 5f);
+                   // Destroy(gameObject, 5f);
 
                 } 
                 else
                 {
                     
-                    //GetComponent<CharacterThirdPerson>().enabled = false;
+                    GetComponent<CharacterThirdPerson>().enabled = false;
                     GetComponentInChildren<PlayerAttack>().enabled = false;
                     anim1.enabled = false;
                     ragdollUtility.EnableRagdoll();
@@ -137,7 +138,7 @@ public class CharacterStats : MonoBehaviour {
                    // dealDamage = true;
                     GetComponent<CapsuleCollider>().enabled = false;
                     //  GetComponent<Rigidbody>().isKinematic = true;
-                    Destroy(gameObject, 3f);
+                   // Destroy(gameObject, 3f);
                     
 
                 }

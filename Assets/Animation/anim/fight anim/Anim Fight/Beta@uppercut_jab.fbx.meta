@@ -190,84 +190,84 @@ ModelImporter:
       curves: []
       events:
       - time: 0.21593855
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.2314942
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.38536447
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.4160921
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.4905747
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5209958
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.55402255
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5737163
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6338695
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6530266
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.69494194
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.73310214
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_RH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

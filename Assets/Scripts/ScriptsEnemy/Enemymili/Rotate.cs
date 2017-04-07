@@ -7,16 +7,17 @@ public class Rotate : MonoBehaviour {
    
     float time = 0;
   private bool act = false;
- 
+    public GameObject enemy;
     
 	void Update ()
     {
+   
         if (act)
         {
             time += Time.deltaTime;
         }
         if (time>= 1.5f)
-            transform.Rotate(Vector3.up, 180f);
+            enemy.transform.Rotate(Vector3.up, 180f);
 
 
     }

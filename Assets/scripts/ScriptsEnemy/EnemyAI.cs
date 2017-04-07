@@ -56,11 +56,9 @@ public class EnemyAI : MonoBehaviour {
 
                         if (hit.transform.CompareTag("Player"))
                         {
-							if (GameObject.FindGameObjectWithTag ("Player").GetComponent<Invisibility> ().state == true)
+							
 								attacking = true;
-							else
-								attacking = false;
-                            
+  
                         }
                        
                     }

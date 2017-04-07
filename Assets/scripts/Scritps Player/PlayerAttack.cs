@@ -11,8 +11,10 @@ public class PlayerAttack : MonoBehaviour {
     public float comboRate = .5f;
     HitReactionTrigger hitt;
     WaitForSeconds comboR;
-    public GameObject  damageCollider;
-    public GameObject damageCollider1;
+    public GameObject  damageCollider_RH;
+    public GameObject damageCollider_LH;
+    public GameObject damageCollider_RL;
+    public GameObject damageCollider_LL;
     private float turnspeed;
     public bool attack= false;
     public float time = 0;
@@ -30,8 +32,10 @@ public class PlayerAttack : MonoBehaviour {
         comboR = new WaitForSeconds(comboRate);
         hitt = GetComponent<HitReactionTrigger>();
 
-        damageCollider.SetActive(false);
-        damageCollider1.SetActive(false);
+        damageCollider_RH.SetActive(false);
+        damageCollider_LH.SetActive(false);
+        damageCollider_RL.SetActive(false);
+        damageCollider_LL.SetActive(false);
     }
 
 
@@ -74,14 +78,14 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButton("Fire1"))
         {
             anim.SetBool("Attack", true);
-            turnspeed = 0;
+           // turnspeed = 0;
             StartCoroutine("CloseAttack");
            
         }
         if (Input.GetButton("Fire2"))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
-            turnspeed = 0;
+           // turnspeed = 0;
             StartCoroutine("CloseAttack1");
             
         }
@@ -92,16 +96,27 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetBool("Attack", false);
       
     }
-    public void OpenDamageCollider()
+    public void OpenDamageCollider_RH()
     {
-        damageCollider.SetActive(true);
+        damageCollider_RH.SetActive(true);
         
 
     }
-    public void CloseDamageCollider()
+    public void CloseDamageCollider_RH()
     {
-        damageCollider.SetActive(false);
+        damageCollider_RH.SetActive(false);
         
+    }
+    public void OpenDamageCollider_LH()
+    {
+        damageCollider_LH.SetActive(true);
+
+
+    }
+    public void CloseDamageCollider_LH()
+    {
+        damageCollider_LH.SetActive(false);
+
     }
     IEnumerator CloseAttack1()
     {
@@ -109,15 +124,27 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetBool("Attack2", false);
 
     }
-    public void OpenDamageCollider1()
+    public void OpenDamageCollider_RL()
     {
-        damageCollider1.SetActive(true);
+        damageCollider_RL.SetActive(true);
 
 
     }
-    public void CloseDamageCollider1()
+    public void CloseDamageCollider_RL()
     {
-        damageCollider1.SetActive(false);
+        damageCollider_RL.SetActive(false);
 
     }
+    public void OpenDamageCollider_LL()
+    {
+        damageCollider_LL.SetActive(true);
+
+
+    }
+    public void CloseDamageCollider_LL()
+    {
+        damageCollider_LL.SetActive(false);
+
+    }
+
 }

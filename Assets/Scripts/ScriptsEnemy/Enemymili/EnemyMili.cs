@@ -31,6 +31,7 @@ public class EnemyMili : MonoBehaviour
 
     Transform target;
     public bool see;
+    float distance;
 
     void Start()
     {
@@ -42,8 +43,8 @@ public class EnemyMili : MonoBehaviour
 
         CharStats = GetComponent<CharacterStats>();
         Invoke("move", 1f);
-
-		invisibleplayer = false;
+        invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
+        invisibleplayer = false;
 
         agent.stoppingDistance = attackRange;
       
@@ -58,85 +59,88 @@ public class EnemyMili : MonoBehaviour
     
     void Update()
     {
-		invisibleplayer = GetComponent<Invisibility>().state;
+		
 		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
 		float distance;   // дистанция
-		if (invisibleplayer == false)
+		if (invisibleplayer)
 		// невидимость игрока
 			distance = visible+1;
-		 else 
-			distance = Vector3.Distance(transform.position, target.position);
-
-        if (distance < visible)
+        if (invisibleplayer = false)
         {
-            Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
-            float angle = Quaternion.Angle(transform.rotation, look);
-            if (angle < angleV)
+
+            distance = Vector3.Distance(transform.position, target.position);
+            if (distance < visible)
             {
-                RaycastHit hit;
-                Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-
-
-                if (Physics.Raycast(ray, out hit, visible))
+                Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
+                float angle = Quaternion.Angle(transform.rotation, look);
+                if (angle < angleV)
                 {
+                    RaycastHit hit;
+                    Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
 
-                    if (hit.transform.CompareTag("Player"))
+
+                    if (Physics.Raycast(ray, out hit, visible))
                     {
-                        see = true;
 
-                        if (distance < attackRange)           // расстоние меньше то бьем 
-                        {               
-                            attacking = true;
-                            
-                        }
-                        else
+                        if (hit.transform.CompareTag("Player"))
                         {
-                            attacking = false;
+                            see = true;
 
-                        }
-
-
-
-						if (!attacking) {                     // если не бьем то идем
-
-							agent.Resume ();
-							agent.destination = Player.transform.position;
-
-
-
-							//lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
-
-							//Quaternion targetRot = transform.rotation;
-
-							//if (lookLeft)
-							//{
-							//    targetRot = Quaternion.Euler(0, 180, 0);
-
-							//}
-							//else
-							//{
-							//    targetRot = Quaternion.Euler(0, 0, 0);
-							//}
-							//transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
-
-						}
-						
-						if(attacking)
-                        {
-                            agent.Stop();
-
-
-                            attackR += Time.deltaTime;
-
-							if (attackR > attackRate)                       // атакуем 
+                            if (distance < attackRange)           // расстоние меньше то бьем 
                             {
-                                anim.SetBool("Attack", true);
-                                StartCoroutine("CloseAttack");
+                                attacking = true;
 
-                                attackR = 0;
+                            }
+                            else
+                            {
+                                attacking = false;
+
                             }
 
 
+
+                            if (!attacking)
+                            {                     // если не бьем то идем
+
+                                agent.Resume();
+                                agent.destination = Player.transform.position;
+
+
+
+                                //lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
+
+                                //Quaternion targetRot = transform.rotation;
+
+                                //if (lookLeft)
+                                //{
+                                //    targetRot = Quaternion.Euler(0, 180, 0);
+
+                                //}
+                                //else
+                                //{
+                                //    targetRot = Quaternion.Euler(0, 0, 0);
+                                //}
+                                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
+
+                            }
+
+                            if (attacking)
+                            {
+                                agent.Stop();
+
+
+                                attackR += Time.deltaTime;
+
+                                if (attackR > attackRate)                       // атакуем 
+                                {
+                                    anim.SetBool("Attack", true);
+                                    StartCoroutine("CloseAttack");
+
+                                    attackR = 0;
+                                }
+
+
+                            }
                         }
                     }
                 }
