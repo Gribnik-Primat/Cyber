@@ -22,24 +22,26 @@ public class Invisibility : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKeyDown (KeyCode.R)) 
-		{
-           
-			if (!state) 
-			{
-               
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            
+
+
+            if (!state)
+            {
+
                 GetComponentInChildren<Renderer>().material.shader = s2;
                 hack.enabled = false;
-               
-            } 
-			else
-		    {
-                
+
+            }
+            else
+            {
+
                 GetComponentInChildren<Renderer>().material.shader = s1;
                 hack.enabled = true;
-               
+
             }
-			state = !state;
-		}
+            state = !state;
+        }
 	}
 }

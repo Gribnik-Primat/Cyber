@@ -31,15 +31,16 @@ public class EnemyAI : MonoBehaviour {
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-	
-	
-	void Update ()
-	{
-		float distance = Vector3.Distance (transform.position, target.position);
-		if (distance < attackRange + .5f) {
+
+
+    void Update()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance < attackRange + .5f)
+        {
 
             RaycastHit hit;
-            Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); 
+            Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position);
 
 
             if (Physics.Raycast(ray, out hit, attackRange + .5f))
@@ -48,7 +49,7 @@ public class EnemyAI : MonoBehaviour {
                 if (hit.transform.CompareTag("Player"))
                 {
                     RaycastHit hit1;
-                    Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up); 
+                    Ray ray1 = new Ray(transform.position + Vector3.up, transform.forward + Vector3.up);
 
 
                     if (Physics.Raycast(ray1, out hit1, attackRange + .5f))
@@ -56,16 +57,16 @@ public class EnemyAI : MonoBehaviour {
 
                         if (hit.transform.CompareTag("Player"))
                         {
-							
-								attacking = true;
-  
+
+                            attacking = true;
+
                         }
-                       
+
                     }
-                 }
+                }
             }
-         }
-		
+        }
+
         else
         {
             attacking = false;
@@ -82,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
 
             anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);
             anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);
-        
+
 
         }
         else
@@ -98,21 +99,55 @@ public class EnemyAI : MonoBehaviour {
 
             attackR += Time.deltaTime;
 
-            if(attackR> attackRate)
+            if (attackR > attackRate)
             {
-                anim.SetBool("Attack", true);
-                StartCoroutine("CloseAttack");
-
-                attackR = 0;
+                int rand = Random.Range(0, 4);
+                switch (rand)
+                {
+                    case 0:
+                        anim.SetBool("Attack", true);
+                        StartCoroutine("CloseAttack");
+                        attackR = 0;
+                        break;
+                    case 1:
+                        anim.SetBool("AttackLL", true);
+                        StartCoroutine("CloseAttack");
+                        attackR = 0;
+                        break;
+                    case 2:
+                        anim.SetBool("AttackRL", true);
+                        StartCoroutine("CloseAttack");
+                        attackR = 0;
+                        break;
+                    case 3:
+                        anim.SetBool("AttackRH", true);
+                        StartCoroutine("CloseAttack");
+                        attackR = 0;
+                        break;
+                    case 4:
+                        anim.SetBool("AttackKick", true);
+                        StartCoroutine("CloseAttack");
+                        attackR = 0;
+                        break;
+                }
             }
+
+
         }
-	}
-    IEnumerator CloseAttack()
-    {
-        yield return new WaitForSeconds(.4f);
-        anim.SetBool("Attack", false);
     }
-    public void OpenDamageCollider()
+
+       
+    
+IEnumerator CloseAttack()
+{
+    yield return new WaitForSeconds(.4f);
+    anim.SetBool("Attack", false);
+    anim.SetBool("AttackRL", false);
+    anim.SetBool("AttackLL", false);
+    anim.SetBool("AttackRH", false);
+    anim.SetBool("AttackKick", false);
+}
+public void OpenDamageCollider()
     {
         damageCollider.SetActive(true);
     }
