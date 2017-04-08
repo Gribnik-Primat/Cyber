@@ -21,10 +21,6 @@ public class AudiEnemy : MonoBehaviour {
     {
         if (!audio.isPlaying)
         {
-          
-
-
-
                 if (shoot)
             {
                 audio.clip = clips[0];

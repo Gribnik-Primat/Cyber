@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class Minigame : MonoBehaviour {
 
-	public Transform point;
-    public float distanse;
-    //CubeChange ch;
+    CubeChange1 cube;
+    
 	void Start ()
     {
-      //  ch = GetComponent<CubeChange>().chage;
-        distanse = 15f;
+        cube =GameObject.FindGameObjectWithTag("Key").GetComponent<CubeChange1>();
+       
 	}
-	
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CubeChange1>())
+        {
+            cube.change = true;
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+
+            //    if (cube.change == false)
+            //    {
+            //        cube.change = true;
+            //    }
+            //    else
+            //    {
+            //        cube.change = false;
+            //    }
+
+
+            //}
+
+
+
+        }
+
+
+    }
 	
 
 	void Update ()
     {
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, point.transform.position);
-        Debug.DrawRay(transform.position, point.transform.position);
-        if (Physics.Raycast(ray, out hit, distanse))
-        {
-            if (hit.transform.CompareTag("Key"))
-            {
-        //        ch = !ch;
-            }
-        }
+        
+         
 	}
 }
