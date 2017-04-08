@@ -6,42 +6,34 @@ public class Invisibility : MonoBehaviour {
 	public bool state = false;
 	private Shader s1;
 	private Shader s2;
-    PlayerHack hack;
-  
-   
-   
+	PlayerHack hack;
+
+
+
 	// Use this for initialization
 	void Start () {
-        
-        hack = GetComponentInChildren<PlayerHack>();
-	//	state = false;
+
+		hack = GetComponentInChildren<PlayerHack>();
+		//	state = false;
 		s1 = Shader.Find ("Standard");
 		s2 = Shader.Find ("uSE - Refraction");
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
+		if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
+		{              
+			GetComponentInChildren<Renderer>().material.shader = s2;
+			hack.enabled = false;
+			state = !state;
+		} 
+		else if(GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == false && state == true)
+		{
 
-
-            if (!state)
-            {
-
-                GetComponentInChildren<Renderer>().material.shader = s2;
-                hack.enabled = false;
-
-            }
-            else
-            {
-
-                GetComponentInChildren<Renderer>().material.shader = s1;
-                hack.enabled = true;
-
-            }
-            state = !state;
-        }
+			GetComponentInChildren<Renderer>().material.shader = s1;
+			hack.enabled = true;
+			state = !state;
+		}
 	}
 }
