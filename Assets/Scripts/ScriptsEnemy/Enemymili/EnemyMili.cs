@@ -25,7 +25,7 @@ public class EnemyMili : MonoBehaviour
 
     public GameObject damageCollider; // колайдер дамага
 
-	public bool invisibleplayer;
+	// public bool invisibleplayer;
 
     CharacterStats CharStats;
 
@@ -43,8 +43,8 @@ public class EnemyMili : MonoBehaviour
 
         CharStats = GetComponent<CharacterStats>();
         Invoke("move", 1f);
-        invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
-        invisibleplayer = false;
+       // invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
+       // invisibleplayer = false;
 
         agent.stoppingDistance = attackRange;
       
@@ -62,11 +62,11 @@ public class EnemyMili : MonoBehaviour
 		
 		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
 		float distance;   // дистанция
-		if (invisibleplayer )
-		// невидимость игрока
-			distance = visible+1;
-        if (invisibleplayer)
-        {
+		//if (invisibleplayer )
+		//// невидимость игрока
+		//	distance = visible+1;
+  //      if (invisibleplayer)
+  //      {
 
             distance = Vector3.Distance(transform.position, target.position);
             if (distance < visible)
@@ -145,7 +145,7 @@ public class EnemyMili : MonoBehaviour
                     }
                 }
             }
-        }
+       // }
 
         if (agent.velocity.magnitude > 1)   // запуск анимации
         {

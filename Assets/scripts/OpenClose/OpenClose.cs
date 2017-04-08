@@ -30,7 +30,7 @@ public class OpenClose : MonoBehaviour {
     }
     void OnTriggerStay(Collider other)
     {
-		if (other.GetComponent<CharacterStats>())
+		if (other.GetComponent<CharacterStatsPlayer>() || other.GetComponent<CharacterStatsEnemy>())
         {       
             open = true;
 
