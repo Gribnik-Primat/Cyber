@@ -133,10 +133,35 @@ public class EnemyMili : MonoBehaviour
 
                                 if (attackR > attackRate)                       // атакуем 
                                 {
-                                    anim.SetBool("Attack", true);
-                                    StartCoroutine("CloseAttack");
-
-                                    attackR = 0;
+								int rand = Random.Range (0, 4);
+									switch (rand)
+									{
+										case 0:
+											anim.SetBool ("Attack", true);
+											StartCoroutine ("CloseAttack");
+											attackR = 0;
+											break;
+										case 1:
+											anim.SetBool ("AttackLL", true);
+											StartCoroutine ("CloseAttack");
+											attackR = 0;
+											break;
+										case 2:
+											anim.SetBool ("AttackRL", true);
+											StartCoroutine ("CloseAttack");
+											attackR = 0;
+											break;
+										case 3:
+											anim.SetBool ("AttackRH", true);
+											StartCoroutine ("CloseAttack");
+											attackR = 0;
+											break;
+										case 4:
+											anim.SetBool ("AttackKick", true);
+											StartCoroutine ("CloseAttack");
+											attackR = 0;
+											break;
+									}
                                 }
 
 
@@ -155,10 +180,14 @@ public class EnemyMili : MonoBehaviour
      
     }
     
-    IEnumerator CloseAttack()
+IEnumerator CloseAttack()
 {
     yield return new WaitForSeconds(.4f);
     anim.SetBool("Attack", false);
+	anim.SetBool("AttackRL", false);
+	anim.SetBool("AttackLL", false);
+	anim.SetBool("AttackRH", false);
+	anim.SetBool("AttackKick", false);
 }
 public void OpenDamageCollider()
 {
