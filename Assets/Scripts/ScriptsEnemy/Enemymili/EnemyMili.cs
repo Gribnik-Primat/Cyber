@@ -62,7 +62,7 @@ public class EnemyMili : MonoBehaviour
 		
 		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
 		float distance;   // дистанция
-		if (invisibleplayer == false)
+		if (invisibleplayer )
 		// невидимость игрока
 			distance = visible+1;
         if (invisibleplayer)
