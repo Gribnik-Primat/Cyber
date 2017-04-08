@@ -22,7 +22,7 @@ public class EnemyShootAi : MonoBehaviour {
     public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
-
+    public GameObject damageCollider1;
     // public bool invisibleplayer;
 
     CharacterStats CharStats;
@@ -131,11 +131,19 @@ public class EnemyShootAi : MonoBehaviour {
                             attackR += Time.deltaTime;
 
                             if (attackR > attackRate)                       // атакуем 
-                            {      
-                               anim.SetBool("Attack", true);
-                                shoot.shooting();
-                               StartCoroutine("CloseAttack");
-                               attackR = 0;  
+                            {   
+                                   
+                               
+                               shoot.shooting();
+
+                                anim.SetBool("Attack", true);
+                                StartCoroutine("CloseAttack");
+                               attackR = 0;
+                                if (distance < 2f)
+                                {
+                                    anim.SetBool("Attack1", true);
+                                    StartCoroutine("CloseAttack1");
+                                }
                             }
 
 
@@ -176,5 +184,19 @@ public class EnemyShootAi : MonoBehaviour {
     public void CloseDamageCollider()
     {
         damageCollider.SetActive(false);
+    }
+    IEnumerator CloseAttack1()
+    {
+        yield return new WaitForSeconds(.4f);
+        anim.SetBool("Attack1", false);
+
+    }
+    public void OpenDamageCollider1()
+    {
+        damageCollider1.SetActive(true);
+    }
+    public void CloseDamageCollider1()
+    {
+        damageCollider1.SetActive(false);
     }
 }
