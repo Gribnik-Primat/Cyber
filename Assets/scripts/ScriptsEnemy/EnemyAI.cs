@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour {
 
     UnityEngine.AI.NavMeshAgent agent;
 
-    public Transform target;
+    Transform target;
     CharacterStats CharStats;
 
 	void Start ()

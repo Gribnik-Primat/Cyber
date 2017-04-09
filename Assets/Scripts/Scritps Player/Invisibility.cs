@@ -7,33 +7,55 @@ public class Invisibility : MonoBehaviour {
 	private Shader s1;
 	private Shader s2;
 	PlayerHack hack;
-
+    GameObject[] Enemy;
 
 
 	// Use this for initialization
 	void Start () {
 
-		hack = GetComponentInChildren<PlayerHack>();
+        Enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in Enemy)
+        {
+            e.GetComponent<EnemyMili>();
+        }
+        hack = GetComponentInChildren<PlayerHack>();
 		//	state = false;
 		s1 = Shader.Find ("Standard");
 		s2 = Shader.Find ("uSE - Refraction");
 	}
 
-	// Update is called once per frame
-	void Update () 
-	{
-		if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
-		{              
-			GetComponentInChildren<Renderer>().material.shader = s2;
-			hack.enabled = false;
-			state = !state;
-		} 
-		else if(GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == false && state == true)
-		{
+    // Update is called once per frame
+    void Update()
+    {
+        //if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
+        //{   
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!state) { 
 
-			GetComponentInChildren<Renderer>().material.shader = s1;
-			hack.enabled = true;
-			state = !state;
-		}
-	}
+            GetComponentInChildren<Renderer>().material.shader = s2;
+            hack.enabled = false;
+            foreach (GameObject e in Enemy)
+            {
+                e.GetComponent<EnemyMili>().invisibleplayer = true;
+            }
+
+        }
+        else
+        /*if(GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == false && state == true)*/
+        {
+
+            GetComponentInChildren<Renderer>().material.shader = s1;
+            hack.enabled = true;
+            foreach (GameObject e in Enemy)
+            {
+                e.GetComponent<EnemyMili>().invisibleplayer = false;
+            }
+            //state = !state;
+        }
+            state = !state;
+      }
+        
+    }
+	 
 }

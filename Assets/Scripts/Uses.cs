@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Uses : MonoBehaviour {
 
-    OpenDoorLock door;
-    
+    GameObject[] door;
+    //GameObject d;
 	void Start ()
     {
-		door = GameObject.FindGameObjectWithTag("Locker").GetComponent<OpenDoorLock>();
-	}
+        door = GameObject.FindGameObjectsWithTag("Locker");
+        foreach (GameObject d in door)
+        {
+            d.GetComponent<OpenDoorLock>();
+        }
+    }
 	
 	
 	void Update ()
     {
+        
+
         RaycastHit hit;
         Ray ray = new Ray(transform.position + Vector3.up, transform.forward);
         Debug.DrawRay(transform.position + Vector3.up, transform.forward);
@@ -25,8 +31,13 @@ public class Uses : MonoBehaviour {
 
                 if (Input.GetButton("Uses"))
                 {
-                    door.Change();
-                  //  door.open = true;
+                    foreach (GameObject d in door)
+                    {
+                        d.GetComponent<OpenDoorLock>().Change();
+                       
+                    }
+                    
+                  //  d.open = true;
                 }
                 
             }

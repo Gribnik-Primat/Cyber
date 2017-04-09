@@ -31,7 +31,7 @@ public class Shoot : MonoBehaviour
         }
 
         GameObject AmmoBulet = Instantiate(Bulet, spawnPos.transform.position, spawnPos.transform.rotation) as GameObject;
-        AmmoBulet.GetComponent<Rigidbody>().AddForce(-transform.forward * 2500f);
+        AmmoBulet.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
 
 
     }
