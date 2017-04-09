@@ -8,11 +8,12 @@ public class Invisibility : MonoBehaviour {
 	private Shader s2;
 	PlayerHack hack;
     GameObject[] Enemy;
-
+    Biostim bio;
 
 	// Use this for initialization
 	void Start () {
 
+        bio = GetComponent<Biostim>();
         Enemy = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject e in Enemy)
         {
@@ -26,35 +27,42 @@ public class Invisibility : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {
-        //if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
-        //{   
-        if (Input.GetKeyDown(KeyCode.R))
+    {   if (bio.biostim >= 0f)
         {
-            if (!state) { 
-
-            GetComponentInChildren<Renderer>().material.shader = s2;
-            hack.enabled = false;
-            foreach (GameObject e in Enemy)
+            //if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
+            //{   
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                e.GetComponent<EnemyMili>().invisibleplayer = true;
-            }
+                if (!state)
+                {
 
+                    GetComponentInChildren<Renderer>().material.shader = s2;
+                    hack.enabled = false;
+                    foreach (GameObject e in Enemy)
+                    {
+                        e.GetComponent<EnemyMili>().invisibleplayer = true;
+                    }
+
+                }
+                else
+                /*if(GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == false && state == true)*/
+                {
+
+                    GetComponentInChildren<Renderer>().material.shader = s1;
+                    hack.enabled = true;
+                    foreach (GameObject e in Enemy)
+                    {
+                        e.GetComponent<EnemyMili>().invisibleplayer = false;
+                    }
+                    //state = !state;
+                }
+                state = !state;
+            }
         }
         else
-        /*if(GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == false && state == true)*/
         {
-
-            GetComponentInChildren<Renderer>().material.shader = s1;
-            hack.enabled = true;
-            foreach (GameObject e in Enemy)
-            {
-                e.GetComponent<EnemyMili>().invisibleplayer = false;
-            }
-            //state = !state;
+            state = true;
         }
-            state = !state;
-      }
         
     }
 	 
