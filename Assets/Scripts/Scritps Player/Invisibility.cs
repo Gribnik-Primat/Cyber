@@ -42,6 +42,7 @@ public class Invisibility : MonoBehaviour {
                     {
                         e.GetComponent<EnemyMili>().invisibleplayer = true;
                     }
+                    bio.Stels();
 
                 }
                 else
@@ -61,7 +62,7 @@ public class Invisibility : MonoBehaviour {
         }
         else
         {
-            state = true;
+            state = false;
         }
         
     }
