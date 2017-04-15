@@ -12,6 +12,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
     bool dealDamage;
     bool substractOnce;
     bool dead;
+    bool dealDead;
+    bool deal;
    // public Transform[] items;
 
     public float damageTimer = .4f;
@@ -58,8 +60,16 @@ public class CharacterStatsEnemy : MonoBehaviour {
 			healthSlider.gameObject.SetActive (true);
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
-       
 
+        if (deal)
+        {
+            anim.SetBool("SpecialDamage1", true);
+            
+        }
+        if (dealDead)
+        {
+            healthE -= 300;
+        }
 
         if (dealDamage)
         {
@@ -122,6 +132,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
         }
 	}
 
+    public void checkToApply()
+    {
+        if (!deal)
+        {
+            deal = true;
+        }
+    }
     public void checkToApplyDamage()
     {
         if (!dealDamage)
@@ -133,6 +150,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
     public void damage(float value)
     {
         healthE -= value;
+    }
+    public void checkToApplyDead()
+    {
+        if (!dealDead)
+        {
+            dealDead = true;
+        }
     }
 
     IEnumerator CloseDamage()

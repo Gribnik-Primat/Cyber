@@ -7,14 +7,18 @@ public class PlayerAttack : MonoBehaviour {
     // PlayerInput plInput;
     // PlayerMovement plMovement;
     Animator anim;
-
+    public bool actionDamage;
     public float comboRate = .5f;
+    public float comboSRate = 3f;
     HitReactionTrigger hitt;
     WaitForSeconds comboR;
+    WaitForSeconds comboS;
     public GameObject  damageCollider_RH;
     public GameObject damageCollider_LH;
     public GameObject damageCollider_RL;
     public GameObject damageCollider_LL;
+    public GameObject damageCollider_S;
+    public GameObject damageCollider_SD;
     private float turnspeed;
     public bool attack= false;
     public float time = 0;
@@ -24,18 +28,22 @@ public class PlayerAttack : MonoBehaviour {
     {
         CharStats = GetComponent<CharacterStats>();
 
+        actionDamage = false;
         // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
         //   plMovement = GetComponent<PlayerMovement>();
         turnspeed = GetComponentInParent<CharacterThirdPerson>().turnSpeed;
 
         comboR = new WaitForSeconds(comboRate);
+        comboS = new WaitForSeconds(comboSRate);
         hitt = GetComponent<HitReactionTrigger>();
 
         damageCollider_RH.SetActive(false);
         damageCollider_LH.SetActive(false);
         damageCollider_RL.SetActive(false);
         damageCollider_LL.SetActive(false);
+        damageCollider_S.SetActive(false);
+        damageCollider_SD.SetActive(false);
     }
 
 
@@ -87,6 +95,23 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Attack2", true);   // вторая аттака
            // turnspeed = 0;
             StartCoroutine("CloseAttack1");
+            
+        }
+        //if (actionDamage)
+        //{
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                anim.SetBool("SpecialAttack1", true);
+                StartCoroutine("CloseAttackSpecial");
+                actionDamage = false;
+                //  time += Time.deltaTime;
+         //   }
+            //if (time >= 4)
+            //{
+            //    StartCoroutine("CloseAttackSpecialDamage");
+            //    time = 0;
+            //}
             
         }
     }
@@ -146,5 +171,43 @@ public class PlayerAttack : MonoBehaviour {
         damageCollider_LL.SetActive(false);
 
     }
+    IEnumerator CloseAttackSpecial()
+    {
+        yield return comboS;
+        anim.SetBool("SpecialAttack1", false);
+
+    }
+    public void OpenDamageCollider_S()
+    {
+        damageCollider_S.SetActive(true);
+
+
+    }
+    public void CloseDamageCollider_S()
+    {
+        damageCollider_S.SetActive(false);
+
+    }
+    //IEnumerator CloseAttackSpecialDamage()
+    //{
+    //    yield return comboR;
+    //   // anim.SetBool("SpecialAttack1", false);
+
+    //}
+    public void OpenDamageCollider_SD()
+    {
+        damageCollider_SD.SetActive(true);
+
+
+    }
+    public void CloseDamageCollider_SD()
+    {
+        damageCollider_SD.SetActive(false);
+
+    }
+    //public void damage()
+    //{
+    //    actionDamage = true;
+    //}
 
 }
