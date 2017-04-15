@@ -64,7 +64,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
         if (deal)
         {
             anim.SetBool("SpecialDamage1", true);
-            
+           // GetComponent<UnityEngine.AI.NavMeshAgent>().Stop();
         }
         if (dealDead)
         {

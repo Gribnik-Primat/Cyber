@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using RootMotion.FinalIK;
 public class EnemyMili : MonoBehaviour
 {
 
@@ -26,9 +26,9 @@ public class EnemyMili : MonoBehaviour
     public GameObject damageCollider; // колайдер дамага
 
 	 public bool invisibleplayer;
-
+    LookAtIK Look;
     CharacterStats CharStats;
-
+  
     Transform target;
     public bool see;
     float distance;
@@ -41,6 +41,7 @@ public class EnemyMili : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
 
+        Look = GetComponent<LookAtIK>();
         CharStats = GetComponent<CharacterStats>();
         Invoke("move", 1f);
        // invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
@@ -61,7 +62,7 @@ public class EnemyMili : MonoBehaviour
     {
 		
 		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
-		float distance;   // дистанция
+		  // дистанция
         if (invisibleplayer)
             // невидимость игрока
             distance = visible + 1;
@@ -71,6 +72,8 @@ public class EnemyMili : MonoBehaviour
             distance = Vector3.Distance(transform.position, target.position);
             if (distance < visible)
             {
+                  
+
                 Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
@@ -84,6 +87,8 @@ public class EnemyMili : MonoBehaviour
 
                         if (hit.transform.CompareTag("Player"))
                         {
+                            angleV = 180f;
+                            Look.enabled = true;
                             see = true;
 
                             if (distance < attackRange)           // расстоние меньше то бьем 
@@ -167,10 +172,16 @@ public class EnemyMili : MonoBehaviour
 
                             }
                         }
+                        else
+                            Look.enabled = false;
                     }
                 }
             }
-       }
+            else
+                angleV = 70f;
+
+
+        }
 
         if (agent.velocity.magnitude > 1)   // запуск анимации
         {
@@ -179,8 +190,8 @@ public class EnemyMili : MonoBehaviour
         else anim.SetBool("Walk", false);
      
     }
-    
-IEnumerator CloseAttack()
+
+        IEnumerator CloseAttack()
 {
     yield return new WaitForSeconds(.4f);
     anim.SetBool("Attack", false);

@@ -22,11 +22,10 @@ public class PlayerAttack : MonoBehaviour {
     private float turnspeed;
     public bool attack= false;
     public float time = 0;
-    CharacterStats CharStats;
+  
 
     void Start ()
     {
-        CharStats = GetComponent<CharacterStats>();
 
         actionDamage = false;
         // plInput = GetComponent<PlayerInput>();
@@ -104,15 +103,16 @@ public class PlayerAttack : MonoBehaviour {
             {
                 anim.SetBool("SpecialAttack1", true);
                 StartCoroutine("CloseAttackSpecial");
-                actionDamage = false;
-                //  time += Time.deltaTime;
-         //   }
+                 GetComponentInParent<CharacterThirdPerson>().enabled = false;
+            //  actionDamage = false;
+            //  time += Time.deltaTime;
+            //   }
             //if (time >= 4)
             //{
             //    StartCoroutine("CloseAttackSpecialDamage");
             //    time = 0;
             //}
-            
+
         }
     }
     IEnumerator CloseAttack()
@@ -175,6 +175,7 @@ public class PlayerAttack : MonoBehaviour {
     {
         yield return comboS;
         anim.SetBool("SpecialAttack1", false);
+        GetComponentInParent<CharacterThirdPerson>().enabled = true;
 
     }
     public void OpenDamageCollider_S()
