@@ -36,7 +36,7 @@ public class Rotate2 : MonoBehaviour {
         if (other.GetComponent<CharacterThirdPerson>())
         {
             act = true;
-            attack.GetComponentInChildren<PlayerAttack>().actionDamage = true;
+            attack.GetComponentInParent<PlayerAttack>().damage();
         }
     }
 

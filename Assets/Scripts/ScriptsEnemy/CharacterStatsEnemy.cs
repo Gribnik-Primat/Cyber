@@ -69,8 +69,9 @@ public class CharacterStatsEnemy : MonoBehaviour {
             anim.SetBool("SpecialDamage1", true);
             rot.enabled = false;
             rot2.enabled = false;
-            GetComponent<UnityEngine.AI.NavMeshAgent>().Stop();
-            GetComponent<EnemyMili>().enabled = false;
+            GetComponent<FullBodyBipedIK>().enabled = false;
+            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+           GetComponent<EnemyMili>().enabled = false;
         }
         if (dealDead)
         {
@@ -105,6 +106,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     rot.enabled = false;
                     rot2.enabled = false;
                     Look.enabled = false;
+                    GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                     Destroy(gameObject, 5f);
                 }
