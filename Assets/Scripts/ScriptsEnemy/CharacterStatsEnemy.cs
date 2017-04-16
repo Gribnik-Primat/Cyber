@@ -30,15 +30,18 @@ public class CharacterStatsEnemy : MonoBehaviour {
     RagdollUtility ragdollUtility;
 
     RectTransform healthTrans;
-
+    Rotate rot;
+    Rotate2 rot2;
+    LookAtIK Look;
     
 
 	void Start ()
     {
         damageT = new WaitForSeconds(damageTimer);
-        anim = GetComponent<Animator>(); 
-       
-        
+        anim = GetComponent<Animator>();
+        rot = GetComponentInChildren<Rotate>();
+        rot2 = GetComponentInChildren<Rotate2>();
+        Look = GetComponent<LookAtIK>();
         GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
         slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         healthSlider = slidH.GetComponentInChildren<Slider>();
@@ -64,7 +67,10 @@ public class CharacterStatsEnemy : MonoBehaviour {
         if (deal)
         {
             anim.SetBool("SpecialDamage1", true);
-           // GetComponent<UnityEngine.AI.NavMeshAgent>().Stop();
+            rot.enabled = false;
+            rot2.enabled = false;
+            GetComponent<UnityEngine.AI.NavMeshAgent>().Stop();
+            GetComponent<EnemyMili>().enabled = false;
         }
         if (dealDead)
         {
@@ -96,8 +102,10 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 {
                     GetComponent<EnemyMili>().enabled = false;
                     anim.enabled = false;
+                    rot.enabled = false;
+                    rot2.enabled = false;
+                    Look.enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-              
                     Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())

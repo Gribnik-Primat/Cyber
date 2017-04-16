@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Invisibility : MonoBehaviour {
 	public bool state = false;
-	private Shader s1;
+    private Shader s1;
 	private Shader s2;
 	PlayerHack hack;
     GameObject[] Enemy;
     Biostim bio;
+    float time;
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +56,8 @@ public class Invisibility : MonoBehaviour {
                     {
                         e.GetComponent<EnemyMili>().invisibleplayer = false;
                     }
+                    bio.Stels();
+                   
                     //state = !state;
                 }
                 state = !state;
@@ -62,6 +65,10 @@ public class Invisibility : MonoBehaviour {
         }
         else
         {
+            GetComponentInChildren<Renderer>().material.shader = s1;
+            hack.enabled = true;
+            bio.biostim = 0;
+            bio.Stels();
             state = false;
         }
         

@@ -22,7 +22,7 @@ public class Rotate : MonoBehaviour {
         {
             time += Time.deltaTime;
         }
-        if (time>= 1.5f)
+        if (time >= 1f)
             enemy.transform.Rotate(Vector3.up, 180f);
           //  rot.gameObject.SetActive(false);
 

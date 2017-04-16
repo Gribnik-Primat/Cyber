@@ -7,8 +7,9 @@ public class Biostim : MonoBehaviour {
 
     public float biostim;
     public bool stels;
-    public GameObject sliderPrefabB;
-    Slider biostimSlider;
+    //   public GameObject sliderPrefabB;
+
+    public Slider biostimSlider;
   //  RectTransform biostimTrans;
 
     void Start ()
@@ -18,25 +19,29 @@ public class Biostim : MonoBehaviour {
 
         //GameObject slidB = Instantiate(sliderPrefabB, transform.position, Quaternion.identity) as GameObject;
         //slidB.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
-       // biostimSlider = GetComponent<Slider>();
+        //biostimSlider = GetComponent<Slider>();
         //biostimTrans = slidB.GetComponent<RectTransform>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         //Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         //biostimTrans.transform.position = screenPoint;
-        
+        if(biostim > 100)
+        {
+            biostim = 100;
+        }
 
         if (stels)
         {
-            biostim -= 20f*Time.deltaTime;
+            biostim = biostim -= 10f *Time.deltaTime;
             biostimSlider.value = biostim;
         }
+             
 	}
     public void Stels()
     {
-        stels = true;
+        stels = !stels;
     } 
 }

@@ -16,7 +16,7 @@ public class player : MonoBehaviour {
     {
         if (!Player)
         {
-            Application.LoadLevel(1);
+            Application.LoadLevel(0);
         }
 	}
 }

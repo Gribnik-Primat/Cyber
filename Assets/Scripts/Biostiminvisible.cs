@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Biostiminvisible : MonoBehaviour {
-	public bool activate = false;
-	public float timelimit = 4f;
-	bool startcountdown = false;
 
+   
+        GameObject bio;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        bio = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	// Update is called once per frame
@@ -16,23 +17,14 @@ public class Biostiminvisible : MonoBehaviour {
 	{
 		if (other.CompareTag("Player")) 
 		{
-			startcountdown = true;
-			activate = true;
-
-			gameObject.GetComponentInChildren<Renderer>().enabled=false;
-		}
+            bio.GetComponent<Biostim>().biostim += 50f;
+            // gameObject.GetComponentInChildren<Renderer>().enabled=false;
+            Destroy(gameObject);
+        }
 	}
 
 	void Update()
-	{
-		if (startcountdown == true)
-			timelimit -= Time.deltaTime;
-		if(timelimit<=0)
-		{
-			activate = false;
-			startcountdown= false;
-			timelimit = 4f;
-			Destroy (gameObject);
-		}
+	{	
+			
 	}
 }

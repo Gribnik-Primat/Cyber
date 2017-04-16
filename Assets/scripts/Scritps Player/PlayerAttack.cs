@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject damageCollider_LL;
     public GameObject damageCollider_S;
     public GameObject damageCollider_SD;
-    private float turnspeed;
+   
     public bool attack= false;
     public float time = 0;
   
@@ -28,10 +28,9 @@ public class PlayerAttack : MonoBehaviour {
     {
 
         actionDamage = false;
-        // plInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
-        //   plMovement = GetComponent<PlayerMovement>();
-        turnspeed = GetComponentInParent<CharacterThirdPerson>().turnSpeed;
+       
+      
 
         comboR = new WaitForSeconds(comboRate);
         comboS = new WaitForSeconds(comboSRate);
@@ -85,33 +84,31 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButton("Fire1"))
         {
             anim.SetBool("Attack", true);
-           // turnspeed = 0;
             StartCoroutine("CloseAttack");
            
         }
         if (Input.GetButton("Fire2"))
         {
             anim.SetBool("Attack2", true);   // вторая аттака
-           // turnspeed = 0;
             StartCoroutine("CloseAttack1");
             
         }
-        //if (actionDamage)
-        //{
+        if (actionDamage)
+        {
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 anim.SetBool("SpecialAttack1", true);
                 StartCoroutine("CloseAttackSpecial");
-                 GetComponentInParent<CharacterThirdPerson>().enabled = false;
-            //  actionDamage = false;
+                GetComponentInParent<CharacterThirdPerson>().enabled = false;
+              actionDamage = false;
             //  time += Time.deltaTime;
-            //   }
+              }
             //if (time >= 4)
             //{
             //    StartCoroutine("CloseAttackSpecialDamage");
             //    time = 0;
-            //}
+           // }
 
         }
     }

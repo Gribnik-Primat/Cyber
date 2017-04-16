@@ -25,10 +25,10 @@ public class EnemyMili : MonoBehaviour
 
     public GameObject damageCollider; // колайдер дамага
 
-	 public bool invisibleplayer;
+    public bool invisibleplayer;
     LookAtIK Look;
     CharacterStats CharStats;
-  
+
     Transform target;
     public bool see;
     float distance;
@@ -40,44 +40,46 @@ public class EnemyMili : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-
+        agent.speed = speed;
         Look = GetComponent<LookAtIK>();
         CharStats = GetComponent<CharacterStats>();
-        Invoke("move", 1f);
-       // invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
+        Invoke("move", 18f);
+        // invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
         invisibleplayer = false;
 
         agent.stoppingDistance = attackRange;
-      
+
     }
     void move()
     {
+        
         CheckPoint point = checkpoint.GetComponent<CheckPoint>();
         checkpoint = point.getNext();
         agent.destination = checkpoint.position;
-        Invoke("move", 15f);
+        Invoke("move", 18f);
     }
-    
+
     void Update()
     {
-		
-		//@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
-		  // дистанция
+
+        //@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
+        // дистанция
         if (invisibleplayer)
             // невидимость игрока
             distance = visible + 1;
-        if (invisibleplayer ==false)
+        if (invisibleplayer == false)
         {
 
             distance = Vector3.Distance(transform.position, target.position);
             if (distance < visible)
             {
-                  
+                
 
                 Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
                 {
+                    Look.enabled = true;
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
 
@@ -88,13 +90,21 @@ public class EnemyMili : MonoBehaviour
                         if (hit.transform.CompareTag("Player"))
                         {
                             angleV = 180f;
-                            Look.enabled = true;
                             see = true;
 
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
-                                attacking = true;
+                                RaycastHit hit1;
+                                Ray ray1 = new Ray(transform.position + Vector3.up, Vector3.forward); //  райкаст чтоб не палил нас сковзь стены
 
+                                if (Physics.Raycast(ray1, out hit1, 4f))
+                                {
+
+                                    if (hit.transform.CompareTag("Player"))
+                                    {
+                                        attacking = true;
+                                    }
+                                }
                             }
                             else
                             {
@@ -108,6 +118,8 @@ public class EnemyMili : MonoBehaviour
                             {                     // если не бьем то идем
 
                                 agent.Resume();
+                                agent.speed = speed * 2.5f;
+                                anim.SetBool("Run", true);
                                 agent.destination = Player.transform.position;
 
 
@@ -131,64 +143,74 @@ public class EnemyMili : MonoBehaviour
 
                             if (attacking)
                             {
-                                agent.Stop();
+                                agent.Stop();  
+                                agent.speed = speed;
+                                anim.SetBool("Run", false);
 
 
                                 attackR += Time.deltaTime;
 
                                 if (attackR > attackRate)                       // атакуем 
                                 {
-								int rand = Random.Range (0, 4);
-									switch (rand)
-									{
-										case 0:
-											anim.SetBool ("Attack", true);
-											StartCoroutine ("CloseAttack");
-											attackR = 0;
-											break;
-										case 1:
-											anim.SetBool ("AttackLL", true);
-											StartCoroutine ("CloseAttack");
-											attackR = 0;
-											break;
-										case 2:
-											anim.SetBool ("AttackRL", true);
-											StartCoroutine ("CloseAttack");
-											attackR = 0;
-											break;
-										case 3:
-											anim.SetBool ("AttackRH", true);
-											StartCoroutine ("CloseAttack");
-											attackR = 0;
-											break;
-										case 4:
-											anim.SetBool ("AttackKick", true);
-											StartCoroutine ("CloseAttack");
-											attackR = 0;
-											break;
-									}
+                                    int rand = Random.Range(0, 4);
+                                    switch (rand)
+                                    {
+                                        case 0:
+                                            anim.SetBool("Attack", true);
+                                            StartCoroutine("CloseAttack");
+                                            attackR = 0;
+                                            break;
+                                        case 1:
+                                            anim.SetBool("AttackLL", true);
+                                            StartCoroutine("CloseAttack");
+                                            attackR = 0;
+                                            break;
+                                        case 2:
+                                            anim.SetBool("AttackRL", true);
+                                            StartCoroutine("CloseAttack");
+                                            attackR = 0;
+                                            break;
+                                        case 3:
+                                            anim.SetBool("AttackRH", true);
+                                            StartCoroutine("CloseAttack");
+                                            attackR = 0;
+                                            break;
+                                        case 4:
+                                            anim.SetBool("AttackKick", true);
+                                            StartCoroutine("CloseAttack");
+                                            attackR = 0;
+                                            break;
+                                    }
                                 }
 
 
                             }
                         }
-                        else
-                            Look.enabled = false;
+
                     }
                 }
+                else
+                    Look.enabled = false;
             }
             else
                 angleV = 70f;
 
 
         }
-
-        if (agent.velocity.magnitude > 1)   // запуск анимации
+        if (distance > visible)
         {
+            agent.speed = speed;
+        }
+        if (agent.velocity.magnitude > 1f)   // запуск анимации
+        {
+           
             anim.SetBool("Walk", true);
         }
-        else anim.SetBool("Walk", false);
-     
+       else
+        {
+            anim.SetBool("Run", false);
+            anim.SetBool("Walk", false);
+        } 
     }
 
         IEnumerator CloseAttack()

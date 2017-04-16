@@ -20,15 +20,15 @@ public class CharacterStatsPlayer : MonoBehaviour {
     public bool energi;
 
     Animator anim;
-    
 
-    public GameObject sliderPrefabH;
+    Biostim bio;
+    //public GameObject sliderPrefabH;
    
-    Slider healthSlider;
-
+   public Slider healthSlider;
+   
     RagdollUtility ragdollUtility;
 
-    RectTransform healthTrans;
+    //RectTransform healthTrans;
 
     
 
@@ -37,11 +37,11 @@ public class CharacterStatsPlayer : MonoBehaviour {
         damageT = new WaitForSeconds(damageTimer);
         
         anim = GetComponentInChildren<Animator>();
-        
-        GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
-        slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
-        healthSlider = slidH.GetComponentInChildren<Slider>();
-        healthTrans = slidH.GetComponent<RectTransform>();
+        bio = GetComponentInParent<Biostim>();
+        //GameObject slidH = Instantiate(sliderPrefabH, transform.position, Quaternion.identity) as GameObject;
+        //slidH.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
+        //healthSlider = slidH.GetComponentInChildren<Slider>();
+        //healthTrans = slidH.GetComponent<RectTransform>();
         ragdollUtility = GetComponentInChildren<RagdollUtility>();
         
 		//substractOnce = false;
@@ -51,23 +51,19 @@ public class CharacterStatsPlayer : MonoBehaviour {
 
     void Update ()
     {
-		
         healthSlider.value = healthP;
-		if (healthSlider.value >= 100 || healthSlider.value <= 0)
-			healthSlider.gameObject.SetActive (false);
-		else
-			healthSlider.gameObject.SetActive (true);
-		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
-        healthTrans.transform.position = screenPoint;
-       
-
-
+        //if (healthSlider.value >= 100 || healthSlider.value <= 0)
+        //	healthSlider.gameObject.SetActive (false);
+        //else
+        //	healthSlider.gameObject.SetActive (true);
+        //Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        //      healthTrans.transform.position = screenPoint;
         if (dealDamage)
         {
             if (substractOnce == false)
             {				
                 healthP -= 30;
-				substractOnce = true;
+                substractOnce = true;
                 anim.SetTrigger("Hit");
             }
 
@@ -87,7 +83,8 @@ public class CharacterStatsPlayer : MonoBehaviour {
                     GetComponentInChildren<PlayerAttack>().enabled = false;
                     anim.enabled = false;
                     ragdollUtility.EnableRagdoll();
-                    healthTrans.gameObject.SetActive(false);
+                    healthSlider.gameObject.SetActive(false);
+                    bio.biostimSlider.gameObject.SetActive(false);
                    // dealDamage = true;
                     GetComponent<CapsuleCollider>().enabled = false;
                     //  GetComponent<Rigidbody>().isKinematic = true;

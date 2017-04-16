@@ -8,13 +8,13 @@ public class Rotate2 : MonoBehaviour {
     float time = 0;
     private bool act = false;
     public GameObject enemy;
-   // Rotate rot2;
- // public  GameObject attack;
+    Rotate rot2;
+    GameObject attack;
 
     void Start()
     {
         //  rot2 = GetComponent<Rotate>();
-       // attack = GameObject.FindGameObjectWithTag("Player"); 
+        attack = GameObject.FindWithTag("Player"); 
        
     }
     void Update()
@@ -36,7 +36,7 @@ public class Rotate2 : MonoBehaviour {
         if (other.GetComponent<CharacterThirdPerson>())
         {
             act = true;
-          //  attack.GetComponent<PlayerAttack>().damage();
+            attack.GetComponentInChildren<PlayerAttack>().actionDamage = true;
         }
     }
 
