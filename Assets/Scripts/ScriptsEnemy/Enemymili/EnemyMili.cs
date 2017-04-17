@@ -79,7 +79,7 @@ public class EnemyMili : MonoBehaviour
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
                 {
-                    Look.enabled = true;
+                     Look.enabled = true;
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
 
@@ -90,21 +90,13 @@ public class EnemyMili : MonoBehaviour
                         if (hit.transform.CompareTag("Player"))
                         {
                             angleV = 180f;
+                            transform.LookAt(target);
                             see = true;
 
                             if (distance < attackRange)           // расстоние меньше то бьем 
-                            {
-                                RaycastHit hit1;
-                                Ray ray1 = new Ray(transform.position + Vector3.up, Vector3.forward); //  райкаст чтоб не палил нас сковзь стены
-
-                                if (Physics.Raycast(ray1, out hit1, 4f))
-                                {
-
-                                    if (hit.transform.CompareTag("Player"))
-                                    {
-                                        attacking = true;
-                                    }
-                                }
+                            {                              
+                                attacking = true;
+                                agent.speed = speed;
                             }
                             else
                             {
@@ -119,7 +111,7 @@ public class EnemyMili : MonoBehaviour
 
                                 agent.Resume();
                                 agent.speed = speed * 2.5f;
-                                anim.SetBool("Run", true);
+                                //anim.SetBool("Run", true);
                                 agent.destination = Player.transform.position;
 
 
@@ -143,9 +135,8 @@ public class EnemyMili : MonoBehaviour
 
                             if (attacking)
                             {
-                                agent.Stop();  
-                                agent.speed = speed;
-                                anim.SetBool("Run", false);
+                                agent.Stop();     
+                              //  anim.SetBool("Run", false);
 
 
                                 attackR += Time.deltaTime;
@@ -190,23 +181,29 @@ public class EnemyMili : MonoBehaviour
                     }
                 }
                 else
-                    Look.enabled = false;
+                    agent.speed = speed;
+                 Look.enabled = false;
             }
             else
                 angleV = 70f;
 
 
         }
-        if (distance > visible)
+        //if (distance > visible)
+        //{
+        //    agent.speed = speed;
+        //}
+        if (agent.velocity.magnitude > 1f && agent.velocity.magnitude < 5f)   // запуск анимации
         {
-            agent.speed = speed;
-        }
-        if (agent.velocity.magnitude > 1f)   // запуск анимации
-        {
-           
             anim.SetBool("Walk", true);
+            anim.SetBool("Run", false);
         }
-       else
+        if (agent.velocity.magnitude > 5f)
+        {
+            anim.SetBool("Run", true);
+            anim.SetBool("Walk", false);
+        }
+        if(agent.velocity.magnitude < 1f)
         {
             anim.SetBool("Run", false);
             anim.SetBool("Walk", false);

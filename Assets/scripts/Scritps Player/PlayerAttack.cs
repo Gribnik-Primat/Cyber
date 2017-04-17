@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour {
     public bool actionDamage;
     public float comboRate = .5f;
     public float comboSRate = 3f;
-    HitReactionTrigger hitt;
+  
     WaitForSeconds comboR;
     WaitForSeconds comboS;
     public GameObject  damageCollider_RH;
@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour {
 
         comboR = new WaitForSeconds(comboRate);
         comboS = new WaitForSeconds(comboSRate);
-        hitt = GetComponent<HitReactionTrigger>();
+       
 
         damageCollider_RH.SetActive(false);
         damageCollider_LH.SetActive(false);
