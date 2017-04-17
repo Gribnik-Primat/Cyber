@@ -101,6 +101,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
                 if (GetComponent<EnemyMili>())
                 {
+                    GetComponent<CapsuleCollider>().enabled = false;
+                    GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyMili>().enabled = false;
                     anim.enabled = false;
                     rot.enabled = false;
@@ -108,7 +110,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     Look.enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                    Destroy(gameObject, 5f);
+                   // Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
@@ -116,7 +118,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     GetComponent<EnemyRobotAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                  
-                    Destroy(gameObject, 5f);
+                  //  Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyAI>())
                 {
@@ -124,7 +126,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     GetComponent<EnemyAI>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                  
-                   Destroy(gameObject, 5f);
+                //   Destroy(gameObject, 5f);
 
                 }
                 if (GetComponent<EnemyShootAi>())
@@ -133,7 +135,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     GetComponent<EnemyShootAi>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                   
-                    Destroy(gameObject, 5f);
+                 //   Destroy(gameObject, 5f);
 
                 } 
                 dead = true;
