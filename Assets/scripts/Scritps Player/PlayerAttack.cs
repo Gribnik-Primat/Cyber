@@ -34,7 +34,6 @@ public class PlayerAttack : MonoBehaviour {
         actionDamage = false;
         anim = GetComponent<Animator>();
        
-      
 
         comboR = new WaitForSeconds(comboRate);
         comboS = new WaitForSeconds(comboSRate);
