@@ -19,6 +19,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
     public float damageTimer = .4f;
     WaitForSeconds damageT;
 
+	public float ragdoll_time = 1f;
+
     public bool energi;
 
     Animator anim;
@@ -28,6 +30,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
     Slider healthSlider;
 
     RagdollUtility ragdollUtility;
+
+	FullBodyBipedIK fbbik;
 
     RectTransform healthTrans;
     Rotate rot;
@@ -47,7 +51,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
         healthSlider = slidH.GetComponentInChildren<Slider>();
         healthTrans = slidH.GetComponent<RectTransform>();
         ragdollUtility = GetComponentInChildren<RagdollUtility>();
-        
+		fbbik = GetComponent<FullBodyBipedIK> ();
 		//substractOnce = false;
     }
 
@@ -55,7 +59,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
     void Update ()
     {
-		
+		if(/*если у нас включено состояние рэгдола*/)
+			ragdoll_time -= Time.deltaTime;
         healthSlider.value = healthE;
 		if (healthSlider.value >= lookHealth || healthSlider.value <= 0)
 			healthSlider.gameObject.SetActive (false);
@@ -63,6 +68,12 @@ public class CharacterStatsEnemy : MonoBehaviour {
 			healthSlider.gameObject.SetActive (true);
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
+
+		if (ragdoll_time < 0) 
+		{
+			ragdoll_time = 1f;
+			ragdoll_func_off ();
+		}
 
         if (deal)
         {
@@ -142,6 +153,24 @@ public class CharacterStatsEnemy : MonoBehaviour {
             }
             
         }
+	}
+
+	private void enableRagdoll(bool enabled)
+	{
+		RagdollHelper helper = GetComponent<RagdollHelper>();
+		helper.ragdolled = enabled;
+		anim.enabled = !enabled;
+		fbbik.enabled = !enabled;
+	}
+
+	public void ragdoll_func_on()
+	{
+		enableRagdoll (true);
+	}
+
+	public void ragdoll_func_off()
+	{
+		enableRagdoll (false);
 	}
 
     public void checkToApply()

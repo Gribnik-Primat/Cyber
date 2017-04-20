@@ -24,9 +24,12 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject damageCollider_S;
     public GameObject damageCollider_SD;
    
+	private int rand;
+	private int count = 0;
+
     public bool attack= false;
     public float time = 0;
-  
+	float biostim;
 
     void Start ()
     {
@@ -45,6 +48,8 @@ public class PlayerAttack : MonoBehaviour {
         damageCollider_LL.SetActive(false);
         damageCollider_S.SetActive(false);
         damageCollider_SD.SetActive(false);
+
+		biostim = GetComponentInParent<Biostim>().biostim;
     }
 
 
@@ -117,12 +122,14 @@ public class PlayerAttack : MonoBehaviour {
     }
     IEnumerator CloseAttack()
     {
+		
         yield return comboR;
         anim.SetBool("Attack", false);
       
     }
     public void OpenDamageCollider_RH()
     {
+		
         damageCollider_RH.SetActive(true);
         //RaycastHit hit = new RaycastHit();
         //Ray ray = new Ray(damageCollider_RH.transform.position, Vector3.forward);
@@ -134,7 +141,6 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_RH()
     {
         damageCollider_RH.SetActive(false);
-        
     }
     public void OpenDamageCollider_LH()
     {
@@ -150,13 +156,11 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_LH()
     {
         damageCollider_LH.SetActive(false);
-
     }
     IEnumerator CloseAttack1()
     {
         yield return comboR;
         anim.SetBool("Attack2", false);
-
     }
     public void OpenDamageCollider_RL()
     {
@@ -172,7 +176,6 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_RL()
     {
         damageCollider_RL.SetActive(false);
-
     }
     public void OpenDamageCollider_LL()
     {
@@ -188,7 +191,6 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_LL()
     {
         damageCollider_LL.SetActive(false);
-
     }
     IEnumerator CloseAttackSpecial()
     {
@@ -206,7 +208,7 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_S()
     {
         damageCollider_S.SetActive(false);
-
+		
     }
     //IEnumerator CloseAttackSpecialDamage()
     //{
@@ -223,7 +225,7 @@ public class PlayerAttack : MonoBehaviour {
     public void CloseDamageCollider_SD()
     {
         damageCollider_SD.SetActive(false);
-
+		
     }
     public void damage()
     {

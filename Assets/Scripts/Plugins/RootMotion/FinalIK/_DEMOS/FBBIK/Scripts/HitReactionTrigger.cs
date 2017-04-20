@@ -14,27 +14,22 @@ namespace RootMotion.Demos {
 
 		private string colliderName;
 
-		void Update() {
+		void Update()
+		{
 			// On left mouse button...
-			if (Input.GetMouseButtonDown(0)) {
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//	Ray ray = new Ray(GameObject.Find("PointRH").transform,Vector3.forward);
 
 				// Raycast to find a ragdoll collider
 				RaycastHit hit = new RaycastHit();
-				if (Physics.Raycast(ray, out hit, 100f)) {
+			if (Physics.CheckSphere(GameObject.Find("PointRH").transform.position, 0))
+				//if (Physics.Raycast(ray, out hit, 100f)) 
+			{
 
 					// Use the HitReaction
-					hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
+					hitReaction.Hit(hit.collider, GameObject.Find("PointRH").transform.forward * hitForce, hit.point);
 
-					// Just for GUI
-					colliderName = hit.collider.name;
-				}
 			}
-		}
 
-		void OnGUI() {
-			GUILayout.Label("LMB to shoot the Dummy, RMB to rotate the camera.");
-			if (colliderName != string.Empty) GUILayout.Label("Last Bone Hit: " + colliderName);
 		}
 	}
 }

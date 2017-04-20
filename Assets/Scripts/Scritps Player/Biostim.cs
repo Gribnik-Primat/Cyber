@@ -40,6 +40,12 @@ public class Biostim : MonoBehaviour {
         }
              
 	}
+
+	public void setBiostim(float value)
+	{
+		biostim += value;
+	}
+
     public void Stels()
     {
         stels = !stels;

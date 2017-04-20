@@ -28,7 +28,7 @@ public class Invisibility : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {   if (bio.biostim >= 0f)
+    {   if (bio.biostim > 0f)
         {
             //if (GameObject.FindGameObjectWithTag("Biostim").GetComponent<Biostiminvisible>().activate == true && state == false) 
             //{   

@@ -189,10 +189,10 @@ public class EnemyMili : MonoBehaviour
 
 
         }
-        //if (distance > visible)
-        //{
-        //    agent.speed = speed;
-        //}
+        if (distance < visible/2)
+        {
+            agent.speed = speed*1.5f;
+        }
         if (agent.velocity.magnitude > 1f && agent.velocity.magnitude < 5f)   // запуск анимации
         {
             anim.SetBool("Walk", true);

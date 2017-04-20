@@ -12,7 +12,6 @@ public class DoDamageEnemy : MonoBehaviour {
     {
         if (other.GetComponent<CharacterStatsPlayer>())
         {
-			
             other.GetComponent<CharacterStatsPlayer>().checkToApplyDamage();
             au.shoot = true;
         }

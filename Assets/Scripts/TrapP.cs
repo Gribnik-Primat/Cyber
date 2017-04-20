@@ -64,7 +64,7 @@ public class TrapP : MonoBehaviour {
         if (state == STATE_WAIT)
         {
             bool relationOk = triggeredByEnemy && other.GetComponent<EnemyAI>();
-            relationOk = relationOk || (triggeredByPlayer && other.GetComponent<PlayerTrap>());
+			relationOk = true;//relationOk || (triggeredByPlayer && other.GetComponent<TrapP>());
 
             if (relationOk && other.GetComponent<CharacterStatsPlayer>())
             {
