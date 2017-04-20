@@ -124,12 +124,12 @@ public class PlayerAttack : MonoBehaviour {
     public void OpenDamageCollider_RH()
     {
         damageCollider_RH.SetActive(true);
-        RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(damageCollider_RH.transform.position, Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 5f))
-        {   
-            hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
-        }
+        //RaycastHit hit = new RaycastHit();
+        //Ray ray = new Ray(damageCollider_RH.transform.position, Vector3.forward);
+        //if (Physics.Raycast(ray, out hit, 5f))
+        //{   
+        //    hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
+        //}
     }
     public void CloseDamageCollider_RH()
     {
@@ -139,12 +139,12 @@ public class PlayerAttack : MonoBehaviour {
     public void OpenDamageCollider_LH()
     {
         damageCollider_LH.SetActive(true);
-        RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(damageCollider_LH.transform.position, Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 5f))
-        {
-            hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
-        }
+        //RaycastHit hit = new RaycastHit();
+        //Ray ray = new Ray(damageCollider_LH.transform.position, Vector3.forward);
+        //if (Physics.Raycast(ray, out hit, 5f))
+        //{
+        //    hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
+        //}
 
     }
     public void CloseDamageCollider_LH()
@@ -161,12 +161,12 @@ public class PlayerAttack : MonoBehaviour {
     public void OpenDamageCollider_RL()
     {
         damageCollider_RL.SetActive(true);
-        RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(damageCollider_RL.transform.position, Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 5f))
-        {
-            hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
-        }
+        //RaycastHit hit = new RaycastHit();
+        //Ray ray = new Ray(damageCollider_RL.transform.position, Vector3.forward);
+        //if (Physics.Raycast(ray, out hit, 5f))
+        //{
+        //    hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
+        //}
 
     }
     public void CloseDamageCollider_RL()
@@ -177,12 +177,12 @@ public class PlayerAttack : MonoBehaviour {
     public void OpenDamageCollider_LL()
     {
         damageCollider_LL.SetActive(true);
-        RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(damageCollider_LL.transform.position, Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 5f))
-        {
-            hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
-        }
+        //RaycastHit hit = new RaycastHit();
+        //Ray ray = new Ray(damageCollider_LL.transform.position, Vector3.forward);
+        //if (Physics.Raycast(ray, out hit, 5f))
+        //{
+        //    hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
+        //}
 
     }
     public void CloseDamageCollider_LL()
