@@ -14,6 +14,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     bool dead;
     bool dealDead;
     bool deal;
+	bool ragdoll_state;
    // public Transform[] items;
 
     public float damageTimer = .4f;
@@ -59,8 +60,12 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
     void Update ()
     {
-        //	if(/*если у нас включено состояние рэгдола*/)
+		if(ragdoll_state == true)
 			ragdoll_time -= Time.deltaTime;
+		if (ragdoll_time < 0 && ragdoll_state == true) {
+			ragdoll_func_off ();
+			ragdoll_time = 1.5f;
+		}
         healthSlider.value = healthE;
 		if (healthSlider.value >= lookHealth || healthSlider.value <= 0)
 			healthSlider.gameObject.SetActive (false);
@@ -172,11 +177,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
 	public void ragdoll_func_on()
 	{
+		ragdoll_state = true;
 		enableRagdoll (true);
 	}
 
 	public void ragdoll_func_off()
 	{
+		ragdoll_state = false;
 		enableRagdoll (false);
 	}
 
