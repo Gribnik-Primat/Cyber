@@ -129,8 +129,6 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     
                     GetComponent<EnemyRobotAI>().enabled = false;
                     anim.enabled = false;
-                    rot.enabled = false;
-                    rot2.enabled = false;
                     Look.enabled = false;
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;

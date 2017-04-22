@@ -21,8 +21,8 @@ public class DoDamagePlayer : MonoBehaviour {
 				count = 0;
 				other.GetComponent<CharacterStatsEnemy> ().ragdoll_func_on ();
 			}
-			gameObject.GetComponentInParent<Biostim> ().setBiostim (2);
-			biostimSlider.value += 2;
+			gameObject.GetComponentInParent<Biostim> ().setBiostim (2f);
+			biostimSlider.value += 2f;
             other.GetComponent<CharacterStatsEnemy>().checkToApplyDamage();
             audio.shoot = true;
         }

@@ -32,7 +32,7 @@ public class RagdollHelper : MonoBehaviour {
 			if (value==true){
 				if (state==RagdollState.animated) {
 					//Transition from animated to ragdolled
-					setKinematic(false); //allow the ragdoll RigidBodies to react to the environment
+				//	setKinematic(false); //allow the ragdoll RigidBodies to react to the environment
 					anim.enabled = false; //disable animation
 					state=RagdollState.ragdolled;
 				} 
@@ -40,7 +40,7 @@ public class RagdollHelper : MonoBehaviour {
 			else {
 				if (state==RagdollState.ragdolled) {
 					//Transition from ragdolled to animated through the blendToAnim state
-					setKinematic(true); //disable gravity etc.
+				//	setKinematic(true); //disable gravity etc.
 					ragdollingEndTime=Time.time; //store the state change time
 					anim.enabled = true; //enable animation
 					state=RagdollState.blendToAnim;  
@@ -123,7 +123,7 @@ public class RagdollHelper : MonoBehaviour {
 	{
 		//Set all RigidBodies to kinematic so that they can be controlled with Mecanim
 		//and there will be no glitches when transitioning to a ragdoll
-		setKinematic(true);
+	//	setKinematic(true);
 		
 		//Find all the transforms in the character, assuming that this script is attached to the root
 		Component[] components=GetComponentsInChildren(typeof(Transform));
