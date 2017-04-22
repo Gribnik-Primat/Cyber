@@ -1,117 +1,185 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using RootMotion.FinalIK;
 
 public class EnemyRobotAI : MonoBehaviour {
 
-    public float attackRate = 3; 
-    float attackR;
-    bool attacking;
-
-    public float attackRange = 3; //attack radius
-    public float rotSpeed = 5;// speed of rotation on 180
-
-    public GameObject damageCollider;
-
-    Animator anim;
 
     UnityEngine.AI.NavMeshAgent agent;
 
+    Animator anim;
+    public float visible = 10f; // дальность на сколько видим 
+    GameObject Player;
+    public float speed = 2f; // speed
+    AudioSource sourse;
+    public float angleV = 180f; // угол обозора
+
+    public float attackRate = 3; // скорость атаки
+    float attackR;
+    public bool attacking;
+
+    public float attackRange = 3;// расстояние до цели
+    public float rotSpeed = 5; // скокрость разворота 
+
+  //  public Transform checkpoint;
+
+    public GameObject damageCollider; // колайдер дамага
+
+    public bool invisibleplayer;
+    LookAtIK Look;
+
+    public Material[] materialArray;
+     public int pointer = 0;
+
     Transform target;
-    bool lookLeft;//change orientation to left
+    public bool see;
+    float distance;
 
-	void Start ()
+    void Start()
     {
-        anim = GetComponent<Animator>();
+        see = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
-        agent.stoppingDistance = attackRange;//stop ai if we in radius of attack
-        agent.updateRotation = false;
-     
         target = GameObject.FindGameObjectWithTag("Player").transform;
-      
-	}
+        Player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
+        agent.speed = speed;
+        Look = GetComponent<LookAtIK>();
+        Invoke("move", 18f);
+        anim.SetLayerWeight(1, 1f);
+        invisibleplayer = false;
+        agent.stoppingDistance = attackRange;
 
+    }
+    //void move()
+    //{
+
+    //    CheckPoint point = checkpoint.GetComponent<CheckPoint>();
+    //    checkpoint = point.getNext();
+    //    agent.destination = checkpoint.position;
+    //    Invoke("move", 18f);
+    //}
 
     void Update()
     {
-
-        float distance = Vector3.Distance(transform.position, target.position);//calculate distance to player
-
-        if (GetComponent<CharacterStats>().health == 100)
+        
+        distance = Vector3.Distance(transform.position, target.position);
+        if (distance < visible)
         {
-            ;//if health == 100 does nothing at all
-        }
-        else
-        {
-            if (distance < attackRange + .5f)//if for attacking player
+                anim.SetLayerWeight(1, 0f);
+            Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
+            float angle = Quaternion.Angle(transform.rotation, look);
+            if (angle < angleV)
             {
-                attacking = true;
-            }
-            else
-            {
-                attacking = false;
-            }
-            if (!attacking)//if dont attack
-            {
-                agent.Resume();
-                agent.SetDestination(target.position);
 
-                Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
+                Look.enabled = true;
+                RaycastHit hit;
+                Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
 
-                float hor = relativePosition.z;
-                float ver = relativePosition.x;
 
-                anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime); //moving enemy?????@@@
-                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);//moving enemy?????@@@
-
-                lookLeft = (target.position.z < transform.position.z) ? true : false; // turn at 180 if player on the left side of enemy
-
-                Quaternion targetRot = transform.rotation;
-
-                if (lookLeft)
+                if (Physics.Raycast(ray, out hit, visible))
                 {
-                    targetRot = Quaternion.Euler(0, 180, 0);
 
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        transform.LookAt(target);
+                        see = true;
+                        if (distance < attackRange)           // расстоние меньше то бьем 
+                        {
+                            attacking = true;
+                            agent.speed = speed;
+                        }
+                        else
+                        {
+                            attacking = false;
+                        }
+                        if (!attacking)
+                        {                     // если не бьем то идем
+                            agent.Resume();
+                            agent.speed = speed * 2.5f;
+                            agent.destination = Player.transform.position;
+                        }
+
+                        if (attacking)
+                        {
+                            agent.Stop();
+                            attackR += Time.deltaTime;
+
+                            if (attackR > attackRate)                       // атакуем 
+                            {
+                                int rand = Random.Range(0, 4);
+                                switch (rand)
+                                {
+                                    case 0:
+                                        anim.SetBool("Attack", true);
+                                        StartCoroutine("CloseAttack");
+                                        attackR = 0;
+                                        break;
+                                    case 1:
+                                        anim.SetBool("AttackLL", true);
+                                        StartCoroutine("CloseAttack");
+                                        attackR = 0;
+                                        break;
+                                    case 2:
+                                        anim.SetBool("AttackRL", true);
+                                        StartCoroutine("CloseAttack");
+                                        attackR = 0;
+                                        break;
+                                    case 3:
+                                        anim.SetBool("AttackRH", true);
+                                        StartCoroutine("CloseAttack");
+                                        attackR = 0;
+                                        break;
+                                    case 4:
+                                        anim.SetBool("AttackKick", true);
+                                        StartCoroutine("CloseAttack");
+                                        attackR = 0;
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    targetRot = Quaternion.Euler(0, 0, 0);
-                }
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed);
 
-            }
-            else // if in radius
-            {
-                agent.Stop();
-                Vector3 relativePosition = transform.InverseTransformDirection(agent.desiredVelocity);
-
-                float hor = relativePosition.z;
-                float ver = relativePosition.x;
-
-                anim.SetFloat("Horizontal", hor, .6f, Time.deltaTime);//moving enemy?????@@@
-                anim.SetFloat("Vertical", ver, .6f, Time.deltaTime);//moving enemy?????@@@
-
-                attackR += Time.deltaTime;
-
-                if (attackR > attackRate) // attack once in "attackRate" seconds
-                {
-                    anim.SetBool("Attack", true);
-                    StartCoroutine("CloseAttack");
-
-                    attackR = 0;
+                    agent.speed = speed;
+                    Look.enabled = false;
                 }
             }
+
         }
-    }
-    public void Hack()
-    {
-        GetComponent<RobotAI>().enabled = true;
+        else
+            anim.SetLayerWeight(1, 1f);
+        if (distance < visible / 2)
+        {
+            agent.speed = speed * 1.5f;
+        }
+        if (agent.velocity.magnitude > 1f && agent.velocity.magnitude < 5f)   // запуск анимации
+        {
+            anim.SetBool("Walk", true);
+            anim.SetBool("Run", false);
+        }
+        if (agent.velocity.magnitude > 5f)
+        {
+            anim.SetBool("Run", true);
+            anim.SetBool("Walk", false);
+        }
+        if (agent.velocity.magnitude < 1f)
+        {
+            anim.SetBool("Run", false);
+            anim.SetBool("Walk", false);
+        }
     }
 
     IEnumerator CloseAttack()
     {
         yield return new WaitForSeconds(.4f);
         anim.SetBool("Attack", false);
+        anim.SetBool("AttackRL", false);
+        anim.SetBool("AttackLL", false);
+        anim.SetBool("AttackRH", false);
+        anim.SetBool("AttackKick", false);
     }
     public void OpenDamageCollider()
     {

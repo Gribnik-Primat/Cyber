@@ -19,7 +19,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     public float damageTimer = .4f;
     WaitForSeconds damageT;
 
-	public float ragdoll_time = 1f;
+	public float ragdoll_time = 1.5f;
 
     public bool energi;
 
@@ -59,7 +59,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
     void Update ()
     {
-		if(/*если у нас включено состояние рэгдола*/)
+        //	if(/*если у нас включено состояние рэгдола*/)
 			ragdoll_time -= Time.deltaTime;
         healthSlider.value = healthE;
 		if (healthSlider.value >= lookHealth || healthSlider.value <= 0)
@@ -68,12 +68,6 @@ public class CharacterStatsEnemy : MonoBehaviour {
 			healthSlider.gameObject.SetActive (true);
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         healthTrans.transform.position = screenPoint;
-
-		if (ragdoll_time < 0) 
-		{
-			ragdoll_time = 1f;
-			ragdoll_func_off ();
-		}
 
         if (deal)
         {
@@ -119,27 +113,35 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     rot.enabled = false;
                     rot2.enabled = false;
                     Look.enabled = false;
+                    GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                    // Destroy(gameObject, 5f);
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
-                    anim.enabled = false;
+                    GetComponent<CapsuleCollider>().enabled = false;
+                    
                     GetComponent<EnemyRobotAI>().enabled = false;
-                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                 
-                  //  Destroy(gameObject, 5f);
-                }
-                if (GetComponent<EnemyAI>())
-                {
                     anim.enabled = false;
-                    GetComponent<EnemyAI>().enabled = false;
+                    rot.enabled = false;
+                    rot2.enabled = false;
+                    Look.enabled = false;
+                    GetComponent<RagdollHelper>().enabled = false;
+                    GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                 
-                //   Destroy(gameObject, 5f);
 
+                    //  Destroy(gameObject, 5f);
                 }
+                //if (GetComponent<EnemyAI>())
+                //{
+                //    anim.enabled = false;
+                //    GetComponent<EnemyAI>().enabled = false;
+                //    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                 
+                ////   Destroy(gameObject, 5f);
+
+                //}
                 if (GetComponent<EnemyShootAi>())
                 {
                     anim.enabled = false;
@@ -153,7 +155,12 @@ public class CharacterStatsEnemy : MonoBehaviour {
             }
             
         }
-	}
+        if (ragdoll_time < 0)
+        {
+            ragdoll_time = 1.5f;
+            ragdoll_func_off();
+        }
+    }
 
 	private void enableRagdoll(bool enabled)
 	{
