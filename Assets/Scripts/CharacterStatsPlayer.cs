@@ -52,6 +52,15 @@ public class CharacterStatsPlayer : MonoBehaviour {
     void Update ()
     {
         healthSlider.value = healthP;
+
+        if (healthP > 100)
+        {
+            healthP = 100;
+        }
+        if (healthP < 0)
+        {
+            healthP = 0;
+        }
         //if (healthSlider.value >= 100 || healthSlider.value <= 0)
         //	healthSlider.gameObject.SetActive (false);
         //else

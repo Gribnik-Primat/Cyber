@@ -18,6 +18,6 @@ public class DoDamageSpecial2 : MonoBehaviour {
            // audio.shoot = true;
         }
 		gameObject.GetComponentInParent<Biostim> ().setBiostim (-30);
-		biostimSlider.value -= 30;
+	//	biostimSlider.value -= 30;
     }
 }

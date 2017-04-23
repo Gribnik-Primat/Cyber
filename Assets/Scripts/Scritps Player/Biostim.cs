@@ -40,10 +40,11 @@ public class Biostim : MonoBehaviour {
         if (stels)
         {
             biostim = biostim -= 10f *Time.deltaTime;
-            biostimSlider.value = biostim;
+            
         }
-             
-	}
+        biostimSlider.value = biostim;
+
+    }
 
 	public void setBiostim(float value)
 	{
