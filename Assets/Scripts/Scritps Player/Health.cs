@@ -19,10 +19,10 @@ public class Health : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.Q))
         {
-            if (bio.biostim > 0)
+            if (bio.biostim > 0 && stats.healthP < 100f)
             {
                 bio.biostim -= 10f * Time.deltaTime;
-                stats.healthP += 5f * Time.deltaTime;
+                stats.healthP += 7f * Time.deltaTime;
             }
         }
 

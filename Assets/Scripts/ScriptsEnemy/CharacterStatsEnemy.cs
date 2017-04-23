@@ -39,10 +39,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
     Rotate2 rot2;
     LookAtIK Look;
 
- 
-    
+    CapsuleCollider capsul;
 
-	void Start ()
+
+    UnityEngine.AI.NavMeshAgent agent;
+
+
+    void Start ()
     {
         
     damageT = new WaitForSeconds(damageTimer);
@@ -56,7 +59,9 @@ public class CharacterStatsEnemy : MonoBehaviour {
         healthTrans = slidH.GetComponent<RectTransform>();
         ragdollUtility = GetComponentInChildren<RagdollUtility>();
 		fbbik = GetComponent<FullBodyBipedIK> ();
-		//substractOnce = false;
+        capsul =GetComponent<CapsuleCollider>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        //substractOnce = false;
     }
 
     
@@ -186,6 +191,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
 	private void enableRagdoll(bool enabled)
 	{
 		RagdollHelper helper = GetComponent<RagdollHelper>();
+        capsul.enabled = !enabled;
+        agent.enabled = !enabled;
 		helper.ragdolled = enabled;
 		anim.enabled = !enabled;
 		fbbik.enabled = !enabled;

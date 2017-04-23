@@ -189,7 +189,7 @@ public class EnemyMili : MonoBehaviour
 
 
         }
-        if (distance < visible/2)
+        if (distance < visible * 0.25)
         {
             agent.speed = speed*1.5f;
         }
