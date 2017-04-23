@@ -11,12 +11,12 @@ public class DoExplodeDamageP : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        CharacterStatsPlayer stats = other.GetComponent<CharacterStatsPlayer>();
+        CharacterStatsPlayer stats = other.GetComponentInChildren<CharacterStatsPlayer>();
 
         if (!stats)
             return;
 
-        bool relationOk = damageEnemy && other.GetComponent<EnemyAI>();
+        bool relationOk = damageEnemy && other.GetComponent<EnemyMili>();
         relationOk = relationOk || (damagePlayer && other.GetComponent<PlayerTrap>());
 
         if (relationOk)
@@ -28,7 +28,7 @@ public class DoExplodeDamageP : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        CharacterStatsPlayer stats = other.GetComponent<CharacterStatsPlayer>();
+        CharacterStatsPlayer stats = other.GetComponentInChildren<CharacterStatsPlayer>();
 
         if (!stats)
             return;

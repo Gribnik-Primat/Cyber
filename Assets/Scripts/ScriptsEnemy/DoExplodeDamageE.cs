@@ -16,7 +16,7 @@ public class DoExplodeDamageE : MonoBehaviour
         if (!stats)
             return;
 
-        bool relationOk = damageEnemy && other.GetComponent<EnemyAI>();
+        bool relationOk = damageEnemy && other.GetComponent<EnemyMili>();
         relationOk = relationOk || (damagePlayer && other.GetComponent<PlayerTrap>());
 
         if (relationOk)

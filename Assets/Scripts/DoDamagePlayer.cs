@@ -2,19 +2,21 @@
 using System.Collections;
 using UnityEngine.UI;
 public class DoDamagePlayer : MonoBehaviour {
-	int count = 0;
-	int rand  = Random.Range(2,5);
+   // [SerializeField] int count = 0;
+   // [SerializeField] int rand  = Random.Range(2,5);
     AudiPlayer audio;
 	public Slider biostimSlider;
     void Start()
-    {
+    {    
         audio = GetComponentInParent<AudiPlayer>();
     }
 	void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<CharacterStatsEnemy>())
         {
-			count++;
+            int count = 0;
+            int rand = Random.Range(2, 5);
+            count++;
 			if (count >= rand) 
 			{
 				rand = Random.Range(2,5);

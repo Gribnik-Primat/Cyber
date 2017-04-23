@@ -101,23 +101,24 @@ public class PlayerAttack : MonoBehaviour {
             StartCoroutine("CloseAttack1");
             
         }
-        if (actionDamage)
-        {
-
-            if (Input.GetKeyDown(KeyCode.E))
+        if(biostim >= 30) {
+            if (actionDamage)
             {
-                anim.SetBool("SpecialAttack1", true);
-                StartCoroutine("CloseAttackSpecial");
-                GetComponentInParent<CharacterThirdPerson>().enabled = false;
-              actionDamage = false;
-            //  time += Time.deltaTime;
-              }
-            //if (time >= 4)
-            //{
-            //    StartCoroutine("CloseAttackSpecialDamage");
-            //    time = 0;
-           // }
 
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    anim.SetBool("SpecialAttack1", true);
+                    StartCoroutine("CloseAttackSpecial");
+                    GetComponentInParent<CharacterThirdPerson>().enabled = false;
+                    actionDamage = false;
+                    //  time += Time.deltaTime;
+                }
+                //if (time >= 4)
+                //{
+                //    StartCoroutine("CloseAttackSpecialDamage");
+                //    time = 0;
+                // }
+            }
         }
     }
     IEnumerator CloseAttack()

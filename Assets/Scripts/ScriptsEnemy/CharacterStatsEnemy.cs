@@ -38,11 +38,14 @@ public class CharacterStatsEnemy : MonoBehaviour {
     Rotate rot;
     Rotate2 rot2;
     LookAtIK Look;
+
+ 
     
 
 	void Start ()
     {
-        damageT = new WaitForSeconds(damageTimer);
+        
+    damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>();
         rot = GetComponentInChildren<Rotate>();
         rot2 = GetComponentInChildren<Rotate2>();
@@ -60,12 +63,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
     void Update ()
     {
-		if(ragdoll_state == true)
-			ragdoll_time -= Time.deltaTime;
-		if (ragdoll_time < 0 && ragdoll_state == true) {
-			ragdoll_func_off ();
-			ragdoll_time = 1.5f;
-		}
+		
         healthSlider.value = healthE;
 		if (healthSlider.value >= lookHealth || healthSlider.value <= 0)
 			healthSlider.gameObject.SetActive (false);
@@ -153,16 +151,36 @@ public class CharacterStatsEnemy : MonoBehaviour {
                   
                  //   Destroy(gameObject, 5f);
 
-                } 
+                }
+                if (GetComponent<Boss>())
+                {
+                    GetComponent<CapsuleCollider>().enabled = false;
+                   
+                    GetComponent<Boss>().enabled = false;
+                    anim.enabled = false;
+                   // Look.enabled = false;
+                    GetComponent<RagdollHelper>().enabled = false;
+                    GetComponent<FullBodyBipedIK>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                   
+                    //  Destroy(gameObject, 5f);
+                }
                 dead = true;
             }
             
         }
-        if (ragdoll_time < 0)
+        if (ragdoll_state == true)
+            ragdoll_time -= Time.deltaTime;
+        if (ragdoll_time < 0 && ragdoll_state == true)
         {
-            ragdoll_time = 1.5f;
             ragdoll_func_off();
+            ragdoll_time = 2f;
         }
+        //if (ragdoll_time < 0)
+        //{
+        //    ragdoll_time = 1.5f;
+        //    ragdoll_func_off();
+        //}
     }
 
 	private void enableRagdoll(bool enabled)
