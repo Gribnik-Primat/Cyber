@@ -71,7 +71,7 @@ public class CharacterStatsPlayer : MonoBehaviour {
         {
             if (substractOnce == false)
             {				
-                healthP -= 30;
+                healthP -= 20;
                 substractOnce = true;
                 anim.SetTrigger("Hit");
             }

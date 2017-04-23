@@ -95,7 +95,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
         {
             if (substractOnce == false)
             {
-                healthE -= 30;
+                healthE -= 20;
 				substractOnce = true;
                 anim.SetTrigger("Hit");
             }
