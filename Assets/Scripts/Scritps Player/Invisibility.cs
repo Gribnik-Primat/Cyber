@@ -65,6 +65,10 @@ public class Invisibility : MonoBehaviour {
         }
         else
         {
+            foreach (GameObject e in Enemy)
+            {
+                e.GetComponent<EnemyMili>().invisibleplayer = false;
+            }
             GetComponentInChildren<Renderer>().material.shader = s1;
             hack.enabled = true;
           //  bio.biostim = 0;
