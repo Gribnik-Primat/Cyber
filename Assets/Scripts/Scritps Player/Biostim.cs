@@ -32,9 +32,10 @@ public class Biostim : MonoBehaviour {
         {
             biostim = 100;
         }
-        if (biostim < 0)
+        if (biostim <= 0)
         {
             biostim = 0;
+            stels = false;
         }
 
         if (stels)

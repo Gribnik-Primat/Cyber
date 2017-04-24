@@ -36,7 +36,7 @@ public class Rotate2 : MonoBehaviour {
         if (other.GetComponent<CharacterThirdPerson>())
         {
             act = true;
-            attack.GetComponentInParent<PlayerAttack>().damage();
+            attack.GetComponentInParent<PlayerAttack>().damage(true);
         }
     }
 
@@ -45,6 +45,7 @@ public class Rotate2 : MonoBehaviour {
         if (other.GetComponent<CharacterThirdPerson>())
         {
             act = false;
+            attack.GetComponentInParent<PlayerAttack>().damage(false);
             time = 0;
           //  attack.GetComponent<PlayerAttack>().damage();
             // rot2.gameObject.SetActive(true);

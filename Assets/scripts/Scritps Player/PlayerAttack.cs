@@ -263,9 +263,9 @@ public class PlayerAttack : MonoBehaviour {
         damageCollider_SD.SetActive(false);
 		
     }
-    public void damage()
+    public void damage(bool enabled)
     {
-        actionDamage = true;
+        actionDamage = enabled;
     }
 
 }

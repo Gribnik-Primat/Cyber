@@ -67,8 +67,8 @@ public class Invisibility : MonoBehaviour {
         {
             GetComponentInChildren<Renderer>().material.shader = s1;
             hack.enabled = true;
-            bio.biostim = 0;
-            bio.Stels();
+          //  bio.biostim = 0;
+           // bio.Stels();
             state = false;
         }
         
