@@ -77,11 +77,12 @@ public class EnemyRobotAI : MonoBehaviour {
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
-                        transform.LookAt(target); 
+                        agent.speed = speed * 2.5f;
+                        
                         if (distance < attackRange)           // расстоние меньше то бьем 
                         {
                             attacking = true;
-                           
+                            transform.LookAt(target);
                         }
                         else
                         {
@@ -91,10 +92,9 @@ public class EnemyRobotAI : MonoBehaviour {
                         {                     // если не бьем то идем
                             agent.Resume();
                             agent.destination = Player.transform.position;
-                            agent.speed = speed * 2.5f;
+                           
                         }
-                        else
-                             agent.speed = speed;
+                       
 
                         if (attacking)
                         {
@@ -135,6 +135,8 @@ public class EnemyRobotAI : MonoBehaviour {
                             }
                         }
                     }
+                    else
+                        agent.speed = speed;
                 } 
             }
         }
