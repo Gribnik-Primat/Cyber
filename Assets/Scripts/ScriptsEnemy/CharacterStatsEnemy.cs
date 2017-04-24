@@ -21,9 +21,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     WaitForSeconds damageT;
 
 	public float ragdoll_time = 1.5f;
-
-    public bool energi;
-
+   
     Animator anim;
 
     public GameObject sliderPrefabH;

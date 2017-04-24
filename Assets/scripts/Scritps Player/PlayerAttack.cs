@@ -5,8 +5,7 @@ using RootMotion.FinalIK;
 
 public class PlayerAttack : MonoBehaviour {
 
-    // PlayerInput plInput;
-    // PlayerMovement plMovement;
+   
     Animator anim;
     public bool actionDamage;
     public float comboRate = .5f;
@@ -18,17 +17,23 @@ public class PlayerAttack : MonoBehaviour {
     WaitForSeconds comboR;
     WaitForSeconds comboS;
     public GameObject  damageCollider_RH;
+    bool DCR;
     public GameObject damageCollider_LH;
+    bool DCL;
     public GameObject damageCollider_RL;
+    bool DCRL;
     public GameObject damageCollider_LL;
+    bool DCLL;
     public GameObject damageCollider_S;
+    bool DCS;
     public GameObject damageCollider_SD;
-   
-	private int rand;
+    bool DCSD;
+
+    private int rand;
 	private int count = 0;
 
     public bool attack= false;
-    public float time = 0;
+    float time = 0;
 	float biostim;
 
     void Start ()
@@ -40,9 +45,15 @@ public class PlayerAttack : MonoBehaviour {
 
         comboR = new WaitForSeconds(comboRate);
         comboS = new WaitForSeconds(comboSRate);
-       
 
-        damageCollider_RH.SetActive(false);
+     DCR = false;
+     DCL = false;
+    DCRL = false;
+    DCLL = false;
+     DCS = false;
+    DCSD = false;
+
+    damageCollider_RH.SetActive(false);
         damageCollider_LH.SetActive(false);
         damageCollider_RL.SetActive(false);
         damageCollider_LL.SetActive(false);
@@ -55,6 +66,29 @@ public class PlayerAttack : MonoBehaviour {
 
     void FixedUpdate()
     {
+        time += Time.deltaTime;
+        if (time > .5f)
+        {
+            if (DCR)
+                damageCollider_RH.SetActive(false);
+   
+            if(DCL)
+                damageCollider_LH.SetActive(false);
+
+            if(DCRL)
+                damageCollider_RL.SetActive(false);
+
+            if(DCLL)
+                damageCollider_LL.SetActive(false);
+
+            if(DCS)
+                damageCollider_S.SetActive(false);
+
+            if(DCSD)
+                damageCollider_SD.SetActive(false);
+
+            time = 0;
+        }
 
         //RaycastHit hit;
         //Ray ray = new Ray(transform.position + Vector3.up, transform.forward);     // об думать как сделать переход между слоями анимациив
@@ -122,15 +156,13 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
     IEnumerator CloseAttack()
-    {
-		
+    {    
         yield return comboR;
         anim.SetBool("Attack", false);
       
     }
     public void OpenDamageCollider_RH()
-    {
-		
+    { 	
         damageCollider_RH.SetActive(true);
         //RaycastHit hit = new RaycastHit();
         //Ray ray = new Ray(damageCollider_RH.transform.position, Vector3.forward);
@@ -141,6 +173,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     public void CloseDamageCollider_RH()
     {
+        DCR = true;
         damageCollider_RH.SetActive(false);
     }
     public void OpenDamageCollider_LH()
@@ -155,7 +188,9 @@ public class PlayerAttack : MonoBehaviour {
 
     }
     public void CloseDamageCollider_LH()
+
     {
+        DCL = true;
         damageCollider_LH.SetActive(false);
     }
     IEnumerator CloseAttack1()
@@ -176,6 +211,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     public void CloseDamageCollider_RL()
     {
+        DCRL = true;
         damageCollider_RL.SetActive(false);
     }
     public void OpenDamageCollider_LL()
@@ -191,6 +227,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     public void CloseDamageCollider_LL()
     {
+        DCLL = true;
         damageCollider_LL.SetActive(false);
     }
     IEnumerator CloseAttackSpecial()
@@ -208,6 +245,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     public void CloseDamageCollider_S()
     {
+        DCS = true;
         damageCollider_S.SetActive(false);
 		
     }
@@ -225,6 +263,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     public void CloseDamageCollider_SD()
     {
+        DCSD = true;
         damageCollider_SD.SetActive(false);
 		
     }

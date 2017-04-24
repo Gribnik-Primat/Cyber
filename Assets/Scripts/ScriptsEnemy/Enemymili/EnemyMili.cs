@@ -24,27 +24,29 @@ public class EnemyMili : MonoBehaviour
     public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
-
+    bool DC;
+    float time;
     public bool invisibleplayer;
     LookAtIK Look;
-    CharacterStats CharStats;
 
     Transform target;
-    public bool see;
+   
     float distance;
 
     void Start()
     {
-        see = false;
+        damageCollider.SetActive(false);
+        DC = false;
+        time = 0;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         agent.speed = speed;
         Look = GetComponent<LookAtIK>();
-        CharStats = GetComponent<CharacterStats>();
+      
         Invoke("move", 18f);
-        // invisibleplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Invisibility>().state;
+       
         invisibleplayer = false;
 
         agent.stoppingDistance = attackRange;
@@ -61,29 +63,20 @@ public class EnemyMili : MonoBehaviour
 
     void Update()
     {
-
-        //@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
-        // дистанция
         if (invisibleplayer)
-            // невидимость игрока
             distance = visible + 1;
         if (invisibleplayer == false)
         {
-
             distance = Vector3.Distance(transform.position, target.position);
             if (distance < visible)
             {
-                
-
                 Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
                 {
-                     Look.enabled = true;
+                    Look.enabled = true;
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-
-
                     if (Physics.Raycast(ray, out hit, visible))
                     {
 
@@ -91,56 +84,25 @@ public class EnemyMili : MonoBehaviour
                         {
                             angleV = 180f;
                             transform.LookAt(target);
-                            see = true;
-
                             if (distance < attackRange)           // расстоние меньше то бьем 
-                            {                              
+                            {
                                 attacking = true;
                                 agent.speed = speed;
                             }
                             else
                             {
                                 attacking = false;
-
                             }
-
-
-
                             if (!attacking)
                             {                     // если не бьем то идем
-
                                 agent.Resume();
                                 agent.speed = speed * 2.5f;
-                                //anim.SetBool("Run", true);
                                 agent.destination = Player.transform.position;
-
-
-
-                                //lookLeft = (target.position.z < transform.position.z) ? true : false;       // повороты
-
-                                //Quaternion targetRot = transform.rotation;
-
-                                //if (lookLeft)
-                                //{
-                                //    targetRot = Quaternion.Euler(0, 180, 0);
-
-                                //}
-                                //else
-                                //{
-                                //    targetRot = Quaternion.Euler(0, 0, 0);
-                                //}
-                                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotSpeed); // плавность поворота
-
                             }
-
                             if (attacking)
                             {
-                                agent.Stop();     
-                              //  anim.SetBool("Run", false);
-
-
+                                agent.Stop();
                                 attackR += Time.deltaTime;
-
                                 if (attackR > attackRate)                       // атакуем 
                                 {
                                     int rand = Random.Range(0, 4);
@@ -173,21 +135,16 @@ public class EnemyMili : MonoBehaviour
                                             break;
                                     }
                                 }
-
-
                             }
                         }
-
                     }
                 }
                 else
                     agent.speed = speed;
-                 Look.enabled = false;
+                Look.enabled = false;
             }
             else
                 angleV = 70f;
-
-
         }
         if (distance < visible * 0.25)
         {
@@ -207,7 +164,16 @@ public class EnemyMili : MonoBehaviour
         {
             anim.SetBool("Run", false);
             anim.SetBool("Walk", false);
-        } 
+        }
+        time += Time.deltaTime;
+        if (time > 0.5f)
+        {
+            if (DC)
+            {
+                damageCollider.SetActive(false);
+            }
+            time = 0;
+        }
     }
 
         IEnumerator CloseAttack()
