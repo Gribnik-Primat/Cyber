@@ -82,13 +82,12 @@ public class EnemyMili : MonoBehaviour
 
                         if (hit.transform.CompareTag("Player"))
                         {
-                            agent.speed = speed * 2.5f;
-                            
+                            angleV = 180f;
+                            transform.LookAt(target);
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
-                                angleV = 180f;
-                                transform.LookAt(target);
+
                             }
                             else
                             {
@@ -96,11 +95,12 @@ public class EnemyMili : MonoBehaviour
                             }
                             if (!attacking)
                             {                     // если не бьем то идем
-                                agent.Resume();
+                               agent.Resume();
                                 agent.destination = Player.transform.position;
-                                
+                                agent.speed = speed * 2.5f;
                             }
-                           
+                            else
+                                agent.speed = speed;
                             if (attacking)
                             {
                                 agent.Stop();
@@ -139,8 +139,6 @@ public class EnemyMili : MonoBehaviour
                                 }
                             }
                         }
-                        else
-                            agent.speed = speed;
                     }
                 }
             }

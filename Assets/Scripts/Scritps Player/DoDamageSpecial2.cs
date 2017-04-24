@@ -15,9 +15,9 @@ public class DoDamageSpecial2 : MonoBehaviour {
         if (other.GetComponent<CharacterStatsEnemy>())
         {
             other.GetComponent<CharacterStatsEnemy>().checkToApplyDead();
-            gameObject.GetComponentInParent<Biostim>().setBiostim(-30);
-            // audio.shoot = true;
-        }	
+           // audio.shoot = true;
+        }
+		gameObject.GetComponentInParent<Biostim> ().setBiostim (-30);
 	//	biostimSlider.value -= 30;
     }
 }
