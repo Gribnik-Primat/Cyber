@@ -187,7 +187,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
             RagdollHelper helper = GetComponent<RagdollHelper>();
             capsul.enabled = !enabled;
             agent.enabled = !enabled;
-            helper.ragdolled = !enabled;
+            helper.ragdolled = enabled;
             anim.enabled = !enabled;
             fbbik.enabled = !enabled;
             box.enabled = !enabled;

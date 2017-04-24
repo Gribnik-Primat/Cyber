@@ -39,8 +39,7 @@ public class Biostim : MonoBehaviour {
 
         if (stels)
         {
-            biostim = biostim -= 10f *Time.deltaTime;
-            
+            biostim = biostim -= 10f *Time.deltaTime;       
         }
         biostimSlider.value = biostim;
 
