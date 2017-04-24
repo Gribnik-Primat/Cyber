@@ -25,27 +25,27 @@ public class EnemyRobotAI : MonoBehaviour {
   //  public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
+    bool DC;
+    float time;
 
     public bool invisibleplayer;
-    LookAtIK Look;
-
-    public Material[] materialArray;
-     public int pointer = 0;
 
     Transform target;
-    public bool see;
+  
     float distance;
 
     void Start()
     {
-        see = false;
+        DC = false;
+        time = 0;
+        damageCollider.SetActive(false);
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         agent.speed = speed;
-        Look = GetComponent<LookAtIK>();
-        Invoke("move", 18f);
+       
+     //   Invoke("move", 18f);
         anim.SetLayerWeight(1, 1f);
         invisibleplayer = false;
         agent.stoppingDistance = attackRange;
@@ -61,33 +61,27 @@ public class EnemyRobotAI : MonoBehaviour {
     //}
 
     void Update()
-    {
-        
+    {  
         distance = Vector3.Distance(transform.position, target.position);
         if (distance < visible)
         {
-                anim.SetLayerWeight(1, 0f);
+            anim.SetLayerWeight(1, 0f);
             Quaternion look = Quaternion.LookRotation(target.transform.position - transform.position);  // угол видимости
             float angle = Quaternion.Angle(transform.rotation, look);
             if (angle < angleV)
             {
-
-                Look.enabled = true;
+             
                 RaycastHit hit;
                 Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
-
-
                 if (Physics.Raycast(ray, out hit, visible))
                 {
-
                     if (hit.transform.CompareTag("Player"))
                     {
-                        transform.LookAt(target);
-                        see = true;
+                        transform.LookAt(target); 
                         if (distance < attackRange)           // расстоние меньше то бьем 
                         {
                             attacking = true;
-                            agent.speed = speed;
+                           
                         }
                         else
                         {
@@ -96,9 +90,11 @@ public class EnemyRobotAI : MonoBehaviour {
                         if (!attacking)
                         {                     // если не бьем то идем
                             agent.Resume();
-                            agent.speed = speed * 2.5f;
                             agent.destination = Player.transform.position;
+                            agent.speed = speed * 2.5f;
                         }
+                        else
+                             agent.speed = speed;
 
                         if (attacking)
                         {
@@ -139,19 +135,12 @@ public class EnemyRobotAI : MonoBehaviour {
                             }
                         }
                     }
-                }
-                else
-                {
-
-                    agent.speed = speed;
-                    Look.enabled = false;
-                }
+                } 
             }
-
         }
         else
             anim.SetLayerWeight(1, 1f);
-        if (distance < visible / 2)
+        if (distance < visible *0.25)
         {
             agent.speed = speed * 1.5f;
         }
@@ -170,8 +159,16 @@ public class EnemyRobotAI : MonoBehaviour {
             anim.SetBool("Run", false);
             anim.SetBool("Walk", false);
         }
+        time += Time.deltaTime;
+        if (time > 0.5f)
+        {
+            if (DC)
+            {
+                damageCollider.SetActive(false);
+            }
+            time = 0;
+        }
     }
-
     IEnumerator CloseAttack()
     {
         yield return new WaitForSeconds(.4f);
@@ -187,6 +184,7 @@ public class EnemyRobotAI : MonoBehaviour {
     }
     public void CloseDamageCollider()
     {
+        DC = true;
         damageCollider.SetActive(false);
     }
 }

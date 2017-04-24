@@ -67,7 +67,7 @@ public class PlayerAttack : MonoBehaviour {
     void FixedUpdate()
     {
         time += Time.deltaTime;
-        if (time > .5f)
+        if (time > 1f)
         {
             if (DCR)
                 damageCollider_RH.SetActive(false);
@@ -145,13 +145,9 @@ public class PlayerAttack : MonoBehaviour {
                     StartCoroutine("CloseAttackSpecial");
                     GetComponentInParent<CharacterThirdPerson>().enabled = false;
                     actionDamage = false;
-                    //  time += Time.deltaTime;
+                    
                 }
-                //if (time >= 4)
-                //{
-                //    StartCoroutine("CloseAttackSpecialDamage");
-                //    time = 0;
-                // }
+               
             }
         }
     }

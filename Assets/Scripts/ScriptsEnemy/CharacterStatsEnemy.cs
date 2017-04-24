@@ -36,16 +36,14 @@ public class CharacterStatsEnemy : MonoBehaviour {
     Rotate rot;
     Rotate2 rot2;
     LookAtIK Look;
-
+    BoxCollider box;
     CapsuleCollider capsul;
-
-
     UnityEngine.AI.NavMeshAgent agent;
 
 
     void Start ()
     {
-        
+        box=GetComponentInChildren<BoxCollider>();
     damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>();
         rot = GetComponentInChildren<Rotate>();
@@ -112,13 +110,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
                 if (GetComponent<EnemyMili>())
                 {
-                    GetComponent<CapsuleCollider>().enabled = false;
-                    GetComponentInChildren<BoxCollider>().enabled = false;
+                    capsul.GetComponent<CapsuleCollider>().enabled = false;
+                   box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyMili>().enabled = false;
                     anim.enabled = false;
                     rot.enabled = false;
                     rot2.enabled = false;
-                    Look.enabled = false;
+                    
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -126,11 +124,12 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 }
                 if (GetComponent<EnemyRobotAI>())
                 {
-                    GetComponent<CapsuleCollider>().enabled = false;
                     
+                    capsul.GetComponent<CapsuleCollider>().enabled = false;
+                    box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
                     anim.enabled = false;
-                    Look.enabled = false;
+
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -157,11 +156,11 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 }
                 if (GetComponent<Boss>())
                 {
-                    GetComponent<CapsuleCollider>().enabled = false;
-                   
+                   capsul.GetComponent<CapsuleCollider>().enabled = false;
+                    box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<Boss>().enabled = false;
                     anim.enabled = false;
-                   // Look.enabled = false;
+                  
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -179,22 +178,22 @@ public class CharacterStatsEnemy : MonoBehaviour {
             ragdoll_func_off();
             ragdoll_time = 2f;
         }
-        //if (ragdoll_time < 0)
-        //{
-        //    ragdoll_time = 1.5f;
-        //    ragdoll_func_off();
-        //}
     }
 
 	private void enableRagdoll(bool enabled)
 	{
-		RagdollHelper helper = GetComponent<RagdollHelper>();
-        capsul.enabled = !enabled;
-        agent.enabled = !enabled;
-		helper.ragdolled = enabled;
-		anim.enabled = !enabled;
-		fbbik.enabled = !enabled;
-	}
+        if (!dead)
+        {
+            RagdollHelper helper = GetComponent<RagdollHelper>();
+            capsul.enabled = !enabled;
+            agent.enabled = !enabled;
+            helper.ragdolled = !enabled;
+            anim.enabled = !enabled;
+            fbbik.enabled = !enabled;
+            box.enabled = !enabled;
+        }
+      
+    }
 
 	public void ragdoll_func_on()
 	{

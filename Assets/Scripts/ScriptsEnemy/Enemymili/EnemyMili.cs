@@ -27,7 +27,7 @@ public class EnemyMili : MonoBehaviour
     bool DC;
     float time;
     public bool invisibleplayer;
-    LookAtIK Look;
+   
 
     Transform target;
    
@@ -43,7 +43,7 @@ public class EnemyMili : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         agent.speed = speed;
-        Look = GetComponent<LookAtIK>();
+        
       
         Invoke("move", 18f);
        
@@ -74,7 +74,7 @@ public class EnemyMili : MonoBehaviour
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
                 {
-                    Look.enabled = true;
+                   
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
                     if (Physics.Raycast(ray, out hit, visible))
@@ -87,7 +87,7 @@ public class EnemyMili : MonoBehaviour
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
-                                agent.speed = speed;
+
                             }
                             else
                             {
@@ -95,10 +95,12 @@ public class EnemyMili : MonoBehaviour
                             }
                             if (!attacking)
                             {                     // если не бьем то идем
-                                agent.Resume();
-                                agent.speed = speed * 2.5f;
+                               agent.Resume();
                                 agent.destination = Player.transform.position;
+                                agent.speed = speed * 2.5f;
                             }
+                            else
+                                agent.speed = speed;
                             if (attacking)
                             {
                                 agent.Stop();
@@ -139,12 +141,12 @@ public class EnemyMili : MonoBehaviour
                         }
                     }
                 }
-                else
-                    agent.speed = speed;
-                Look.enabled = false;
             }
             else
+            {
+               
                 angleV = 70f;
+            }
         }
         if (distance < visible * 0.25)
         {
@@ -166,7 +168,7 @@ public class EnemyMili : MonoBehaviour
             anim.SetBool("Walk", false);
         }
         time += Time.deltaTime;
-        if (time > 0.5f)
+        if (time > 1f)
         {
             if (DC)
             {
@@ -191,6 +193,7 @@ public void OpenDamageCollider()
 }
 public void CloseDamageCollider()
 {
+     DC = true;
     damageCollider.SetActive(false);
 }
 }

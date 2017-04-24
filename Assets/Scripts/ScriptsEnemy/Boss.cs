@@ -24,23 +24,25 @@ public class Boss : MonoBehaviour
    // public Transform checkpoint;
 
     public GameObject damageCollider; // колайдер дамага
+    bool DC;
+    float time;
 
     public bool invisibleplayer;
-    LookAtIK Look;
-
-
     Transform target;
     float distance;
 
     void Start()
     {
-       
+        DC = false;
+        time = 0;
+        damageCollider.SetActive(false);
+
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         agent.speed = speed;
-        Look = GetComponent<LookAtIK>();
+       
      //   Invoke("move", 18f);
         invisibleplayer = false;
         agent.stoppingDistance = attackRange;
@@ -58,10 +60,8 @@ public class Boss : MonoBehaviour
     void Update()
     {
 
-        //@@@@@@@@@@@ какого хрена здесь вылетает ошибка NULL REFERENCE Exception?!!!
-        // дистанция
+        
         if (invisibleplayer)
-            // невидимость игрока
             distance = visible + 1;
         if (invisibleplayer == false)
         {
@@ -75,7 +75,7 @@ public class Boss : MonoBehaviour
                 float angle = Quaternion.Angle(transform.rotation, look);
                 if (angle < angleV)
                 {
-                   // Look.enabled = true;
+                   
                     RaycastHit hit;
                     Ray ray = new Ray(transform.position + Vector3.up, target.transform.position - transform.position); //  райкаст чтоб не палил нас сковзь стены
 
@@ -90,7 +90,7 @@ public class Boss : MonoBehaviour
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
-                                agent.speed = speed;
+                                
                             }
                             else
                             {
@@ -100,10 +100,11 @@ public class Boss : MonoBehaviour
                             if (!attacking)
                             {                     // если не бьем то идем
                                 agent.Resume();
-                                agent.speed = speed * 2.5f;
-                               
                                 agent.destination = Player.transform.position;
+                                agent.speed = speed * 2.5f;
                             }
+                            else
+                                agent.speed = speed;
 
                             if (attacking)
                             {
@@ -149,32 +150,33 @@ public class Boss : MonoBehaviour
 
                     }
                 }
-                else
-                    agent.speed = speed;
-              //  Look.enabled = false;
+
             }
+            
         }
-        if (distance < visible / 1.5)
+        if (distance < visible * 0.25f)
         {
             agent.speed = speed * 1.5f;
         }
-        if (agent.velocity.magnitude > 1f /*&& agent.velocity.magnitude < 5f*/)   // запуск анимации
+        if (agent.velocity.magnitude > 1f)   // запуск анимации
         {
             anim.SetBool("Walk", true);
-            //anim.SetBool("Run", false);
+
         }
         else
+        {
             anim.SetBool("Walk", false);
-        //if (agent.velocity.magnitude > 5f)
-        //{
-        //    anim.SetBool("Run", true);
-        //    anim.SetBool("Walk", false);
-        //}
-        //if (agent.velocity.magnitude < 1f)
-        //{
-        //    anim.SetBool("Run", false);
-        //    anim.SetBool("Walk", false);
-        //}
+        }
+        time += Time.deltaTime;
+        if (time > 1f)
+        {
+            if (DC)
+            {
+                damageCollider.SetActive(false);
+            }
+            time = 0;
+        }
+
     }
 
     IEnumerator CloseAttack()
@@ -192,6 +194,7 @@ public class Boss : MonoBehaviour
     }
     public void CloseDamageCollider()
     {
+        DC = true;
         damageCollider.SetActive(false);
     }
 }
