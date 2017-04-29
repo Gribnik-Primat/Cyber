@@ -11,8 +11,8 @@ public class PlayerAttack : MonoBehaviour {
     public float comboRate = .5f;
     public float comboSRate = 3f;
 
-    [SerializeField] HitReaction hitReaction;
-    [SerializeField] float hitForce = 1f;
+    //[SerializeField] HitReaction hitReaction;
+    //[SerializeField] float hitForce = 1f;
 
     WaitForSeconds comboR;
     WaitForSeconds comboS;

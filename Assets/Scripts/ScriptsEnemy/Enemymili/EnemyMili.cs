@@ -22,7 +22,7 @@ public class EnemyMili : MonoBehaviour
     public float rotSpeed = 5; // скокрость разворота 
 
     public Transform checkpoint;
-
+    public GameObject spine;
     public GameObject damageCollider; // колайдер дамага
     bool DC;
     float time;
@@ -88,7 +88,7 @@ public class EnemyMili : MonoBehaviour
                             {
                                 attacking = true;
                                 angleV = 180f;
-                                transform.LookAt(target);
+                                spine.transform.LookAt(target);
                             }
                             else
                             {

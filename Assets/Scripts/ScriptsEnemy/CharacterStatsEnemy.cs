@@ -39,7 +39,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     BoxCollider box;
     CapsuleCollider capsul;
     UnityEngine.AI.NavMeshAgent agent;
-
+    
 
     void Start ()
     {
@@ -58,6 +58,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
         capsul =GetComponent<CapsuleCollider>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //substractOnce = false;
+
+       
     }
 
     
@@ -111,12 +113,13 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 if (GetComponent<EnemyMili>())
                 {
                     capsul.GetComponent<CapsuleCollider>().enabled = false;
-                   box.GetComponentInChildren<BoxCollider>().enabled = false;
+                    box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyMili>().enabled = false;
                     anim.enabled = false;
                     rot.enabled = false;
                     rot2.enabled = false;
-                    
+                    RagdollHelper helper = GetComponent<RagdollHelper>();
+                    helper.ragdolled = true;
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -128,8 +131,9 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     capsul.GetComponent<CapsuleCollider>().enabled = false;
                     box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
-                    anim.enabled = false;
-
+                   anim.enabled = false;
+                    RagdollHelper helper = GetComponent<RagdollHelper>();
+                    helper.ragdolled = true;
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -147,6 +151,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 //}
                 if (GetComponent<EnemyShootAi>())
                 {
+                    RagdollHelper helper = GetComponent<RagdollHelper>();
+                    helper.ragdolled = true;
                     anim.enabled = false;
                     GetComponent<EnemyShootAi>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -160,7 +166,8 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<Boss>().enabled = false;
                     anim.enabled = false;
-                  
+                    RagdollHelper helper = GetComponent<RagdollHelper>();
+                    helper.ragdolled = true;
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -169,14 +176,14 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 }
                 dead = true;
             }
-            
+          
         }
         if (ragdoll_state == true)
             ragdoll_time -= Time.deltaTime;
         if (ragdoll_time < 0 && ragdoll_state == true)
         {
             ragdoll_func_off();
-            ragdoll_time = 2f;
+            ragdoll_time = 1.5f;
         }
     }
 
@@ -185,10 +192,10 @@ public class CharacterStatsEnemy : MonoBehaviour {
         if (!dead)
         {
             RagdollHelper helper = GetComponent<RagdollHelper>();
+            helper.ragdolled = enabled;
             capsul.enabled = !enabled;
             agent.enabled = !enabled;
-            helper.ragdolled = !enabled;
-            anim.enabled = !enabled;
+            //anim.enabled = !enabled;
             fbbik.enabled = !enabled;
             box.enabled = !enabled;
         }
