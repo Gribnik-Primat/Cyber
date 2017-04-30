@@ -88,11 +88,15 @@ public class EnemyMili : MonoBehaviour
                             {
                                 attacking = true;
                                 angleV = 180f;
-                                spine.transform.LookAt(target);
+								GetComponent<LookAtIK> ().enabled = true;
+								GetComponent<LookAtIK> ().solver.target=target;
+
+								//spine.transform.LookAt(target);
                             }
                             else
                             {
                                 attacking = false;
+								GetComponent<LookAtIK> ().enabled = false;
                             }
                             if (!attacking)
                             {                     // если не бьем то идем
