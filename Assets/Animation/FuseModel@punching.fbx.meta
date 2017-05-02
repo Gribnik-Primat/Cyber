@@ -192,14 +192,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4938317
-        functionName: OpenDamageCollider
+        functionName: OpenDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6606909
-        functionName: CloseDamageCollider
+        functionName: CloseDamageCollider_LH
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
