@@ -30,6 +30,8 @@ public class EnemyRobotAI : MonoBehaviour {
 
     public bool invisibleplayer;
 
+    Vector3 target_point;
+
     Transform target;
   
     float distance;
@@ -78,11 +80,14 @@ public class EnemyRobotAI : MonoBehaviour {
                     if (hit.transform.CompareTag("Player"))
                     {
                         agent.speed = speed * 2.5f;
-                        
+                        target_point = target.transform.position;
+                        target_point.y = 0;
+
+                        transform.LookAt(target);
                         if (distance < attackRange)           // расстоние меньше то бьем 
                         {
                             attacking = true;
-                            transform.LookAt(target);
+                            
                         }
                         else
                         {

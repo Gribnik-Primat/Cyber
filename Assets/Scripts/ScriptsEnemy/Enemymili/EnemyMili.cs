@@ -27,7 +27,9 @@ public class EnemyMili : MonoBehaviour
     bool DC;
     float time;
     public bool invisibleplayer;
-   
+    
+
+    Vector3 target_point;
 
     Transform target;
    
@@ -63,6 +65,7 @@ public class EnemyMili : MonoBehaviour
 
     void Update()
     {
+        
         if (invisibleplayer)
             distance = visible + 1;
         if (invisibleplayer == false)
@@ -83,20 +86,26 @@ public class EnemyMili : MonoBehaviour
                         if (hit.transform.CompareTag("Player"))
                         {
                             agent.speed = speed * 2.5f;
-                            
+                            target_point = target.transform.position;
+                            target_point.y = 0;
+
+                            transform.LookAt(target);
+
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
                                 angleV = 180f;
-								GetComponent<LookAtIK> ().enabled = true;
-								GetComponent<LookAtIK> ().solver.target=target;
+                                //GetComponent<LookAtIK> ().enabled = true;
+                                //GetComponent<LookAtIK> ().solver.target=target;
+                              
+                              
 
-								//spine.transform.LookAt(target);
                             }
                             else
                             {
                                 attacking = false;
-								GetComponent<LookAtIK> ().enabled = false;
+                                //GetComponent<LookAtIK> ().enabled = false;
+                                
                             }
                             if (!attacking)
                             {                     // если не бьем то идем

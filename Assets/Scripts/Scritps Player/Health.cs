@@ -6,10 +6,10 @@ public class Health : MonoBehaviour {
 
     CharacterStatsPlayer stats;
     Biostim bio;
-   
+    Animator anim;
 	void Start ()
     {
-        
+      anim= GetComponentInChildren<Animator>();
 		bio = GetComponent<Biostim>();
         stats = GetComponentInChildren<CharacterStatsPlayer>();
 	}
@@ -23,6 +23,7 @@ public class Health : MonoBehaviour {
             {
                 bio.biostim -= 10f * Time.deltaTime;
                 stats.healthP += 7f * Time.deltaTime;
+                
             }
         }
 

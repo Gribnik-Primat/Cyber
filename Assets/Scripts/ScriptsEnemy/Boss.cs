@@ -27,6 +27,8 @@ public class Boss : MonoBehaviour
     bool DC;
     float time;
 
+    Vector3 target_point;
+
     public bool invisibleplayer;
     Transform target;
     float distance;
@@ -82,15 +84,19 @@ public class Boss : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit, visible))
                     {
+                    
 
                         if (hit.transform.CompareTag("Player"))
                         {
                             agent.speed = speed * 2.5f;
-                            
+
+                            target_point = target.transform.position;
+                            target_point.y = 0;
+
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
                                 attacking = true;
-                                transform.LookAt(target);
+                                
                             }
                             else
                             {
