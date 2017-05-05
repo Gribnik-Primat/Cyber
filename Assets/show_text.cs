@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class show_text : MonoBehaviour {
 
 	bool text_show = false;
-	Time t;
+	float t;
 	// Use this for initialization
 	void Start () {
 		
