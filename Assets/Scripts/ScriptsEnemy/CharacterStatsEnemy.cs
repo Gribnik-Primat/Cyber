@@ -138,14 +138,29 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 
-                    //  Destroy(gameObject, 5f);
+                    
+                }
+                if (GetComponent<EnemyRobotAISpawn>())
+                {
+
+                    capsul.GetComponent<CapsuleCollider>().enabled = false;
+                    box.GetComponentInChildren<BoxCollider>().enabled = false;
+                    GetComponent<EnemyRobotAISpawn>().enabled = false;
+                    anim.enabled = false;
+                    RagdollHelper helper = GetComponent<RagdollHelper>();
+                    helper.ragdolled = true;
+                    GetComponent<RagdollHelper>().enabled = false;
+                    GetComponent<FullBodyBipedIK>().enabled = false;
+                    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+                    
                 }
                 //if (GetComponent<EnemyAI>())
                 //{
                 //    anim.enabled = false;
                 //    GetComponent<EnemyAI>().enabled = false;
                 //    GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                 
+
                 ////   Destroy(gameObject, 5f);
 
                 //}
