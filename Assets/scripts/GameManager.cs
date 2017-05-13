@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
            
         }
        
-        if(enemiesSpawend.Count == 0)      // необходимо убрать все Element  в Size 
+        if(enemiesSpawend.Count == 0)      
         {
             holdPlayer = false;
         }
