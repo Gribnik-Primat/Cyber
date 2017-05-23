@@ -23,18 +23,18 @@ public class CamersEffect : MonoBehaviour {
         if (time > 4f &&time < 8f)
         {
 
-        vig.intensity += v * Time.deltaTime; ;
+        vig.chromaticAberration += v * Time.deltaTime; ;
            
 
         }
-      if (time > 8f&& time < 10f)
+      if (time > 8f&& time < 15f)
         {
-         vig.intensity -= v *Time.deltaTime;
+         vig.chromaticAberration -= v *Time.deltaTime;
             
         }
-        if (time > 10f)
+        if (time > 15f)
         {
-            vig.intensity = v;
+            vig.chromaticAberration = v;
 
         }
 
