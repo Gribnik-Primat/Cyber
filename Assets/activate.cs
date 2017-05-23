@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class activate : MonoBehaviour {
 	public Slider slide;
 	// Use this for initialization
+	float time;
 	void Start () {
 		
 	}
@@ -15,9 +16,20 @@ public class activate : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.tag == "Player" && Input.GetKey (KeyCode.E))
-			other.gameObject.GetComponentInParent<Animator>().SetLayerWeight(0,0);
+		if(Input.GetKeyDown(KeyCode.E))
+			{
+			time += Time.deltaTime;
+		   		slide.value += time*20;
+			if (slide.value == 100) {
+				if (other.gameObject.tag == "Player") {
+					other.gameObject.GetComponentInChildren<Animator> ().SetLayerWeight (0, 1f);
+
+					other.gameObject.GetComponentInChildren<Animator> ().SetLayerWeight (1, 0);
+					Destroy (GameObject.FindGameObjectWithTag("Loading"));
+				}
+			}
+			}
 	}
 }
