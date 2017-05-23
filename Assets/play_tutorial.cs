@@ -7,6 +7,7 @@ using UnityEngine;
 public class play_tutorial : MonoBehaviour {
 	public AudioClip clip;
 	AudioSource audio;	// Use this for initialization
+	public GameObject[] buttons;
 	void Start () {
 		audio = GetComponent<AudioSource>();
 		audio.playOnAwake = false;
@@ -20,6 +21,13 @@ public class play_tutorial : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player") {
 			audio.Play();
+
+		}
+	}
+	void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.tag == "Player") {
+			
 		}
 	}
 }
