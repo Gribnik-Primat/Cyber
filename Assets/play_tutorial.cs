@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class play_tutorial : MonoBehaviour {
 	public AudioClip clip;
-	// Use this for initialization
+	AudioSource audio;	// Use this for initialization
 	void Start () {
-		
+		audio = GetComponent<AudioSource>();
+		audio.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
@@ -16,8 +19,7 @@ public class play_tutorial : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Player") {
-			AudioSource.PlayClipAtPoint(clip, transform.position);
+			audio.Play();
 		}
 	}
-
 }
