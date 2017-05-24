@@ -8,16 +8,22 @@ public class activate : MonoBehaviour {
 	// Use this for initialization
 	float time;
 	void Start () {
-		
+		slide.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Player") {
+			slide.gameObject.SetActive (true);
+		}
+	}
 	void OnTriggerStay(Collider other)
 	{
+		
 		if(Input.GetKeyDown(KeyCode.E))
 			{
 			time += Time.deltaTime;
