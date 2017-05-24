@@ -17,14 +17,19 @@ public class Health : MonoBehaviour {
 	
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            
             if (bio.biostim > 0 && stats.healthP < 100f)
             {
                 bio.biostim -= 10f * Time.deltaTime;
                 stats.healthP += 7f * Time.deltaTime;
-                
+                anim.SetBool("Health", true);
             }
+        }
+        else
+        {
+            anim.SetBool("Health", false);
         }
 
 	}
