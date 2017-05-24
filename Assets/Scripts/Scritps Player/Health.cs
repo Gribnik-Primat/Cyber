@@ -17,7 +17,7 @@ public class Health : MonoBehaviour {
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             
             if (bio.biostim > 0 && stats.healthP < 100f)
