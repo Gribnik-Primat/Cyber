@@ -38,6 +38,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     LookAtIK Look;
     BoxCollider box;
     CapsuleCollider capsul;
+    DarkCity dark;
     UnityEngine.AI.NavMeshAgent agent;
     
 
@@ -58,6 +59,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
         capsul =GetComponent<CapsuleCollider>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //substractOnce = false;
+        dark = GameObject.FindGameObjectWithTag("Dark").GetComponent<DarkCity>();
 
        
     }
@@ -186,7 +188,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                   
+                    dark.enabled = true;
                     //  Destroy(gameObject, 5f);
                 }
                 dead = true;
