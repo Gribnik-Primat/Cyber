@@ -4,24 +4,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent (typeof(AudioSource))]
 
-public class play_tutorial : MonoBehaviour {
+public class play_tutorial : MonoBehaviour
+{
+	public int id;
 	public AudioClip clip;
-	AudioSource audio;	// Use this for initialization
+	AudioSource audio;
+	// Use this for initialization
+
 	public GameObject[] buttons;
 	public GameObject[] doors;
 	public float time_for_doors_closed;
+
 	float time;
-	void Start () {
-		audio = GetComponent<AudioSource>();
+	bool exit = false;
+	float time_to_wait;
+
+	void Start ()
+	{
+		audio = GetComponent<AudioSource> ();
 		audio.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+		/*if (exit == true) {
+			time_to_wait += Time.deltaTime;
+			if (time_to_wait > exit_time) {
+				this.gameObject.SetActive (false);
 			}
-	void OnTriggerStay(Collider other)
+		}*/
+		if (audio.isPlaying == false && exit == true) {
+			this.gameObject.SetActive (false);
+		}
+			
+			
+	}
+
+	void OnTriggerStay (Collider other)
 	{
 		time += Time.deltaTime;
 		if (doors.Length > 0) {
@@ -32,25 +54,28 @@ public class play_tutorial : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Player") {
 			foreach (GameObject button in buttons)
-				button.gameObject.SetActive(true);
+				button.gameObject.SetActive (true);
 		}
 	}
-	void OnTriggerEnter(Collider other)
+
+	void OnTriggerEnter (Collider other)
 	{
 		if (doors.Length > 0) {
 			foreach (GameObject door in doors)
 				door.gameObject.GetComponent<OpenClose> ().enabled = false;
 		}
 		if (other.gameObject.tag == "Player") {
-			audio.Play();
+			audio.Play ();
 		}
 	}
-	void OnTriggerExit(Collider other)
+
+	void OnTriggerExit (Collider other)
 	{
+		exit = true;
 		if (other.gameObject.tag == "Player") {
 			foreach (GameObject button in buttons)
-				button.gameObject.SetActive(false);
+				button.gameObject.SetActive (false);
 		}
-		this.gameObject.SetActive (false);
+
 	}
 }
