@@ -70,7 +70,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     {
 		
         healthSlider.value = healthE;
-		if (healthSlider.value >= lookHealth || healthSlider.value <= 0)
+		if (healthSlider.value >=  lookHealth || healthSlider.value <= 0)
 			healthSlider.gameObject.SetActive (false);
 		else
 			healthSlider.gameObject.SetActive (true);
