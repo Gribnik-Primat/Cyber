@@ -45,7 +45,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     void Start ()
     {
         box=GetComponentInChildren<BoxCollider>();
-    damageT = new WaitForSeconds(damageTimer);
+        damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>();
         rot = GetComponentInChildren<Rotate>();
         rot2 = GetComponentInChildren<Rotate2>();
@@ -55,17 +55,12 @@ public class CharacterStatsEnemy : MonoBehaviour {
         healthSlider = slidH.GetComponentInChildren<Slider>();
         healthTrans = slidH.GetComponent<RectTransform>();
         ragdollUtility = GetComponentInChildren<RagdollUtility>();
-		fbbik = GetComponent<FullBodyBipedIK> ();
+		fbbik = GetComponent<FullBodyBipedIK>();
         capsul =GetComponent<CapsuleCollider>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //substractOnce = false;
-        dark = GameObject.FindGameObjectWithTag("Dark").GetComponent<DarkCity>();
-
-       
+        dark = GameObject.FindGameObjectWithTag("Dark").GetComponent<DarkCity>();      
     }
-
-    
-
     void Update ()
     {
 		
@@ -133,7 +128,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     capsul.GetComponent<CapsuleCollider>().enabled = false;
                     box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
-                   anim.enabled = false;
+                    anim.enabled = false;
                     RagdollHelper helper = GetComponent<RagdollHelper>();
                     helper.ragdolled = true;
                     GetComponent<RagdollHelper>().enabled = false;
@@ -179,7 +174,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
                 }
                 if (GetComponent<Boss>())
                 {
-                   capsul.GetComponent<CapsuleCollider>().enabled = false;
+                    capsul.GetComponent<CapsuleCollider>().enabled = false;
                     box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<Boss>().enabled = false;
                     anim.enabled = false;
