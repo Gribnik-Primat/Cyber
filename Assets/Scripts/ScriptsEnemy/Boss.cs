@@ -92,6 +92,7 @@ public class Boss : MonoBehaviour
 
                             target_point = target.transform.position;
                             target_point.y = 0;
+                            transform.LookAt(target);
 
                             if (distance < attackRange)           // расстоние меньше то бьем 
                             {
