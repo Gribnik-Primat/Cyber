@@ -7,16 +7,16 @@ using RootMotion.Demos;
 public class AttackRobots : MonoBehaviour {
 
     public GameObject[] Robots;
-    int n;
-    int r;
+   public int n;
+   public int r;
     CharacterStatsEnemy chartRob;
 
 	void Start ()
     {
         r = 0;
-       n= Random.Range(0, 16);
-       Robots = GameObject.FindGameObjectsWithTag("Robot");
-        chartRob = GameObject.FindGameObjectWithTag("Robot").GetComponentInParent<CharacterStatsEnemy>();
+       // n = Random.Range(0, 16);
+        Robots = GameObject.FindGameObjectsWithTag("Robot");
+       chartRob = GameObject.FindGameObjectWithTag("Robot").GetComponentInParent<CharacterStatsEnemy>();
 	}
 	
 	
@@ -33,8 +33,10 @@ public class AttackRobots : MonoBehaviour {
                 if (chartRob.deadrobots == true)
                 {
                     r++;
+                    //  n = Random.Range(0, 16);
                     Robots[n].gameObject.GetComponent<EnemyRobotAI>().enabled = true;
                     chartRob.deadrobots = false;
+                    
                 }
             }
             else

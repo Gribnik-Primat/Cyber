@@ -20,7 +20,7 @@ public class deadDown : MonoBehaviour {
     {
 		
 	}
-    void OntriggerEnter(Collider other)
+    void OntriggerStay(Collider other)
     {
         if(other.gameObject.tag=="Enemy" || other.gameObject.tag == "Robot")
         {
