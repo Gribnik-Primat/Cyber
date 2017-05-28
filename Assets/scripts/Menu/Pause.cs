@@ -47,8 +47,10 @@ public class Pause : MonoBehaviour {
             timing = 1;
             menu.SetActive(false);   
             task.SetActive(false);
-			map.SetActive (false);
-			flag_map = false;
+           
+                map.SetActive(false);
+                flag_map = false;
+            
         }
        
     }
