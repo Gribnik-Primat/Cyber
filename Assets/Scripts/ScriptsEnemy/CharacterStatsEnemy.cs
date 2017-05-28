@@ -15,6 +15,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
     bool dealDead;
     bool deal;
 	bool ragdoll_state;
+    public bool deadrobots;
    // public Transform[] items;
 
     public float damageTimer = .4f;
@@ -44,6 +45,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
 
     void Start ()
     {
+        deadrobots = true;
         box=GetComponentInChildren<BoxCollider>();
         damageT = new WaitForSeconds(damageTimer);
         anim = GetComponent<Animator>();
@@ -129,13 +131,15 @@ public class CharacterStatsEnemy : MonoBehaviour {
                     box.GetComponentInChildren<BoxCollider>().enabled = false;
                     GetComponent<EnemyRobotAI>().enabled = false;
                     anim.enabled = false;
+                    
                     RagdollHelper helper = GetComponent<RagdollHelper>();
                     helper.ragdolled = true;
                     GetComponent<RagdollHelper>().enabled = false;
                     GetComponent<FullBodyBipedIK>().enabled = false;
                     GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                    deadrobots = true;
 
-                    
+
                 }
                 if (GetComponent<EnemyRobotAISpawn>())
                 {

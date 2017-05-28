@@ -34,17 +34,17 @@ public class PlayerHack : MonoBehaviour
         if (Physics.Raycast(ray, out hit, see))
         {
             
-            if (hit.collider.CompareTag("Robot"))
-            {
-			if (Input.GetKeyDown(KeyCode.E))
-                {
-                    anim.SetBool("Uses", true);
-                  //  plMovement.canMove = false;
+   //         if (hit.collider.CompareTag("Robot"))
+   //         {
+			//if (Input.GetKeyDown(KeyCode.E))
+   //             {
+   //                 anim.SetBool("Uses", true);
+   //               //  plMovement.canMove = false;
 
-                }
-                else
-                    anim.SetBool("Uses", false);
-            }
+   //             }
+   //             else
+   //                 anim.SetBool("Uses", false);
+   //         }
         }
 
     
