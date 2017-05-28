@@ -61,7 +61,7 @@ public class CharacterStatsEnemy : MonoBehaviour {
         capsul =GetComponent<CapsuleCollider>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //substractOnce = false;
-        //dark = GameObject.FindGameObjectWithTag("Dark").GetComponent<DarkCity>();      
+        dark = GameObject.FindGameObjectWithTag("Dark").GetComponent<DarkCity>();      
     }
     void Update ()
     {
