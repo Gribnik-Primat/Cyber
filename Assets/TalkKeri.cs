@@ -36,7 +36,50 @@ public class TalkKeri : MonoBehaviour
         if (timeNow)
         {
             time += Time.deltaTime;
-           
+            if (time > 0 && time < 4)
+            {
+                Text[0].SetActive(true);
+            }
+            if (time > 4 && time < 8)
+            {
+                Text[0].SetActive(false);
+                Text[1].SetActive(true);
+            }
+            if (time > 8 && time < 12)
+            {
+                Text[1].SetActive(false);
+                Text[2].SetActive(true);
+            }
+            if (time > 12 && time < 16)
+            {
+                Text[2].SetActive(false);
+                Text[3].SetActive(true);
+            }
+            if (time > 16 && time < 20)
+            {
+                Text[3].SetActive(false);
+                Text[4].SetActive(true);
+            }
+            if (time > 20 && time < 24)
+            {
+                Text[4].SetActive(false);
+                Text[5].SetActive(true);
+            }
+            if (time > 24 && time < 28)
+            {
+                Text[5].SetActive(false);
+                Text[6].SetActive(true);
+            }
+            if (time > 28 && time < 32)
+            {
+                Text[6].SetActive(false);
+                Text[7].SetActive(true);
+            }
+            if (time > 32 && time < 36)
+            {
+                Text[7].SetActive(false);
+                Text[8].SetActive(true);
+            }
         }
         if (time > t)
         {
@@ -44,6 +87,7 @@ public class TalkKeri : MonoBehaviour
             animPlayer.SetBool("Talk", false);
             if (time > t + t)
             {
+                Text[8].SetActive(false);
                 chart.enabled = true;
                 attPlayer.enabled = true;
                 animPlayer.SetLayerWeight(2, 0f);
@@ -69,10 +113,8 @@ public class TalkKeri : MonoBehaviour
                 animPlayer.SetLayerWeight(2, 1f);
                 animPlayer.SetBool("Talk", true);
                 timeNow = true;
-                if (time >= t + t)
-                {
-                    Destroy(trigger);
-                }
+                
+
             }
         }
     }

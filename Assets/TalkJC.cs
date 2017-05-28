@@ -36,7 +36,30 @@ public class TalkJC : MonoBehaviour
         if (timeNow)
         {
             time += Time.deltaTime;
-
+            if (time > 0 && time < 4)
+            {
+                Text[0].SetActive(true);
+            }
+            if (time > 4 && time < 8)
+            {
+                Text[0].SetActive(false);
+                Text[1].SetActive(true);
+            }
+            if (time > 8 && time < 12)
+            {
+                Text[1].SetActive(false);
+                Text[2].SetActive(true);
+            }
+            if (time > 12 && time < 16)
+            {
+                Text[2].SetActive(false);
+                Text[3].SetActive(true);
+            }
+            if (time > 16 && time < 20)
+            {
+                Text[3].SetActive(false);
+                Text[4].SetActive(true);
+            }
         }
         if (time > t)
         {
@@ -44,6 +67,7 @@ public class TalkJC : MonoBehaviour
             animPlayer.SetBool("Talk", false);
             if (time > t + t)
             {
+                Text[4].SetActive(false);
                 animJC.SetBool("SitStand", false);
                 chart.enabled = true;
                 attPlayer.enabled = true;
