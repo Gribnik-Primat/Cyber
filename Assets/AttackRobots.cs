@@ -8,10 +8,12 @@ public class AttackRobots : MonoBehaviour {
 
     public GameObject[] Robots;
     int n;
+    int r;
     CharacterStatsEnemy chartRob;
 
 	void Start ()
     {
+        r = 0;
        n= Random.Range(0, 16);
        Robots = GameObject.FindGameObjectsWithTag("Robot");
         chartRob = GameObject.FindGameObjectWithTag("Robot").GetComponentInParent<CharacterStatsEnemy>();
@@ -26,12 +28,20 @@ public class AttackRobots : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            if (chartRob.deadrobots == true)
+            if (r <= 4)
             {
-                
-                Robots[n].gameObject.GetComponent<EnemyRobotAI>().enabled = true;
-                chartRob.deadrobots = false;
+                if (chartRob.deadrobots == true)
+                {
+                    r++;
+                    Robots[n].gameObject.GetComponent<EnemyRobotAI>().enabled = true;
+                    chartRob.deadrobots = false;
+                }
             }
+            else
+            {
+                Application.LoadLevel(4);
+            }
+
         }
     }
 }
