@@ -15,6 +15,6 @@ public class ChangeLayer : MonoBehaviour {
     {
         player.GetComponentInChildren<Animator>().SetLayerWeight(0, 1f);
         player.GetComponentInChildren<Animator>().SetLayerWeight(1, 0f);
-        Destroy(gameObject);
+        //Destroy(gameObject);
 	}
 }
