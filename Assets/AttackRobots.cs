@@ -33,7 +33,7 @@ public class AttackRobots : MonoBehaviour {
 		}
         if (other.gameObject.tag == "Player")
         {
-            if (r <= 4)
+            if (r <= 3)
             {
 				flag_dead = true;
 				for (int i = 0; i < chartRob.Length; i++) {
