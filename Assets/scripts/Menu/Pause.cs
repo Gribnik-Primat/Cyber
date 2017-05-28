@@ -7,6 +7,8 @@ public class Pause : MonoBehaviour {
     public bool isPaused;
     public GameObject menu;
     public GameObject task;
+	public GameObject map;
+	public bool flag_map;
     bool onOff;
 	void Start ()
     {
@@ -33,6 +35,10 @@ public class Pause : MonoBehaviour {
             timing = 0;
             menu.SetActive(true);
             task.SetActive(true);
+			if (flag_map == true) {
+				map.SetActive (true);
+				flag_map = false;
+			}
         }
         else if (isPaused == false)
         {
@@ -41,6 +47,8 @@ public class Pause : MonoBehaviour {
             timing = 1;
             menu.SetActive(false);   
             task.SetActive(false);
+			map.SetActive (false);
+			flag_map = false;
         }
        
     }
@@ -53,6 +61,10 @@ public class Pause : MonoBehaviour {
     {
         Application.LoadLevel(0);
     }
+	public void OpenMap()
+	{			
+		flag_map = true;
+	}
     public void QuitButton()
     {
         Application.Quit();
