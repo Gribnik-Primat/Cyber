@@ -6,15 +6,17 @@ public class Pause : MonoBehaviour {
     public float timing;
     public bool isPaused;
     public GameObject menu;
-
+    public GameObject task;
+    bool onOff;
 	void Start ()
     {
-	
+        onOff = false;
 	}
 	
 	
 	void Update ()
     {
+      
         Time.timeScale = timing;
         if (Input.GetButtonDown("Cancel") && isPaused == false)
         {
@@ -30,15 +32,18 @@ public class Pause : MonoBehaviour {
             Cursor.visible = true;
             timing = 0;
             menu.SetActive(true);
+            task.SetActive(true);
         }
         else if (isPaused == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             timing = 1;
-            menu.SetActive(false);
+            menu.SetActive(false);   
+            task.SetActive(false);
         }
-	}
+       
+    }
     public void ResumeButton(bool state)
     {
         isPaused = state;
@@ -52,5 +57,4 @@ public class Pause : MonoBehaviour {
     {
         Application.Quit();
     }
-
 }

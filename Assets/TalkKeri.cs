@@ -16,6 +16,8 @@ public class TalkKeri : MonoBehaviour
     public GameObject[] Text;
     public GameObject[] buttons;
 
+    public GameObject task;
+
     public float time;
     public float t;
     bool timeNow;
@@ -83,10 +85,13 @@ public class TalkKeri : MonoBehaviour
         }
         if (time > t)
         {
-            animKeri.SetBool("Talk", false);
-            animPlayer.SetBool("Talk", false);
+          //  animKeri.SetBool("Talk", false);
+           // animPlayer.SetBool("Talk", false);
             if (time > t + t)
             {
+                animKeri.SetBool("Talk", false);
+                animPlayer.SetBool("Talk", false);
+                task.SetActive(true);
                 Text[8].SetActive(false);
                 chart.enabled = true;
                 attPlayer.enabled = true;

@@ -15,6 +15,7 @@ public class TalkJC : MonoBehaviour
 
     public GameObject[] Text;
     public GameObject[] buttons;
+    public GameObject[] task;
 
     public float time;
     public float t;
@@ -67,6 +68,8 @@ public class TalkJC : MonoBehaviour
             animPlayer.SetBool("Talk", false);
             if (time > t + t)
             {
+                task[0].SetActive(false);
+                task[1].SetActive(true);
                 Text[4].SetActive(false);
                 animJC.SetBool("SitStand", false);
                 chart.enabled = true;
