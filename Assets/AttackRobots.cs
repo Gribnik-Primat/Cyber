@@ -7,35 +7,47 @@ using RootMotion.Demos;
 public class AttackRobots : MonoBehaviour {
 
     public GameObject[] Robots;
-   public int n;
-   public int r;
-    CharacterStatsEnemy chartRob;
+    int n;
+    int r;
+    public CharacterStatsEnemy[] chartRob;
+	bool flag_dead;
 
 	void Start ()
-    {
+	{
+		
+		flag_dead = false;
         r = 0;
-       // n = Random.Range(0, 16);
-        Robots = GameObject.FindGameObjectsWithTag("Robot");
-       chartRob = GameObject.FindGameObjectWithTag("Robot").GetComponentInParent<CharacterStatsEnemy>();
+		n = 0;
+
 	}
 	
 	
 	void Update ()
     {
-        n = Random.Range(0, 16);
+        //n = Random.Range(0, 16);
     }
     void OnTriggerStay(Collider other)
     {
+		for(int i = 0;i<Robots.Length;i++) {
+			chartRob[i] = Robots [i].GetComponent<CharacterStatsEnemy> ();
+		}
         if (other.gameObject.tag == "Player")
         {
             if (r <= 4)
             {
-                if (chartRob.deadrobots == true)
+				flag_dead = true;
+				for (int i = 0; i < chartRob.Length; i++) {
+					if (chartRob [i].deadrobots == false)
+						flag_dead = false;
+				}
+                if (flag_dead == true)
                 {
                     r++;
-                    //  n = Random.Range(0, 16);
-                    Robots[n].gameObject.GetComponent<EnemyRobotAI>().enabled = true;
-                    chartRob.deadrobots = false;
+					n += r;
+					for (int i = n - r; i < n; i++) {
+						Robots [i].gameObject.GetComponent<EnemyRobotAI> ().enabled = true;
+						chartRob [i].deadrobots = false;
+					}
                     
                 }
             }
