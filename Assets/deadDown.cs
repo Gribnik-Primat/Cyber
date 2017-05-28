@@ -11,25 +11,19 @@ public class deadDown : MonoBehaviour {
 	
 	void Start ()
     {
-        Rob = GameObject.FindGameObjectsWithTag("Robot");
-        Ene = GameObject.FindGameObjectsWithTag("Enemy");
+		Rob = GameObject.FindGameObjectsWithTag ("Robot");
+		Ene = GameObject.FindGameObjectsWithTag ("Enemy");
     }
 	
 	
 	void Update ()
     {
-		
+		foreach (GameObject robot in Rob)
+			if (robot.transform.position.y <= -5)
+				robot.GetComponent<CharacterStatsEnemy> ().healthE = 0;
+		foreach (GameObject enemy in Ene)
+			if (enemy.transform.position.y <= -5)
+				enemy.GetComponent<CharacterStatsEnemy> ().healthE = 0;
 	}
-    void OntriggerStay(Collider other)
-    {
-        if(other.gameObject.tag=="Enemy" || other.gameObject.tag == "Robot")
-        {
-            foreach (GameObject rob in Rob)
-                rob.GetComponentInParent<CharacterStatsEnemy>().healthE = 0;
-
-            foreach (GameObject ene in Ene)
-                ene.GetComponentInParent<CharacterStatsEnemy>().healthE = 0;
-
-        }
-    }
+   
 }
